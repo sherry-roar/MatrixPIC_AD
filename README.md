@@ -1,4 +1,4 @@
-# MatrixPIC-AD
+# MatrixPIC-AD [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17037887.svg)](https://doi.org/10.5281/zenodo.17037887)
 
 This repository contains the source code, build scripts, and performance results for the MatrixPIC project. The project focuses on optimizing the **WarpX** Particle-in-Cell (PIC) simulation framework for the **LX2 architecture**, leveraging advanced features of MPU.
 
