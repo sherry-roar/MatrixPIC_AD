@@ -78,7 +78,7 @@
 #include <string>
 #include <vector>
 
-#include <HBM_Allocator.H>
+#include <OPM_Allocator.H>
 
 class WARPX_EXPORT WarpX
     : public amrex::AmrCore

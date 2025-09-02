@@ -502,7 +502,6 @@ WarpX::WarpX ()
 
     m_accelerator_lattice.resize(nlevs_max);
 
-    // USER DEFINED 大数组解决
     InitTempVectors();
 
 }
@@ -515,14 +514,13 @@ WarpX::~WarpX ()
     }
 }
 
-// USER DEFINED 大数组解决
 void
 WarpX::InitTempVectors()
 {
     int max_threads = omp_get_max_threads();
     long np=m_init_np;
     int len_rhocell=m_len_rhocell;
-    // 为 "vector of vectors" 分配空间
+
     m_thread_private_wqx.resize(max_threads);
     m_thread_private_wqy.resize(max_threads);
     m_thread_private_wqz.resize(max_threads);
@@ -535,7 +533,7 @@ WarpX::InitTempVectors()
     m_thread_private_xrhocells.resize(max_threads);
     m_thread_private_yrhocells.resize(max_threads);
     m_thread_private_zrhocells.resize(max_threads);
-    // 为每个线程的 vector 预留容量 (reserve)
+
     for (int i = 0; i < max_threads; ++i) {
         m_thread_private_wqx[i].reserve(np);
         m_thread_private_wqy[i].reserve(np);

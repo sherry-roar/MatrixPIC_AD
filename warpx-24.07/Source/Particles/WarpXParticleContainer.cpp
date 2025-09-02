@@ -979,31 +979,24 @@
      local_jy[thread_num].resize(tby, jy->nComp());
      local_jz[thread_num].resize(tbz, jz->nComp());
      local_jx_test[thread_num].resize(tbx, jx->nComp());
-     // local_jy_test[thread_num].resize(tby_1, jy->nComp());
-     // local_jz_test[thread_num].resize(tbz_1, jz->nComp());
-     // local_jy_test[thread_num].resize(tby, jy->nComp());
-     // local_jz_test[thread_num].resize(tbz, jz->nComp());
+
  
-     // local_jx[thread_num] is set to zero
      local_jx[thread_num].setVal(0.0);
      local_jy[thread_num].setVal(0.0);
      local_jz[thread_num].setVal(0.0);
      local_jx_test[thread_num].setVal(0.0);
-     // local_jy_test[thread_num].setVal(0.0);
-     // local_jz_test[thread_num].setVal(0.0);
+
  
      auto & jx_fab = local_jx[thread_num];
      auto & jy_fab = local_jy[thread_num];
      auto & jz_fab = local_jz[thread_num];
      auto & jx_fab1 = local_jx_test[thread_num];
-     // auto & jy_fab1 = local_jy_test[thread_num];
-     // auto & jz_fab1 = local_jz_test[thread_num];
+
      Array4<Real> const& jx_arr = local_jx[thread_num].array();
      Array4<Real> const& jy_arr = local_jy[thread_num].array();
      Array4<Real> const& jz_arr = local_jz[thread_num].array();
      Array4<Real> const& jx_arr1 = local_jx_test[thread_num].array();
-     // Array4<Real> const& jy_arr1 = local_jy_test[thread_num].array();
-     // Array4<Real> const& jz_arr1 = local_jz_test[thread_num].array();
+
  #endif
  
      const auto GetPosition = GetParticlePosition<PIdx>(pti, offset);
@@ -1287,239 +1280,68 @@
          } else { // Direct deposition
              if (push_type == PushType::Explicit) {
                  if        (WarpX::nox == 1){
-                     const Dim3 hi = ubound(tilebox);
-                     const Dim3 len = length(tilebox);
-                     // std::vector<double> test0(8*np_to_deposit, 0);
-                     // std::vector<long> test(np_to_deposit, 0);
-                     WARPX_PROFILE_VAR_NS("doDepositionShapeN_1", org);
-                     WARPX_PROFILE_VAR_NS("doDepositionShapeN_simd_org", simd_org);
-                     WARPX_PROFILE_VAR_NS("doDepositionShapeN_sve2", sve2);
-                     WARPX_PROFILE_VAR_NS("doDepositionShapeN_sve_sort_real", sve_sort_real);
-                     WARPX_PROFILE_VAR_NS("doDepositionShapeN_sve_jtmp", sve_jtmp);
-                     WARPX_PROFILE_VAR_NS("doDepositionShapeN_sve_jtmp2", sve_jtmp2);
-                     WARPX_PROFILE_VAR_NS("doDepositionShapeN_sve_sort_real_sme", sme);
- 
-                     // DONE: doDepositionShapeN_1, doDepositionShapeN_simd_org, 
-                     // doDepositionShapeN_sve1 have passed test
- 
-                     // doDepositionShapeN_1<1>(
-                     // doDepositionShapeN_simd_org<1>(
-                     //     GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
-                     //     uyp.dataPtr() + offset, uzp.dataPtr() + offset, ion_lev,
-                     //     jx_fab, jy_fab, jz_fab, np_to_deposit, relative_time, dinv,
-                     //     xyzmin, lo, q, test, WarpX::n_rz_azimuthal_modes);
-                     // doDepositionShapeN_sve_sort<1>(
-                         // doDepositionShapeN_sve_sort_real<1>(
-                     // double total_time1=0;
-                     // WARPX_PROFILE_VAR_START(org);
-                     // auto total_start=std::chrono::high_resolution_clock::now();
-                     // doDepositionShapeN_1<1>( 
-                     //     GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
-                     //     uyp.dataPtr() + offset, uzp.dataPtr() + offset, ion_lev,
-                     //     jx_fab, jy_fab, jz_fab, np_to_deposit, relative_time, dinv,
-                     //     xyzmin, lo, q,  WarpX::n_rz_azimuthal_modes);
-                     // auto total_stop=std::chrono::high_resolution_clock::now();
-                     // WARPX_PROFILE_VAR_STOP(org);
-                     // std::chrono::duration<double> total_elapse = total_stop-total_start;
-                     // total_time1 = total_elapse.count();
-                     // printf(" 1 Orgin: %lf \n", total_time1);
- 
-                     // total_time1=0;
-                     // WARPX_PROFILE_VAR_START(simd_org);
-                     // total_start=std::chrono::high_resolution_clock::now();
-                     // doDepositionShapeN_simd_org<1>( 
-                     //     GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
-                     //     uyp.dataPtr() + offset, uzp.dataPtr() + offset, ion_lev,
-                     //     jx_fab, jy_fab, jz_fab, np_to_deposit, relative_time, dinv,
-                     //     xyzmin, lo,  q, test, WarpX::n_rz_azimuthal_modes);
-                     // total_stop=std::chrono::high_resolution_clock::now();
-                     // WARPX_PROFILE_VAR_STOP(simd_org);
-                     // total_elapse = total_stop-total_start;
-                     // total_time1 = total_elapse.count();
-                     // printf(" 2 Orgin simd with serial write: %lf \n", total_time1);
- 
-                     // total_time1=0;
-                     // WARPX_PROFILE_VAR_START(sve2);
-                     // total_start=std::chrono::high_resolution_clock::now();
-                     // doDepositionShapeN_sve2<1>( 
-                     //     GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
-                     //     uyp.dataPtr() + offset, uzp.dataPtr() + offset, ion_lev,
-                     //     jx_fab, jy_fab, jz_fab, np_to_deposit, relative_time, dinv,
-                     //     xyzmin, lo, hi,len, q, test0, WarpX::n_rz_azimuthal_modes);
-                     // total_stop=std::chrono::high_resolution_clock::now();
-                     // WARPX_PROFILE_VAR_STOP(sve2);
-                     // total_elapse = total_stop-total_start;
-                     // total_time1 = total_elapse.count();
-                     // printf(" 3 rhocell simd: %lf \n", total_time1);
- 
-                     // total_time1=0;
-                     // WARPX_PROFILE_VAR_START(sve_sort_real);
-                     // total_start=std::chrono::high_resolution_clock::now();
-                     // doDepositionShapeN_sve_sort_real<1>( 
-                     //     GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
-                     //     uyp.dataPtr() + offset, uzp.dataPtr() + offset, ion_lev,
-                     //     jx_fab, jy_fab, jz_fab, np_to_deposit, relative_time, dinv,
-                     //     xyzmin, lo, hi,len, q, test0, WarpX::n_rz_azimuthal_modes);
-                     // total_stop=std::chrono::high_resolution_clock::now();
-                     // WARPX_PROFILE_VAR_STOP(sve_sort_real);
-                     // total_elapse = total_stop-total_start;
-                     // total_time1 = total_elapse.count();
-                     // printf(" 4 rhocell simd with sort reuse: %lf \n", total_time1);
-                     
-                     // total_time1=0;
-                     // WARPX_PROFILE_VAR_START(sve_jtmp);
-                     // total_start=std::chrono::high_resolution_clock::now();
-                     // doDepositionShapeN_sve_jtmp<1>( 
-                     //     GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
-                     //     uyp.dataPtr() + offset, uzp.dataPtr() + offset, ion_lev,
-                     //     jx_fab, jy_fab, jz_fab, np_to_deposit, relative_time, dinv,
-                     //     xyzmin, lo, hi,len, q, test0, WarpX::n_rz_azimuthal_modes);
-                     // total_stop=std::chrono::high_resolution_clock::now();
-                     // WARPX_PROFILE_VAR_STOP(sve_jtmp);
-                     // total_elapse = total_stop-total_start;
-                     // total_time1 = total_elapse.count();
-                     // printf(" 5 sort particle simd: %lf \n", total_time1);
-                     
-                     // total_time1=0;
-                     // WARPX_PROFILE_VAR_START(sve_jtmp2);
-                     // total_start=std::chrono::high_resolution_clock::now();
-                     // doDepositionShapeN_sve_jtmp2<1>( 
-                     //     GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
-                     //     uyp.dataPtr() + offset, uzp.dataPtr() + offset, ion_lev,
-                     //     jx_fab, jy_fab, jz_fab, np_to_deposit, relative_time, dinv,
-                     //     xyzmin, lo, hi,len, q, test0, WarpX::n_rz_azimuthal_modes);
-                     // total_stop=std::chrono::high_resolution_clock::now();
-                     // WARPX_PROFILE_VAR_STOP(sve_jtmp2);
-                     // total_elapse = total_stop-total_start;
-                     // total_time1 = total_elapse.count();
-                     // printf(" 6 sort particle simd with data reuse: %lf \n", total_time1);
-                     
-                     // total_time1=0;
-                     // WARPX_PROFILE_VAR_START(sme);
-                     // total_start=std::chrono::high_resolution_clock::now();
-                     // doDepositionShapeN_sve_sort_real_sme<1>(
-                     //     GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
-                     //     uyp.dataPtr() + offset, uzp.dataPtr() + offset, ion_lev,
-                     //     jx_fab, jy_fab, jz_fab, np_to_deposit, relative_time, dinv,
-                     //     xyzmin, lo, hi,len, q, test0, WarpX::n_rz_azimuthal_modes);
-                     // doDepositionShapeN_sve_sort_real<1>(
-                     // doDepositionShapeN_sve_sort_real_sme<1>(
-                     //     GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
-                     //     uyp.dataPtr() + offset, uzp.dataPtr() + offset, ion_lev,
-                     //     jx_fab,  jy_fab, jz_fab, np_to_deposit, relative_time, dinv,
-                     //     xyzmin, lo, hi,len, q, test,test0,WarpX::n_rz_azimuthal_modes);
-                     // total_stop=std::chrono::high_resolution_clock::now();
-                     // WARPX_PROFILE_VAR_STOP(sme);
-                     // total_elapse = total_stop-total_start;
-                     // total_time1 = total_elapse.count();
-                     // printf(" 7 sort particle sme (not true): %lf \n", total_time1);
-                         
-                     // auto total_stop=std::chrono::high_resolution_clock::now();
-                     // std::chrono::duration<double> total_elapse = total_stop-total_start;
-                     // total_time1 = total_elapse.count();
-                         // doDepositionShapeN_sve_sort_real<1>(
-                         // doDepositionShapeN_sve2<1>(
-                     // double total_time2=0;
-                     // auto total_start2=std::chrono::high_resolution_clock::now();
-                     // doDepositionShapeN_sve_jtmp<1>(
-                     //     GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
-                     //     uyp.dataPtr() + offset, uzp.dataPtr() + offset, ion_lev,
-                     //     jx_fab, jy_fab, jz_fab, np_to_deposit, relative_time, dinv,
-                     //     xyzmin, lo, hi,len, q, test0, WarpX::n_rz_azimuthal_modes);
-                     
-                     // doDepositionShapeN_test<1>(
-                     //     GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
-                     //     uyp.dataPtr() + offset, uzp.dataPtr() + offset, ion_lev,
-                     //     jx_fab, jx_fab1, jy_fab, jz_fab, np_to_deposit, relative_time, dinv,
-                     //     xyzmin, lo, hi,len, q, test,test0, WarpX::n_rz_azimuthal_modes);
-                     auto& ptile = ParticlesAt(lev, pti); 
-                     const amrex::Box& tbox = pti.tilebox();
-                     // doDepositionShapeN_3d_sort<1>(
-                     // doDepositionShapeN_3d<1>(
-                     //     GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
-                     //     uyp.dataPtr() + offset, uzp.dataPtr() + offset, ion_lev,
-                     //     jx_fab, jy_fab, jz_fab, np_to_deposit, relative_time, dinv,
-                     //     xyzmin, lo, q, ptile,tbox, WarpX::n_rz_azimuthal_modes);// printf("stop 1\n");
-                     //////////////below is/////////////////////////////////
-                     std::vector<double> test0;
-                     std::vector<double> test1;
-                    //  std::vector<int> test0(np_to_deposit, 0);
-                    //  std::vector<long> test1(np_to_deposit, 0);
-                     std::vector<int> test(np_to_deposit, 0);
-                     // doDepositionShapeN_org<1>( 
-                     //     GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
-                     //     uyp.dataPtr() + offset, uzp.dataPtr() + offset, ion_lev,
-                     //     jx_fab, jy_fab, jz_fab, np_to_deposit, relative_time, dinv,
-                     //     xyzmin, lo, q,  WarpX::n_rz_azimuthal_modes);
-                     // doDepositionShapeN_3d_sme_hybrid_nosort<1>(
-                     //     GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
-                     //     uyp.dataPtr() + offset, uzp.dataPtr() + offset, ion_lev,
-                     //     jx_fab,  jy_fab, jz_fab, np_to_deposit, relative_time, dinv,
-                     //     xyzmin, lo, hi,len, q, test,test0,ptile,tbox,WarpX::n_rz_azimuthal_modes);
-                     // doDepositionShapeN_3d_sme_v0522<1>(
-                     //     GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
-                     //     uyp.dataPtr() + offset, uzp.dataPtr() + offset, ion_lev,
-                     //     jx_fab,  jy_fab, jz_fab, np_to_deposit, relative_time, dinv,
-                     //     xyzmin, lo, hi,len, q, test,test0,test1,ptile,tbox,WarpX::n_rz_azimuthal_modes);
-                     std::vector<amrex::Real> test_rhocells;
-                     std::vector<amrex::Real> test_sxwq;
-                     doDepositionShapeN_3d_sme<1>(
-                         GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
-                         uyp.dataPtr() + offset, uzp.dataPtr() + offset, ion_lev,
-                         jx_fab,  jy_fab, jz_fab, np_to_deposit, relative_time, dinv,
-                         xyzmin, lo, hi,len, q, test,test0,test1,ptile,tbox,
-                         test_rhocells,test_sxwq,WarpX::n_rz_azimuthal_modes);
-                     // doDepositionShapeN_full_special<1>(
-                     //     GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
-                     //     uyp.dataPtr() + offset, uzp.dataPtr() + offset, ion_lev,
-                     //     jx_fab,  jy_fab, jz_fab, np_to_deposit, relative_time, dinv,
-                     //     xyzmin, lo, hi,len, q, test,test0,test1,ptile,tbox,WarpX::n_rz_azimuthal_modes);
-                     // doDepositionShapeN_pura_sme<1>(
-                     //     GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
-                     //     uyp.dataPtr() + offset, uzp.dataPtr() + offset, ion_lev,
-                     //     jx_fab,  jy_fab, jz_fab, np_to_deposit, relative_time, dinv,
-                     //     xyzmin, lo, hi,len, q, test,test0,ptile,tbox,WarpX::n_rz_azimuthal_modes);
-                     //06.14 15:41
-                    //  doDepositionShapeN_org_rhocell<1>(
-                    //      GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
-                    //      uyp.dataPtr() + offset, uzp.dataPtr() + offset, ion_lev,
-                    //      jx_fab,  jy_fab, jz_fab, np_to_deposit, relative_time, dinv,
-                    //      xyzmin, lo, hi,len, q, test,test0,ptile,tbox,WarpX::n_rz_azimuthal_modes);
-                     // doDepositionShapeN_org_sp<1>(
-                     //     GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
-                     //     uyp.dataPtr() + offset, uzp.dataPtr() + offset, ion_lev,
-                     //     jx_fab,  jy_fab, jz_fab, np_to_deposit, relative_time, dinv,
-                     //     xyzmin, lo, hi,len, q, test,test0,ptile,tbox,WarpX::n_rz_azimuthal_modes);
-                     // const long numcell = ptile.m_bin_offsets.size()-1;
-                     // applyPendingMoves_nogpma(numcell, ptile, ptile.m_pid_to_bin_map,np_to_deposit);
-                     // doDepositionShapeN_3d_sme_hybrid_incrsort_noGPMA<1>(
-                     //     GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
-                     //     uyp.dataPtr() + offset, uzp.dataPtr() + offset, ion_lev,
-                     //     jx_fab,  jy_fab, jz_fab, np_to_deposit, relative_time, dinv,
-                     //     xyzmin, lo, hi,len, q, test,test0,test1,ptile,tbox,WarpX::n_rz_azimuthal_modes);
-                     doDepositionShapeN_sve_sort_real_sme<1>(
-                             GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
-                             uyp.dataPtr() + offset, uzp.dataPtr() + offset, ion_lev,
-                             jx_fab,  jy_fab, jz_fab, np_to_deposit, relative_time, dinv,
-                             xyzmin, lo, hi,len, q, test,test0,test1,ptile,tbox,
-                             test_rhocells,test_sxwq,WarpX::n_rz_azimuthal_modes);
-                     doDepositionShapeN_test<1>(
-                             GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
-                             uyp.dataPtr() + offset, uzp.dataPtr() + offset, ion_lev,
-                             jx_fab, jx_fab1, jy_fab, jz_fab, np_to_deposit, relative_time, dinv,
-                             xyzmin, lo, hi,len, q, test,test0, WarpX::n_rz_azimuthal_modes);
-                     
-                     // amrex::Abort("stop test 1");
-                     // doDepositionShapeN_1<1>( 
-                     //     GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
-                     //     uyp.dataPtr() + offset, uzp.dataPtr() + offset, ion_lev,
-                     //     jx_fab, jy_fab, jz_fab, np_to_deposit, relative_time, dinv,
-                     //     xyzmin, lo, q,  WarpX::n_rz_azimuthal_modes);
-                     // auto total_stop2=std::chrono::high_resolution_clock::now();
-                     // std::chrono::duration<double> total_elapse2 = total_stop2-total_start2;
-                     // total_time2 = total_elapse2.count();
-                     // printf("\n 1 rhocell method %lf, 2 jtmp method %f \n",total_time1,total_time2);
-                     // printf("\n 1 jtmp data reuse %lf, 2 jtmp org %f \n",total_time1,total_time2);
+                    const Dim3 hi = ubound(tilebox);
+                    const Dim3 len = length(tilebox);
+                    auto& ptile = ParticlesAt(lev, pti); 
+                    const amrex::Box& tbox = pti.tilebox();
+                    std::vector<double> test0;
+                    std::vector<double> test1;
+                   //  std::vector<int> test0(np_to_deposit, 0);
+                   //  std::vector<long> test1(np_to_deposit, 0);
+                    std::vector<int> test(np_to_deposit, 0);
+                    std::vector<amrex::Real> test_rhocells;
+                    std::vector<amrex::Real> test_sxwq;
+
+                    // =================Experments 1================
+                    doDepositionShapeN_3d_sme<1>(
+                       GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
+                       uyp.dataPtr() + offset, uzp.dataPtr() + offset, ion_lev,
+                       jx_fab,  jy_fab, jz_fab, np_to_deposit, relative_time, dinv,
+                       xyzmin, lo, hi,len, q, test,test0,test1,ptile,tbox,
+                       test_rhocells,test_sxwq,WarpX::n_rz_azimuthal_modes,inner_timer);
+                   doDepositionShapeN<1>( 
+                       GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
+                       uyp.dataPtr() + offset, uzp.dataPtr() + offset, ion_lev,
+                       jx_fab, jy_fab, jz_fab, np_to_deposit, relative_time, dinv,
+                       xyzmin, lo, q,  WarpX::n_rz_azimuthal_modes);
+                   // =================Experments 2================
+                   doDepositionShapeN_pure_sme<1>(
+                       GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
+                       uyp.dataPtr() + offset, uzp.dataPtr() + offset, ion_lev,
+                       jx_fab,  jy_fab, jz_fab, np_to_deposit, relative_time, dinv,
+                       xyzmin, lo, hi,len, q, test,test0,ptile,tbox,WarpX::n_rz_azimuthal_modes);
+                   doDepositionShapeN_3d_sme_hybrid_nosort<1>(
+                       GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
+                       uyp.dataPtr() + offset, uzp.dataPtr() + offset, ion_lev,
+                       jx_fab,  jy_fab, jz_fab, np_to_deposit, relative_time, dinv,
+                       xyzmin, lo, hi,len, q, test,test0,ptile,tbox,WarpX::n_rz_azimuthal_modes);
+                   doDepositionShapeN_sve_sort_real_sme<1>(
+                       GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
+                       uyp.dataPtr() + offset, uzp.dataPtr() + offset, ion_lev,
+                       jx_fab,  jy_fab, jz_fab, np_to_deposit, relative_time, dinv,
+                       xyzmin, lo, hi,len, q, test,test0,test1,ptile,tbox,
+                       test_rhocells,test_sxwq,WarpX::n_rz_azimuthal_modes);
+                   // =================Experments 3================
+                   doDepositionShapeN_org_sp_GPMA<1>(
+                       GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
+                       uyp.dataPtr() + offset, uzp.dataPtr() + offset, ion_lev,
+                       jx_fab,  jy_fab, jz_fab, np_to_deposit, relative_time, dinv,
+                       xyzmin, lo, hi,len, q,ptile,tbox,WarpX::n_rz_azimuthal_modes,inner_timer);
+                   doDepositionShapeN_org_sp_rhocell<1>(
+                       GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
+                       uyp.dataPtr() + offset, uzp.dataPtr() + offset, ion_lev,
+                       jx_fab,  jy_fab, jz_fab, np_to_deposit, relative_time, dinv,
+                       xyzmin, lo, hi,len, q,ptile,tbox,WarpX::n_rz_azimuthal_modes,inner_timer);
+                   doDepositionShapeN_org_sp_rhocell_GPMA<1>(
+                       GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
+                       uyp.dataPtr() + offset, uzp.dataPtr() + offset, ion_lev,
+                       jx_fab,  jy_fab, jz_fab, np_to_deposit, relative_time, dinv,
+                       xyzmin, lo, hi,len, q,ptile,tbox,WarpX::n_rz_azimuthal_modes,inner_timer);
+                   doDepositionShapeN_org_sp_rhocell_GPMA_sve<1>(
+                       GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
+                       uyp.dataPtr() + offset, uzp.dataPtr() + offset, ion_lev,
+                       jx_fab,  jy_fab, jz_fab, np_to_deposit, relative_time, dinv,
+                       xyzmin, lo, hi,len, q,ptile,tbox,WarpX::n_rz_azimuthal_modes,inner_timer);
                  } else if (WarpX::nox == 2){
                      doDepositionShapeN<2>(
                          GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
@@ -1538,71 +1360,31 @@
                     std::vector<amrex::Real> test_sxm;
                     std::vector<amrex::Real> test_rhocells;
                     std::vector<amrex::Real> test_sxwq;
-                    // doDepositionShapeN_3d_sme_order3_compact_HBM<3>(
-                    //     GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
-                    //     uyp.dataPtr() + offset, uzp.dataPtr() + offset, ion_lev,
-                    //     wqx,wqy,wqz,sxm,sym,szm,
-                    //     xrhocells,yrhocells,zrhocells,newbin,
-                    //     jx_fab,  jy_fab, jz_fab, np_to_deposit, relative_time, dinv,
-                    //     xyzmin, lo, hi,len, q,ptile,tbox,
-                    //     WarpX::n_rz_azimuthal_modes,test_sxwq);
-                    
-                    doDepositionShapeN_sve_rhocell_sme_order3_cxj<3>(
-                            GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
-                            uyp.dataPtr() + offset, uzp.dataPtr() + offset, ion_lev,
-                            jx_fab,  jy_fab, jz_fab, np_to_deposit, relative_time, dinv,
-                            xyzmin, len, q, WarpX::n_rz_azimuthal_modes,
-                            wqx,wqy,wqz,sxm,sym,szm,
-                            xrhocells,yrhocells,zrhocells,newbin,ptile,tbox);
-                    // doDepositionShapeN_sve_rhocell_sme_order3_org_cxj<3>(
-                    //     GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
-                    //     uyp.dataPtr() + offset, uzp.dataPtr() + offset, ion_lev,
-                    //     jx_fab,  jy_fab, jz_fab, np_to_deposit, relative_time, dinv,
-                    //     xyzmin, len, q, WarpX::n_rz_azimuthal_modes,
-                    //     wqx,wqy,wqz,sxm,sym,szm,
-                    //     xrhocells,yrhocells,zrhocells,newbin,ptile,tbox
-                    // );
-                    
-                    // doDepositionShapeN_3d_sme_order3_compact<3>(
-                    //     GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
-                    //     uyp.dataPtr() + offset, uzp.dataPtr() + offset, ion_lev,
-                    //     wqx,wqy,wqz,sxm,sym,szm,
-                    //     xrhocells,yrhocells,zrhocells,newbin,
-                    //     jx_fab,  jy_fab, jz_fab, np_to_deposit, relative_time, dinv,
-                    //     xyzmin, lo, hi,len, q, test,test0,testbin,test_sxm,ptile,tbox,
-                    //     test_rhocells,test_sxwq,WarpX::n_rz_azimuthal_modes);
-                    // doDepositionShapeN_3d_sme_order3_v2<3>(
-                    //     GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
-                    //     uyp.dataPtr() + offset, uzp.dataPtr() + offset, ion_lev,
-                    //     wqx,wqy,wqz,sxm,sym,szm,newbin,
-                    //     jx_fab,  jy_fab, jz_fab, np_to_deposit, relative_time, dinv,
-                    //     xyzmin, lo, hi,len, q, test,test0,testbin,test_sxm,ptile,tbox,
-                    //     test_rhocells,test_sxwq,WarpX::n_rz_azimuthal_modes);
-                    // doDepositionShapeN_3d_sme_order3<3>(
-                    //     GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
-                    //     uyp.dataPtr() + offset, uzp.dataPtr() + offset, ion_lev,
-                    //     jx_fab,  jy_fab, jz_fab, np_to_deposit, relative_time, dinv,
-                    //     xyzmin, lo, hi,len, q, test,test0,testbin,test_sxm,ptile,tbox,
-                    //     test_rhocells,test_sxwq,WarpX::n_rz_azimuthal_modes);
-                    //==========================
-                    // 用来检测排序正确性的
-                    // doDepositionShapeN_sort_test_order3<3>(
-                    //         GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
-                    //         uyp.dataPtr() + offset, uzp.dataPtr() + offset, ion_lev,
-                    //         jx_fab,  jy_fab, jz_fab, np_to_deposit, relative_time, dinv,
-                    //         xyzmin, lo, hi,len, q, test,test0,test1,ptile,tbox,
-                    //         test_rhocells,test_sxwq,WarpX::n_rz_azimuthal_modes);
-                    //===========================
-                    // doDepositionShapeN_test_order3_special<3>(
-                    //         GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
-                    //         uyp.dataPtr() + offset, uzp.dataPtr() + offset, ion_lev,
-                    //         jx_fab1,  jy_fab, jz_fab, np_to_deposit, relative_time, dinv,
-                    //         xyzmin, lo, hi,len, q, ptile,tbox,WarpX::n_rz_azimuthal_modes);
-                    // doDepositionShapeN_test_order3<3>(
-                    //         GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
-                    //         uyp.dataPtr() + offset, uzp.dataPtr() + offset, ion_lev,
-                    //         jx_fab, jx_fab1, jy_fab, jz_fab, np_to_deposit, relative_time, dinv,
-                    //         xyzmin, lo, hi,len, q, test,testbin,test_sxm,test_sxwq, WarpX::n_rz_azimuthal_modes);
+                    // =================Experments 4 & 5================
+                    doDepositionShapeN<3>( 
+                        GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
+                        uyp.dataPtr() + offset, uzp.dataPtr() + offset, ion_lev,
+                        jx_fab, jy_fab, jz_fab, np_to_deposit, relative_time, dinv,
+                        xyzmin, lo, q,  WarpX::n_rz_azimuthal_modes);
+                    doDepositionShapeN_org_sp_GPMA_order3<1>(
+                        GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
+                        uyp.dataPtr() + offset, uzp.dataPtr() + offset, ion_lev,
+                        jx_fab,  jy_fab, jz_fab, np_to_deposit, relative_time, dinv,
+                        xyzmin, lo, hi,len, q,ptile,tbox,WarpX::n_rz_azimuthal_modes,inner_timer);
+                    doDepositionShapeN_sve_rhocell_sme_order3<3>(
+                        GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
+                        uyp.dataPtr() + offset, uzp.dataPtr() + offset, ion_lev,
+                        jx_fab,  jy_fab, jz_fab, np_to_deposit, relative_time, dinv,
+                        xyzmin, len, q, WarpX::n_rz_azimuthal_modes,
+                        wqx,wqy,wqz,sxm,sym,szm,
+                        xrhocells,yrhocells,zrhocells,newbin,ptile,tbox);
+                    doDepositionShapeN_sve_rhocell_order3_sort<3>(
+                        GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
+                        uyp.dataPtr() + offset, uzp.dataPtr() + offset, ion_lev,
+                        jx_fab, jy_fab, jz_fab, np_to_deposit, relative_time, dinv,
+                        xyzmin, len, q, WarpX::n_rz_azimuthal_modes,
+                        wqx,wqy,wqz,sxm,sym,szm,
+                        xrhocells,yrhocells,zrhocells,newbin,ptile,tbox);
                  } else if (WarpX::nox == 4){
                      doDepositionShapeN<4>(
                          GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
@@ -2490,19 +2272,6 @@
              {
                  ion_lev = pti.GetiAttribs(particle_icomps["ionizationLevel"]).dataPtr();
              }
-            //  wqx.resize(np);
-            //  wqy.resize(np);
-            //  wqz.resize(np);
-            //  newbin.resize(np);
-            //  sxm.resize(np*(WarpX::nox+1));
-            // //  sxm.shrink_to_fit();
-            //  sym.resize(np*(WarpX::nox+1));
-            // //  sym.shrink_to_fit();
-            //  szm.resize(np*(WarpX::nox+1));
-            // //  szm.shrink_to_fit();
-            //  xrhocells.resize(8*numcells);
-            //  yrhocells.resize(8*numcells);
-            //  zrhocells.resize(8*numcells);
             wqx.assign(np,0.0);
             wqy.assign(np,0.0);
             wqz.assign(np,0.0);

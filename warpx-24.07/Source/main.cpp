@@ -14,13 +14,12 @@
 #include <ablastr/utils/timer/Timer.H>
 
 #include <AMReX_Print.H>
-#include <HBM_Allocator.H>
+#include <OPM_Allocator.H>
 
 int main(int argc, char* argv[])
 {
     // set HBM must be bind
     int result = hbw_set_policy(HBW_POLICY_BIND);
-    // int result = memkind_check_available(MEMKIND_HBW);
     if (result != 0) {
         std::cerr << "Error: Failed to set memkind HBM policy to BIND." << std::endl;
     }

@@ -1,7 +1,7 @@
 #################################
 ####### GENERAL PARAMETERS ######
 #################################
-max_step = 200           # for production, run for longer time, e.g. max_step = 1000
+max_step = 20           # for production, run for longer time, e.g. max_step = 1000
 amr.n_cell = 16 16 128   # for production, run with finer mesh, e.g. amr.n_cell = 64 64 512
 amr.max_grid_size = 128   # maximum size of each AMReX box, used to decompose the domain
 amr.blocking_factor = 8 # minimum size of each AMReX box, used to decompose the domain
@@ -31,15 +31,6 @@ warpx.moving_window_v = 1.0 # units of speed of light
 warpx.do_dynamic_scheduling = 1 # for production, set this to 1 (default)
 warpx.serialize_initial_conditions = 0         # for production, set this to 0 (default)
 
-# Order of particle shape factors
-# algo.particle_shape = 1
-# algo.current_deposition =  direct # esirkepov  direct
-# algo.maxwell_solver = ckc # psatd
-# algo.particle_pusher = boris # boris vay
-# # DistributionMapping.strategy = RRSFC
-# algo.load_balance_intervals = 12
-# algo.load_balance_costs_update = heuristic
-# particles.do_tiling = true
 
 algo.particle_shape = 1
 algo.current_deposition = direct
@@ -47,14 +38,16 @@ algo.maxwell_solver = ckc
 algo.particle_pusher = boris
 particles.do_tiling=true
 particles.tile_size= 8 8 8
-warpx.sort_intervals=-1
-warpx.sort_particles_for_deposition=false
-warpx.grid_type=collocated
-warpx.sort_bin_size=1 1 1
-# particles.tile_size= 2 2 2
-# psatd.periodic_single_box_fft = 0
-# warpx.sort_intervals=4
-# warpx.sort_particles_for_deposition=true
+
+warpx.sort_interval      = 25
+warpx.min_sort_interval  = 11
+warpx.sort_trigger_rebuild_count  = 1000
+warpx.sort_trigger_perf_enable  = 1
+warpx.sort_trigger_perf_degrad  = 0.85
+warpx.sort_trigger_empty_ratio  = 0.15
+warpx.sort_trigger_full_ratio  = 0.85
+
+
 
 #################################
 ############ PLASMA #############

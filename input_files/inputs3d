@@ -2,8 +2,8 @@
 ####### GENERAL PARAMETERS ######
 #################################
 max_step = 10
-amr.n_cell =  32 16 16
-amr.max_grid_size = 32
+amr.n_cell =  16 16 16
+amr.max_grid_size = 16
 amr.blocking_factor = 16
 amr.max_level = 0
 geometry.dims = 3
@@ -35,18 +35,14 @@ warpx.sort_particles_for_deposition=false
 warpx.grid_type=collocated
 warpx.sort_bin_size=1 1 1
 
-# 在输入文件中，可选
-warpx.sort_interval      = 1 # 15  
-warpx.min_sort_interval  = 0 # 100  
-# warpx.sort_interval      = 15  
-# warpx.min_sort_interval  = 10   
-warpx.sort_trigger_rebuild_count  = 100
+warpx.sort_interval      = 25
+warpx.min_sort_interval  = 11
+warpx.sort_trigger_rebuild_count  = 1000
+warpx.sort_trigger_perf_enable  = 1
+warpx.sort_trigger_perf_degrad  = 0.85
 warpx.sort_trigger_empty_ratio  = 0.15
 warpx.sort_trigger_full_ratio  = 0.85
-warpx.sort_trigger_perf_enable  = 1
-warpx.sort_trigger_perf_degrad  = 0.80
-warpx.gap_ratio=0.5
-warpx.rebuild_weight=1.5 # >1
+
 
 
 

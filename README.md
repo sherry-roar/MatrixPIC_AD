@@ -10,7 +10,7 @@ The provided modifications are based on [WarpX v24.07](https://github.com/BLAST-
   * **Advanced Vectorization**: Utilizes VPU and MPU with a 512-bit vector width for maximum performance.
   * **Hybrid Parallelism**: Employs an MPI + OpenMP parallel programming model.
   * **Custom Memory Management**: Integrates the `memkind` library to enable explicit allocation on On-Package Memory (OPM).
-  * **Specialized Compiler Stack**: Built and tested with the Huawei BiSheng Compiler, HMPI, and Kunpeng Math Library (KML).
+  * **Specialized Compiler Stack**: Built and tested with the BiSheng Compiler and HMPI.
 
 ## Prerequisites and Environment
 
@@ -58,23 +58,27 @@ Copy or replace the following files from this repository into your local WarpX s
 1.  **Add OPM Allocator Header**:
 
       * Copy `warpx-24.07/Source/OPM_Allocator.H` to your `warpx-24.07/Source/` directory.
+  
+2.  **Add RankSortStats Header**:
 
-2.  **Replace Core Source Files**:
+      * Copy `warpx-24.07/Source/RankSortStats.H` to your `warpx-24.07/Source/` directory.
+
+3.  **Replace Core Source Files**:
 
       * Replace `main.cpp`, `WarpX.cpp`, and `WarpX.H` in `warpx-24.07/Source/`.
 
-3.  **Replace Particle Container Files**:
+4.  **Replace Particle Container Files**:
 
       * Replace the corresponding files in `warpx-24.07/Source/Particles/`.
           * `WarpXParticleContainer.cpp` / `.H`
           * `PhysicalParticleContainer.cpp` / `.H`
           * `MultiParticleContainer.cpp` / `.H`
 
-4.  **Replace Current Deposition Header**:
+5.  **Replace Current Deposition Header**:
 
       * Replace `CurrentDeposition.H` in `warpx-24.07/Source/Particles/Deposition/`.
 
-5.  **Replace CMake Build File**:
+6.  **Replace CMake Build File**:
 
       * Replace `CMakeLists.txt` in `warpx-24.07/`.
 
@@ -159,6 +163,7 @@ bash ./build_debug_and_run.sh.sh
     ├── CMakeLists.txt
     └── Source
         ├── OPM_Allocator.H
+        ├── RankSortStats.H
         ├── main.cpp
         ├── WarpX.cpp
         ├── WarpX.H
