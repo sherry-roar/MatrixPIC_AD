@@ -19,7 +19,7 @@ export MEMKIND_HBW_NODES=$OPM_NODES
 export ASAN_OPTIONS=abort_on_error=1
 
 
-input_file="input_files/inputs3d-l" # input_files/LWFA
+input_file="input_files/inputs3d" # input_files/LWFA
 install_prefix="warpx.install.debug"
 
 cat $input_file > "output_files/warpx_debug_$(date '+%Y-%m-%d_%H-%M-%S').txt"

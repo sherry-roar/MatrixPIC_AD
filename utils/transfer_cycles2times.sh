@@ -1,111 +1,122 @@
 #!/bin/bash
 
 # ==============================================================================
-# 脚本功能:
-# 1. 读取一个包含多个统计数据块的日志文件。
-# 2. 对文件中每个统计项（如 "Global Total"）的周期数进行跨块累加。
-# 3. 在读取完整个文件后，执行两种计算：
-#    a.【累加总时间】: 将累加后的总周期数直接换算成时间（秒）。
-#    b.【平均时间】:   将总周期数除以指定的块数得到平均周期，再换算成时间（秒）。
-# 4. 生成一个包含上述两种计算结果的、格式化的最终报告。
+# SCRIPT FUNCTIONALITY:
+# 1. Reads a log file containing multiple blocks of statistical data.
+# 2. Aggregates the cycle counts for each statistical item (e.g., "Global Total")
+#    across all blocks in the file.
+# 3. After processing the entire file, it performs two main calculations:
+#    a. [Total Accumulated Time]: Converts the total aggregated cycle counts
+#       directly into time in seconds.
+#    b. [Average Time per Block]: Divides the total cycle counts by a specified
+#       number of blocks to get an average, then converts that average into
+#       time in seconds.
+# 4. Generates a formatted final report containing the results of both calculations.
 # ==============================================================================
 
-# --- 配置区 ---
-# 要进行平均的数据块总数 (例如，您提到的80个)
-NUM_BLOCKS=40
-# CPU 频率 (单位: GHz)
-FREQUENCY_GHZ="1.55"
+# --- Configuration Section ---
+# Total number of data blocks to use for the averaging calculation.
+NUM_BLOCKS=100
+# CPU frequency in GHz.
+# PLEASE REPLACE "xxx" WITH THE ACTUAL FREQUENCY.
+FREQUENCY_GHZ="xxx"
 
-# --- 脚本主逻辑 ---
+# --- Main Script Logic ---
 
-# 检查用户是否提供了输入和输出文件名
+# Check if the user has provided the required input and output filenames.
 if [ "$#" -ne 2 ]; then
-    echo "用法: $0 <包含所有数据的输入文件> <最终报告输出文件>"
-    echo "示例: ./compute_total_and_avg_time.sh all_stats.log final_report.txt"
+    echo "Usage: $0 <input_file_with_all_data> <output_file_for_report>"
+    echo "Example: ./compute_total_and_avg_time.sh all_stats.log final_report.txt"
     exit 1
 fi
 
-# 将命令行参数赋值给可读的变量名
+# Assign command-line arguments to more readable variable names.
 INPUT_FILE="$1"
 OUTPUT_FILE="$2"
 
-# 检查输入文件是否存在
+# Check if the input file exists.
 if [ ! -f "$INPUT_FILE" ]; then
-    echo "错误: 输入文件 '$INPUT_FILE' 不存在。"
+    echo "Error: Input file '$INPUT_FILE' not found."
     exit 1
 fi
 
-echo "正在从 '$INPUT_FILE' 中聚合数据..."
-echo "将基于 $NUM_BLOCKS 个数据块进行汇总和平均计算..."
+echo "Aggregating data from '$INPUT_FILE'..."
+echo "Calculating totals and averages based on $NUM_BLOCKS data blocks..."
 
-# 使用 awk 完成所有聚合与计算
-# awk 的关联数组 `sums` 用于按名称存储每个统计项的累加周期数
+# Use awk to perform all aggregation and calculation tasks.
+# The awk associative array `sums` is used to store the accumulated cycle count for each metric by name.
 awk -v num_blocks="$NUM_BLOCKS" -v freq_ghz="$FREQUENCY_GHZ" '
-# 对每一行，检查它包含哪个统计项的关键字，然后将该行的最后一个字段($NF, 即数值)累加到sums数组的对应项中
-/Global Total:/    { sums["total"]      += $NF }
+# For each line, check for a metric keyword. If a keyword is found,
+# add the last field of the line ($NF, which is the numeric value)
+# to the corresponding item in the `sums` array.
+/Global Total:/      { sums["total"]      += $NF }
 /Global precompute:/ { sums["precompute"] += $NF }
-/Global cale_time:/  { sums["cale_time"]  += $NF }
+/Global cale_time:/  { sums["calc_time"]  += $NF } # Assuming "cale_time" is a typo for "calc_time"
 /Global sort time:/  { sums["sort"]       += $NF }
 /Global reduce time:/ { sums["reduce"]     += $NF }
 
-# END 块在整个文件读取完毕后执行一次
+# The END block is executed once after the entire file has been read.
 END {
-    # --- 准备工作：定义计算常量 ---
+    # --- Preparation: Define calculation constants ---
     frequency_hz = freq_ghz * 1e9;
 
-    # --- 第一部分：计算【累加总时间】 ---
-    # 公式: 总时间(秒) = 总周期数 / 频率(Hz)
+    # --- Part 1: Calculate [Total Accumulated Time] ---
+    # Formula: Total Time (s) = Total Cycles / Frequency (Hz)
     total_time_total      = sums["total"] / frequency_hz;
     total_time_precompute = sums["precompute"] / frequency_hz;
-    total_time_cale       = sums["cale_time"] / frequency_hz;
+    total_time_calc       = sums["calc_time"] / frequency_hz;
     total_time_sort       = sums["sort"] / frequency_hz;
     total_time_reduce     = sums["reduce"] / frequency_hz;
 
-    # --- 第二部分：计算【平均时间】 ---
-    # 公式: 平均时间(秒) = (总周期数 / 数据块数) / 频率(Hz)
+    # --- Part 2: Calculate [Average Time per Block] ---
+    # Formula: Average Time (s) = (Total Cycles / Number of Blocks) / Frequency (Hz)
     avg_time_total      = (sums["total"] / num_blocks) / frequency_hz;
     avg_time_precompute = (sums["precompute"] / num_blocks) / frequency_hz;
-    avg_time_cale       = (sums["cale_time"] / num_blocks) / frequency_hz;
+    avg_time_calc       = (sums["calc_time"] / num_blocks) / frequency_hz;
     avg_time_sort       = (sums["sort"] / num_blocks) / frequency_hz;
     avg_time_reduce     = (sums["reduce"] / num_blocks) / frequency_hz;
 
-    # --- 打印【累加总时间】报告 ---
-    print "### 累加总时间 (单位: 秒) ###";
+    # Note: The original script multiplies the final times by 2. This is preserved here.
+    # This might be specific to the use case (e.g., accounting for 2 nodes).
+    multiplier = 2;
+
+    # --- Print the [Total Accumulated Time] Report ---
+    print "### Total Accumulated Time (Unit: seconds) ###";
     print "=================================================";
-    printf "Global Total: %.9f\n", total_time_total*2;
-    printf "|  Global precompute: %.9f\n", total_time_precompute*2;
-    printf "|  Global cale_time: %.9f\n", total_time_cale*2;
-    printf "|  Global sort time: %.9f\n", total_time_sort*2;
-    printf "|  Global reduce time: %.9f\n", total_time_reduce*2;
+    printf "Global Total: %.9f\n", total_time_total * multiplier;
+    printf "|  Global precompute: %.9f\n", total_time_precompute * multiplier;
+    printf "|  Global calc_time:  %.9f\n", total_time_calc * multiplier;
+    printf "|  Global sort time:  %.9f\n", total_time_sort * multiplier;
+    printf "|  Global reduce time:%.9f\n", total_time_reduce * multiplier;
     print "-------------------------------------------------";
 
-    # 打印一个空行用于分隔
+    # Print a blank line for separation.
     print "";
 
-    # --- 打印【平均时间】报告 ---
-    print "### 平均时间 (单位: 秒) ###";
+    # --- Print the [Average Time per Block] Report ---
+    print "### Average Time per Block (Unit: seconds) ###";
     print "=================================================";
-    printf "Global Total: %.9f\n", avg_time_total*2;
-    printf "|  Global precompute: %.9f\n", avg_time_precompute*2;
-    printf "|  Global cale_time: %.9f\n", avg_time_cale*2;
-    printf "|  Global sort time: %.9f\n", avg_time_sort*2;
-    printf "|  Global reduce time: %.9f\n", avg_time_reduce*2;
+    printf "Global Total: %.9f\n", avg_time_total * multiplier;
+    printf "|  Global precompute: %.9f\n", avg_time_precompute * multiplier;
+    printf "|  Global calc_time:  %.9f\n", avg_time_calc * multiplier;
+    printf "|  Global sort time:  %.9f\n", avg_time_sort * multiplier;
+    printf "|  Global reduce time:%.9f\n", avg_time_reduce * multiplier;
     print "-------------------------------------------------";
 
-    # --- 打印脚注信息 ---
-    printf "\n(计算基于 %d 个数据块 和 %.2fGHz 频率)\n", num_blocks*2, freq_ghz;
+    # --- Print Footer Information ---
+    printf "\n(Calculations based on %d data blocks and a %.2fGHz frequency)\n", num_blocks * multiplier, freq_ghz;
 
 }' "$INPUT_FILE" > "$OUTPUT_FILE"
 
-# 检查输出文件是否成功生成
+# Check if the output file was generated successfully.
 if [ -f "$OUTPUT_FILE" ]; then
     echo "----------------------------------------"
-    echo "计算完成!"
-    echo "最终报告已写入文件: $OUTPUT_FILE"
+    echo "Calculation complete!"
+    echo "Final report has been written to: $OUTPUT_FILE"
     echo ""
-    echo "--- 最终报告内容预览 ---"
+    echo "--- Final Report Preview ---"
     cat "$OUTPUT_FILE"
 else
-    echo "错误: 生成报告文件失败。"
+    echo "Error: Failed to generate the report file."
     exit 1
 fi

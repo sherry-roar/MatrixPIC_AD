@@ -33,7 +33,7 @@ module load bisheng/kml25.0.0/kml
 
 ## Directory Structure
 
-Before running the build scripts, ensure your project is structured as follows. The official source codes for AMReX and PICSAR should be placed in the `deps` directory.
+Before running the build scripts, ensure your project is structured as follows. The official source codes for AMReX should be placed in the `deps` directory.
 
 ```
 .
@@ -94,17 +94,43 @@ Replace the following header file in your local AMReX source tree.
 Once the source files are in place, you can compile and execute the simulation using the provided scripts.
 
 1.  **Configure Build Options (Optional)**:
-    You can modify the variables at the top of the `build_release_and_run.sh.sh` script to control the build:
+    You can modify the variables at the top of the `build_release_and_run.sh` script to control the build:
 
       * `ENABLE_ROOFLINE_PROFILING`: Set to `"ON"` to enable Roofline performance profiling.
       * `ENABLE_SANITIZE`: Set to `"ON"` to enable AddressSanitizer for debugging.
       * `install_prefix`: Defines the build output directory name.
 
-2.  **Execute the Build Script**:
+2.  **Select the Deposition Algorithm for Ablation Studies**:
+    Before compiling, you must manually select the particle deposition algorithm you wish to test. This is a required step for conducting ablation studies.
+
+      * **File to Modify**: `warpx-24.07/Source/Particles/WarpXParticleContainer.cpp`
+      * **Location**: Lines `1295` to `1387`.
+      * **Action**: Within this code block, you will find several function calls, each corresponding to a different experiment. To run a specific experiment, ensure its function call is **uncommented**, while the others are **commented out**.
+
+    For example, to enable "Experiment 1," which uses the `doDepositionShapeN_3d_sme` function, the code should be configured as follows:
+
+    ```cpp
+    // =================Experments 1================
+    doDepositionShapeN_3d_sme<1>(
+        GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
+        uyp.dataPtr() + offset, uzp.dataPtr() + offset, ion_lev,
+        jx_fab,  jy_fab, jz_fab, np_to_deposit, relative_time, dinv,
+        xyzmin, lo, hi,len, q, test,test0,test1,ptile,tbox,
+        test_rhocells,test_sxwq,WarpX::n_rz_azimuthal_modes,inner_timer);
+
+    // Ensure other experimental or baseline versions are commented out.
+    // doDepositionShapeN<1>(
+    //     GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
+    //     uyp.dataPtr() + offset, uzp.dataPtr() + offset, ion_lev,
+    //     jx_fab, jy_fab, jz_fab, np_to_deposit, relative_time, dinv,
+    //     xyzmin, lo, q,  WarpX::n_rz_azimuthal_modes);
+    ```
+
+3.  **Execute the Build Script**:
     Run the release build script from the project's root directory:
 
     ```bash
-    bash ./build_release_and_run.sh.sh
+    bash ./build_release_and_run.sh
     ```
 
     This script automates the entire process:
@@ -117,7 +143,9 @@ Once the source files are in place, you can compile and execute the simulation u
 
 ### Debug Build
 
-For development and debugging, a separate script is provided which builds with debug symbols and without high-level optimizations.
+For development purposes, a separate script is provided to build the code in debug mode. This build process disables high-level compiler optimizations and includes debug symbols, making it suitable for use with debuggers like GDB.
+
+Remember to select the desired particle deposition algorithm in the source code before running the debug build.
 
 ```bash
 bash ./build_debug_and_run.sh.sh
@@ -127,7 +155,7 @@ bash ./build_debug_and_run.sh.sh
 
   * **`input_files/`**: Contains sample input files (`inputs3d`, `LWFA`, etc.) for running different simulation scenarios.
   * **`utils/`**: Contains helper scripts for post-processing and analysis, such as `calculate_particle_avg_metric.py`.
-  * **`eurosys_outputs/`**: Contains sample output logs and performance data from various test runs, corresponding to results presented in our EuroSys '26 paper.
+  * **`eurosys_outputs/`**: Contains origin outputs results presented in our EuroSys '26 paper.
 
 -----
 
@@ -146,10 +174,9 @@ bash ./build_debug_and_run.sh.sh
 │           └── Particle
 │               └── AMReX_ParticleTile.H
 ├── eurosys_outputs
-│   ├── sec6.2
-│   │   └── ... (benchmark results)
-│   └── sec6.3
-│       └── ... (benchmark results)
+│   ├── sec6.1.xlsx
+│   ├── sec6.2.xlsx
+│   └── sec6.3.xlsx
 ├── input_files
 │   ├── LWFA
 │   ├── inputs3d

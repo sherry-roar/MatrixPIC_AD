@@ -1,34 +1,59 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+"""
+This script provides a utility to parse a file and calculate the average value 
+of a specific metric. It is designed to read text files where the data of 
+interest is on lines beginning with a specific prefix, such as 'avg_metric:'.
+"""
+
 import re
+
 def calculate_avg_metric(file_path):
     """
-    计算文件中以 arvg_metric: 开头的行中数字的平均值
-    :param file_path: 输入文件路径
-    :return: 平均值若无匹配行则返回 None
+    Calculates the average of numbers found on lines starting with 'avg_metric:'.
+
+    This function opens a file, iterates through each line, and uses a regular
+    expression to find lines that match the specified format. It collects all
+    the numeric values from these lines and computes their average.
+
+    :param file_path: str, The path to the input file.
+    :return: float, The calculated average, or None if no matching lines are found
+             or the file does not exist.
     """
     values = []
     try:
-        with open(file_path, 'r', encoding='utf8') as file:
+        with open(file_path, 'r', encoding='utf-8') as file:
             for line in file:
-            # 匹配以 arvg_metric: 开头且后跟数字的行
-                match = re.match(r'arvg_metric:\s*(\d+)', line.strip())
+                # Use regex to match lines starting with 'avg_metric:' followed by a number.
+                # - r'avg_metric:' : Matches the literal text.
+                # - \s* : Matches zero or more whitespace characters.
+                # - (\d+)          : Captures one or more digits as a group.
+                match = re.match(r'avg_metric:\s*(\d+)', line.strip())
                 if match:
-                    values.append(int(match.group(1)))  # 提取数字并转为整数[6,7](@ref)
+                    # Extract the captured number (group 1) and convert it to an integer.
+                    values.append(int(match.group(1)))
     except FileNotFoundError:
-        print(f"错误：文件 {file_path} 未找到")
-        return None
-    # 计算平均值避免除零错误
-    if not values:
-        print("警告未找到符合条件的行")
+        print(f"Error: The file '{file_path}' was not found.")
         return None
     
-    average = sum(values) / len(values)  # 使用内置函数计算平均值[1,5](@ref)
-    print("len(values)", len(values))
+    # Check if any values were found to avoid a division-by-zero error.
+    if not values:
+        print("Warning: No lines matching the 'avg_metric:' format were found.")
+        return None
+    
+    # Calculate the average using built-in sum() and len() functions for efficiency.
+    average = sum(values) / len(values)
+    print(f"Number of values found: {len(values)}")
     return average
 
-# 示例调用
-file_path = "sme.11LWFA.444.timer.static.out"  # 替换为实际文件路径
-print(file_path)
-result = calculate_avg_metric(file_path)
-if result is not None:
-    print(f"平均值: {result:.2f}")
+# --- Example Usage ---
+# Replace this with the actual path to your data file.
+file_path = "sme.LWFA.444.timer.static.out" 
+print(f"Processing file: {file_path}")
 
+result = calculate_avg_metric(file_path)
+
+if result is not None:
+    # Print the final result formatted to two decimal places.
+    print(f"The calculated average metric is: {result:.2f}")
