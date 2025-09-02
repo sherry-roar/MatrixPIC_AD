@@ -39,7 +39,7 @@ cmake -S . -B $build_prefix \
         -DCMAKE_BUILD_TYPE=Release \
         -DCMAKE_C_COMPILER=clang \
         -DCMAKE_CXX_COMPILER=clang++  \
-        -DDEBUG_LOG=OFF -DBREAKDOWN=OFF -DMEASURE_IPC=OFF -DENABLE_HBM=ON -DENABLE_FLOPS=ON \
+        -DDEBUG_LOG=OFF -DBREAKDOWN=OFF -DMEASURE_IPC=OFF -DENABLE_OPM=ON -DENABLE_FLOPS=ON \
         -DCMAKE_CXX_FLAGS="-mcpu=hip11 \
                 -march=armv9+sve+sve2+sme -rtlib=compiler-rt -ffast-math \
                 -msve-vector-bits=512 -O3 -optimize-loop -flto=full -fopenmp -fveclib=MATHLIB -finline-functions -ftree-vectorize \
@@ -59,7 +59,7 @@ cmake -S . -B $build_prefix \
                 -L/path/to/HPCKit_root/25.3.30/kml/bisheng-0126/lib/sve512/ -lkfft" \
 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/path/to/HPCKit_root/25.3.30/kml/bisheng-0126/lib/sve
-export MEMKIND_HBW_NODES=$HBM_NODES
+export MEMKIND_HBW_NODES=$OPM_NODES
 
 cmake --build $build_prefix --target install -j16
 

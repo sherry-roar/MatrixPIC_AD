@@ -18,10 +18,10 @@
 
 int main(int argc, char* argv[])
 {
-    // set HBM must be bind
+    // set OPM must be bind
     int result = hbw_set_policy(HBW_POLICY_BIND);
     if (result != 0) {
-        std::cerr << "Error: Failed to set memkind HBM policy to BIND." << std::endl;
+        std::cerr << "Error: Failed to set memkind OPM policy to BIND." << std::endl;
     }
     //========================
     warpx::initialization::initialize_external_libraries(argc, argv);

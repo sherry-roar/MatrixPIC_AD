@@ -4024,9 +4024,9 @@ void doDepositionShapeN_org_sp_rhocell_GPMA_sve(const GetParticlePosition<PIdx> 
     #endif
 }
 
-inline void increment_sort_particles_order3_HBM (
+inline void increment_sort_particles_order3_OPM (
     int np_to_deposit, ParticleTileType& ptile,
-    HBM_Inner_Vector_Int& newbin, int numcell, amrex::Dim3 len
+    OPM_Inner_Vector_Int& newbin, int numcell, amrex::Dim3 len
 )
 {
     auto& local_index = ptile.m_local_index_hbm;
@@ -4042,7 +4042,7 @@ inline void increment_sort_particles_order3_HBM (
     was_rebuilt_this_step = false ;
     
     // TODO: move ouside
-    std::unordered_map<int, HBM_Inner_Vector_Int> m_pending_moves;
+    std::unordered_map<int, OPM_Inner_Vector_Int> m_pending_moves;
     m_pending_moves.clear();
 
     bool rebuild=false;
@@ -4194,7 +4194,7 @@ inline void increment_sort_particles_order3_HBM (
     if(!rebuild){ 
         for (const auto& pair : m_pending_moves) {
             int new_bin=pair.first;
-            const HBM_Inner_Vector_Int& moved_ips = pair.second;
+            const OPM_Inner_Vector_Int& moved_ips = pair.second;
             int ip_size = moved_ips.size();
             
             int bin_end = bin_offsets[new_bin+1];
@@ -4326,16 +4326,16 @@ inline void increment_sort_particles_order3_HBM (
 
 template <int depos_order>
 __arm_new("za") inline void sve_rhocell_sme_order3_kernel_sort(
-    HBM_Inner_Vector_Real& xrhocells,
-    HBM_Inner_Vector_Real& yrhocells,
-    HBM_Inner_Vector_Real& zrhocells,
-    const HBM_Inner_Vector_Real& sx_m,
-    const HBM_Inner_Vector_Real& sy_m,
-    const HBM_Inner_Vector_Real& sz_m,
-    const HBM_Inner_Vector_Real& wqx,
-    const HBM_Inner_Vector_Real& wqy,
-    const HBM_Inner_Vector_Real& wqz,
-    const HBM_Inner_Vector_Int& local_index,
+    OPM_Inner_Vector_Real& xrhocells,
+    OPM_Inner_Vector_Real& yrhocells,
+    OPM_Inner_Vector_Real& zrhocells,
+    const OPM_Inner_Vector_Real& sx_m,
+    const OPM_Inner_Vector_Real& sy_m,
+    const OPM_Inner_Vector_Real& sz_m,
+    const OPM_Inner_Vector_Real& wqx,
+    const OPM_Inner_Vector_Real& wqy,
+    const OPM_Inner_Vector_Real& wqz,
+    const OPM_Inner_Vector_Int& local_index,
     const std::vector<int>& bin_length,
     const std::vector<int>& bin_offsets,
     int lenx,
@@ -4545,16 +4545,16 @@ void doDepositionShapeN_sve_rhocell_sme_order3 (const GetParticlePosition<PIdx>&
                         amrex::Dim3 len,
                         amrex::Real q,
                         [[maybe_unused]]int n_rz_azimuthal_modes,
-                        HBM_Inner_Vector_Real& wqx,
-                        HBM_Inner_Vector_Real& wqy,
-                        HBM_Inner_Vector_Real& wqz,
-                        HBM_Inner_Vector_Real& sx_m,
-                        HBM_Inner_Vector_Real& sy_m,
-                        HBM_Inner_Vector_Real& sz_m,
-                        HBM_Inner_Vector_Real& xrhocells,
-                        HBM_Inner_Vector_Real& yrhocells,
-                        HBM_Inner_Vector_Real& zrhocells,
-                        HBM_Inner_Vector_Int& newbin,
+                        OPM_Inner_Vector_Real& wqx,
+                        OPM_Inner_Vector_Real& wqy,
+                        OPM_Inner_Vector_Real& wqz,
+                        OPM_Inner_Vector_Real& sx_m,
+                        OPM_Inner_Vector_Real& sy_m,
+                        OPM_Inner_Vector_Real& sz_m,
+                        OPM_Inner_Vector_Real& xrhocells,
+                        OPM_Inner_Vector_Real& yrhocells,
+                        OPM_Inner_Vector_Real& zrhocells,
+                        OPM_Inner_Vector_Int& newbin,
                         ParticleTileType& ptile, const amrex::Box& box
                     )
 {
@@ -4663,7 +4663,7 @@ void doDepositionShapeN_sve_rhocell_sme_order3 (const GetParticlePosition<PIdx>&
     }
 
     const int numcell=ptile.m_num_bins;
-    increment_sort_particles_order3_HBM(np_to_deposit,ptile,newbin,numcell,len);
+    increment_sort_particles_order3_OPM(np_to_deposit,ptile,newbin,numcell,len);
 
     auto& local_index = ptile.m_local_index_hbm;
     auto& bin_offsets = ptile.m_bin_offsets;
@@ -4739,16 +4739,16 @@ void doDepositionShapeN_sve_rhocell_order3_sort (const GetParticlePosition<PIdx>
                                 amrex::Dim3 len,
                                 amrex::Real q,
                                 [[maybe_unused]]int n_rz_azimuthal_modes,
-                                HBM_Inner_Vector_Real& wqx,
-                                HBM_Inner_Vector_Real& wqy,
-                                HBM_Inner_Vector_Real& wqz,
-                                HBM_Inner_Vector_Real& sx_m,
-                                HBM_Inner_Vector_Real& sy_m,
-                                HBM_Inner_Vector_Real& sz_m,
-                                HBM_Inner_Vector_Real& xrhocells,
-                                HBM_Inner_Vector_Real& yrhocells,
-                                HBM_Inner_Vector_Real& zrhocells,
-                                HBM_Inner_Vector_Int& newbin,
+                                OPM_Inner_Vector_Real& wqx,
+                                OPM_Inner_Vector_Real& wqy,
+                                OPM_Inner_Vector_Real& wqz,
+                                OPM_Inner_Vector_Real& sx_m,
+                                OPM_Inner_Vector_Real& sy_m,
+                                OPM_Inner_Vector_Real& sz_m,
+                                OPM_Inner_Vector_Real& xrhocells,
+                                OPM_Inner_Vector_Real& yrhocells,
+                                OPM_Inner_Vector_Real& zrhocells,
+                                OPM_Inner_Vector_Int& newbin,
                                 ParticleTileType& ptile, const amrex::Box& box)
 {
 #ifdef BREAKDOWN
@@ -4886,7 +4886,7 @@ void doDepositionShapeN_sve_rhocell_order3_sort (const GetParticlePosition<PIdx>
     calculate_area[0] = rdtscv();
 #endif  // BREAKDOWN
 
-    increment_sort_particles_order3_HBM(np_to_deposit,ptile,newbin,numcell,len);
+    increment_sort_particles_order3_OPM(np_to_deposit,ptile,newbin,numcell,len);
 
     auto& local_index = ptile.m_local_index_hbm;
     auto& bin_offsets = ptile.m_bin_offsets;

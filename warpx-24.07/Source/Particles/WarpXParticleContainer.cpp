@@ -224,9 +224,9 @@
                 ptile.buildPMAForGrownTile(perm1.data(), nps, offsets, 
                     numBins, box, growbox, gap_ratio);
              }else if(WarpX::nox==3 || WarpX::nox==2){
-                ptile.buildPMAForGrownTile_HBM_order(perm1.data(), nps, offsets, 
+                ptile.buildPMAForGrownTile_OPM_order(perm1.data(), nps, offsets, 
                     numBins, box, growbox, gap_ratio,WarpX::nox);
-                // ptile.buildPMAForGrownTile_HBM(perm1.data(), nps, offsets, 
+                // ptile.buildPMAForGrownTile_OPM(perm1.data(), nps, offsets, 
                 //     numBins, box, growbox, gap_ratio);
                 // ptile.buildPMAForGrownTile(perm1.data(), nps, offsets, 
                 //     numBins, box, growbox, gap_ratio);
@@ -864,16 +864,16 @@
                                          RealVector const & wp, RealVector const & uxp,
                                          RealVector const & uyp, RealVector const & uzp,
                                          int const * const ion_lev,
-                                         HBM_Inner_Vector_Real& wqx,
-                                         HBM_Inner_Vector_Real& wqy,
-                                         HBM_Inner_Vector_Real& wqz,
-                                         HBM_Inner_Vector_Real& sxm,
-                                         HBM_Inner_Vector_Real& sym,
-                                         HBM_Inner_Vector_Real& szm,
-                                         HBM_Inner_Vector_Real& xrhocells,
-                                         HBM_Inner_Vector_Real& yrhocells,
-                                         HBM_Inner_Vector_Real& zrhocells,
-                                         HBM_Inner_Vector_Int& newbin,
+                                         OPM_Inner_Vector_Real& wqx,
+                                         OPM_Inner_Vector_Real& wqy,
+                                         OPM_Inner_Vector_Real& wqz,
+                                         OPM_Inner_Vector_Real& sxm,
+                                         OPM_Inner_Vector_Real& sym,
+                                         OPM_Inner_Vector_Real& szm,
+                                         OPM_Inner_Vector_Real& xrhocells,
+                                         OPM_Inner_Vector_Real& yrhocells,
+                                         OPM_Inner_Vector_Real& zrhocells,
+                                         OPM_Inner_Vector_Int& newbin,
                                          amrex::MultiFab * const jx, amrex::MultiFab * const jy, amrex::MultiFab * const jz,
                                          long const offset, long const np_to_deposit,
                                          int const thread_num, const int lev, int const depos_lev,

@@ -15,7 +15,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/path/to/HPCKit_root/25.3.30/kml/bisheng
 
 export OMP_NUM_THREADS=1
 export OMP_PROC_BIND=true
-export MEMKIND_HBW_NODES=$HBM_NODES
+export MEMKIND_HBW_NODES=$OPM_NODES
 export ASAN_OPTIONS=abort_on_error=1
 
 

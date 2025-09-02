@@ -1290,13 +1290,13 @@ struct ParticleTile
     std::vector<int> m_pid_to_bin_map;   // Index = pid, Value = bin_id (0-based). Use -1 for invalid/unmapped.
     std::vector<int> m_pid_to_index_map; // This is essentially the permutation array (perm), a compact index array for easy statistics and access.
 
-    // --- HBM versions of sorting arrays ---
-    HBM_Inner_Vector_Int m_local_index_hbm;
-    HBM_Inner_Vector_Int m_pid_to_bin_map_hbm;
-    HBM_Inner_Vector_Int m_pid_to_index_map_hbm;
-    HBM_Inner_Vector_Int m_bin_offsets_hbm;
-    HBM_Inner_Vector_Int m_slot_offsets_hbm;
-    HBM_Inner_Vector_Int m_bin_lengths_hbm;
+    // --- OPM versions of sorting arrays ---
+    OPM_Inner_Vector_Int m_local_index_hbm;
+    OPM_Inner_Vector_Int m_pid_to_bin_map_hbm;
+    OPM_Inner_Vector_Int m_pid_to_index_map_hbm;
+    OPM_Inner_Vector_Int m_bin_offsets_hbm;
+    OPM_Inner_Vector_Int m_slot_offsets_hbm;
+    OPM_Inner_Vector_Int m_bin_lengths_hbm;
 
     // The following are deprecated as of 2025.07.21
     std::vector<int> m_bin_max_ip;         // Indicates the largest particle index (ip) in each bin, used to determine insertion position
@@ -1555,7 +1555,7 @@ struct ParticleTile
         }
     }
 
-    void buildPMAForGrownTile_HBM(
+    void buildPMAForGrownTile_OPM(
         const int* perm,
         const int np,
         const int* offsets,
@@ -1673,7 +1673,7 @@ struct ParticleTile
         m_was_rebuilt_this_step = true;
     }
 
-    void buildPMAForGrownTile_HBM_order(
+    void buildPMAForGrownTile_OPM_order(
         const int* perm,
         const int np,
         const int* offsets,

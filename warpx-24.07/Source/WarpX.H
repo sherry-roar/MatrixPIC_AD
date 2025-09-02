@@ -430,19 +430,19 @@ public:
     // std::vector<std::vector<amrex::Real>> m_thread_private_szm;
     // std::vector<std::vector<int>> m_thread_private_newbin;
 
-    HBM_Nested_Vector_Real m_thread_private_wqx;
-    HBM_Nested_Vector_Real m_thread_private_wqy;
-    HBM_Nested_Vector_Real m_thread_private_wqz;
+    OPM_Nested_Vector_Real m_thread_private_wqx;
+    OPM_Nested_Vector_Real m_thread_private_wqy;
+    OPM_Nested_Vector_Real m_thread_private_wqz;
 
-    HBM_Nested_Vector_Real m_thread_private_sxm;
-    HBM_Nested_Vector_Real m_thread_private_sym;
-    HBM_Nested_Vector_Real m_thread_private_szm;
+    OPM_Nested_Vector_Real m_thread_private_sxm;
+    OPM_Nested_Vector_Real m_thread_private_sym;
+    OPM_Nested_Vector_Real m_thread_private_szm;
 
-    HBM_Nested_Vector_Int  m_thread_private_newbin;
+    OPM_Nested_Vector_Int  m_thread_private_newbin;
 
-    HBM_Nested_Vector_Real m_thread_private_xrhocells;
-    HBM_Nested_Vector_Real m_thread_private_yrhocells;
-    HBM_Nested_Vector_Real m_thread_private_zrhocells;
+    OPM_Nested_Vector_Real m_thread_private_xrhocells;
+    OPM_Nested_Vector_Real m_thread_private_yrhocells;
+    OPM_Nested_Vector_Real m_thread_private_zrhocells;
     // ========= END USER DEFINED PARAMETERS =========
 
     //! If true, particles will be sorted in the order x -> y -> z -> ppc for faster deposition

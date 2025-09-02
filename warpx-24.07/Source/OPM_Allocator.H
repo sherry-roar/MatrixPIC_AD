@@ -21,7 +21,7 @@ public:
 
     // Core: memory allocation function
     T* allocate(size_t n) {
-        // Use hbw_malloc to allocate HBM memory
+        // Use hbw_malloc to allocate OPM memory
         void* p = hbw_malloc(n * sizeof(T));
         
         if (!p) {
@@ -33,7 +33,7 @@ public:
 
     // Core: memory deallocation function
     void deallocate(T* p, size_t /*n*/) noexcept {
-        // Use hbw_free to deallocate HBM memory
+        // Use hbw_free to deallocate OPM memory
         // Note: the argument for hbw_free is void*
         hbw_free(static_cast<void*>(p));
     }
@@ -51,17 +51,17 @@ bool operator!=(const OPM_Allocator<T>&, const OPM_Allocator<U>&) {
 }
 
 
-// Define a vector type that uses HBM memory
+// Define a vector type that uses OPM memory
 template <typename T>
-using HBM_Vector = std::vector<T, OPM_Allocator<T>>;
+using OPM_Vector = std::vector<T, OPM_Allocator<T>>;
 
 // Apply to your data structures
-// Inner vector: HBM vector for storing amrex::Real or int
-using HBM_Inner_Vector_Real = HBM_Vector<amrex::Real>;
-using HBM_Inner_Vector_Int = HBM_Vector<int>;
+// Inner vector: OPM vector for storing amrex::Real or int
+using OPM_Inner_Vector_Real = OPM_Vector<amrex::Real>;
+using OPM_Inner_Vector_Int = OPM_Vector<int>;
 
-// Outer vector: HBM vector for storing other "HBM vectors"
-using HBM_Nested_Vector_Real = HBM_Vector<HBM_Inner_Vector_Real>;
-using HBM_Nested_Vector_Int = HBM_Vector<HBM_Inner_Vector_Int>;
+// Outer vector: OPM vector for storing other "OPM vectors"
+using OPM_Nested_Vector_Real = OPM_Vector<OPM_Inner_Vector_Real>;
+using OPM_Nested_Vector_Int = OPM_Vector<OPM_Inner_Vector_Int>;
 
 #endif // OPM_Allocator_H_

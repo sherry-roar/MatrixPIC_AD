@@ -39,7 +39,7 @@ cmake -S . -B $build_prefix \
         -DCMAKE_BUILD_TYPE=Debug \
         -DCMAKE_C_COMPILER=clang \
         -DCMAKE_CXX_COMPILER=clang++  \
-        -DDEBUG_LOG=ON -DBREAKDOWN=ON -DMEASURE_IPC=OFF -DENABLE_HBM=OFF -DENABLE_FLOPS=OFF \
+        -DDEBUG_LOG=ON -DBREAKDOWN=ON -DMEASURE_IPC=OFF -DENABLE_OPM=OFF -DENABLE_FLOPS=OFF \
         -DCMAKE_CXX_FLAGS="-mcpu=hip11 \
                 -march=armv8.6-a+sve+sve2+sme -rtlib=compiler-rt \
                 -I/path/to/memkind_root/include/ \
@@ -58,7 +58,7 @@ cmake -S . -B $build_prefix \
                 "      
     
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/path/to/HPCKit_root/25.3.30/kml/bisheng-0126/lib/sve
-export MEMKIND_HBW_NODES=$HBM_NODES
+export MEMKIND_HBW_NODES=$OPM_NODES
 
 cmake --build $build_prefix --target install -j16
 

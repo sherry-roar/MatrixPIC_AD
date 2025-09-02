@@ -48,7 +48,7 @@
 #include <utility>
 
 #include <RankSortStats.H>
-#include <HBM_Allocator.H>
+#include <OPM_Allocator.H>
 
 class WarpXParIter
     : public amrex::ParIterSoA<PIdx::nattribs, 0>
@@ -308,16 +308,16 @@ public:
                                 RealVector const & uyp,
                                 RealVector const & uzp,
                                 int const* ion_lev,
-                                HBM_Inner_Vector_Real& wqx,
-                                HBM_Inner_Vector_Real& wqy,
-                                HBM_Inner_Vector_Real& wqz,
-                                HBM_Inner_Vector_Real& sxm,
-                                HBM_Inner_Vector_Real& sym,
-                                HBM_Inner_Vector_Real& szm,
-                                HBM_Inner_Vector_Real& xrhocells,
-                                HBM_Inner_Vector_Real& yrhocells,
-                                HBM_Inner_Vector_Real& zrhocells,
-                                HBM_Inner_Vector_Int& newbin,
+                                OPM_Inner_Vector_Real& wqx,
+                                OPM_Inner_Vector_Real& wqy,
+                                OPM_Inner_Vector_Real& wqz,
+                                OPM_Inner_Vector_Real& sxm,
+                                OPM_Inner_Vector_Real& sym,
+                                OPM_Inner_Vector_Real& szm,
+                                OPM_Inner_Vector_Real& xrhocells,
+                                OPM_Inner_Vector_Real& yrhocells,
+                                OPM_Inner_Vector_Real& zrhocells,
+                                OPM_Inner_Vector_Int& newbin,
                                 amrex::MultiFab* jx,
                                 amrex::MultiFab* jy,
                                 amrex::MultiFab* jz,

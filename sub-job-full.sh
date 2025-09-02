@@ -15,7 +15,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/path/to/HPCKit_root/25.3.30/kml/bisheng
 
 export OMP_NUM_THREADS=xx
 export OMP_PROC_BIND=true
-export MEMKIND_HBW_NODES=$HBM_NODES
+export MEMKIND_HBW_NODES=$OPM_NODES
 
 
 input_file="input_files/inputs3d-l" # input_files/LWFA
