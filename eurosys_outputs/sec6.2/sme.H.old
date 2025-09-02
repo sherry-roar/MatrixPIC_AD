@@ -1,0 +1,933 @@
+#include <AMReX_Arena.H>
+#include <AMReX_Array4.H>
+#include <AMReX_Dim3.H>
+#include <AMReX_REAL.H>
+
+#include <arm_sve.h>
+#include <arm_sme.h>
+
+typedef svfloat64_t svec _attribute_(armsve_vector_bits(_ARW_FEATURE_SVE_BITS));
+
+#include <chrono>
+
+inline uint64_t rdtscv(void) {
+    uint64_t val;
+    asm volatile("mrs %0, cntvct_el0" : "=r" (val) : : "memory");
+    return val;
+}
+
+inline uint64_t rdtscm(void) __arm_preserves("za") __arm_streaming_compatible {
+    uint64_t val;
+    asm volatile("mrs %0, cntvct_el0" : "=r" (val) : : "memory");
+    return val;
+}
+
+inline uint64_t sve_cnt[3] = {0};
+inline uint64_t sme_cnt[3] = {0};
+inline uint64_t org_cnt[3] = {0};
+
+#include <arm_sve.h>  // 假设你已经包含了 ARM SVE 的头文件
+typedef svfloat64_t svec __attribute__((arm_sve_vector_bits(__ARM_FEATURE_SVE_BITS)));
+
+class Vec {
+private:
+    svec v_;  // 假设 svec 是 svfloat64_t 的别名
+
+public:
+    // 默认构造函数
+    Vec() = default;
+
+    // 从 svfloat64_t 构造
+    Vec(svfloat64_t v) : v_(v) {}
+
+    // 从 double 构造
+    Vec(double v) : v_(svdup_f64(v)) {}
+
+    // 转换为 svfloat64_t    operator svfloat64_t() const {
+        return v_;
+    }
+
+    // 向量加法赋值
+    void operator+=(const Vec& rhs) {
+        v_ = svadd_f64_x(svptrue_b64(), v_, rhs.v_);
+    }
+
+    // 向量减法赋值
+    void operator=(const Vec& rhs) {
+        v_ = svsub_f64_x(svptrue_b64(), v_, rhs.v_);
+    }
+
+    // 向量乘法赋值
+    void operator*=(const Vec& rhs) {
+        v_ = svmul_f64_x(svptrue_b64(), v_, rhs.v_);
+    }
+
+    // 向量加法赋值    
+	Vec operator+(const Vec &rhs) const {
+        return Vec(svadd_f64_x(svptrue_b64(), v_, rhs.v_));
+    }
+
+    // 向量减法赋值    
+	Vec operator(const Vec &rhs) const {
+        return Vec(svsub_f64_x(svptrue_b64(), v_, rhs.v_));
+    }
+
+    // 向量乘法赋值    
+	Vec operator*(const Vec &rhs) const {
+        return Vec(svmul_f64_x(svptrue_b64(), v_, rhs.v_));
+    }
+
+    // 向量除法
+    Vec operator/(const Vec &rhs) const {
+        return Vec(svdiv_f64_x(svptrue_b64(), v_, rhs.v_));
+    }
+
+    // 向量取负
+    Vec operator() const {
+        return Vec(svneg_f64_x(svptrue_b64(), v_));
+    }
+
+    // 向量平方根
+    Vec Sqrt() const {
+        return Vec(svsqrt_f64_x(svptrue_b64(), v_));
+    }
+
+    // 向量加标量
+    Vec operator+(double rhs) const {
+        return *this + Vec(rhs);
+    }
+
+    // 向量减标量
+    Vec operator(double rhs) const {
+        return *this  Vec(rhs);
+    }
+
+    // 向量乘标量
+    Vec operator*(double rhs) const {
+        return *this * Vec(rhs);
+    }
+
+    // 向量除标量
+    Vec operator/(double rhs) const {
+        return *this / Vec(rhs);
+    }
+
+    // 友元函数：标量加向量
+    friend Vec operator+(double lhs, const Vec &rhs) {
+        return Vec(lhs) + rhs;
+    }
+
+    // 友元函数标量减向量
+    friend Vec operator(double lhs, const Vec &rhs) {
+        return Vec(lhs)  rhs;
+    }
+
+    // 友元函数标量乘向量
+    friend Vec operator*(double lhs, const Vec &rhs) {
+        return Vec(lhs) * rhs;
+    }
+
+    // 友元函数标量除向量
+    friend Vec operator/(double lhs, const Vec &rhs) {
+        return Vec(lhs) / rhs;
+    }
+
+    // 存储向量到内存
+    void Store(svbool_t p, double *mem) const {
+        svst1_f64(p, mem, v_);
+    }
+
+    // 从内存加载向量
+    static Vec Load(svbool_t p, const double *mem) {
+        return Vec(svld1_f64(p, mem));
+    }
+};
+
+#include <arm_sme.h>  // 假设你已经包含了 ARM SME 的头文件class MVec {
+private:
+    // svfloat64_t v_;
+    svec v_;
+
+public:
+    MVec() __arm_preserves("za") __arm_streaming_compatible = default;
+
+    // 从 svfloat64_t 构造
+    MVec(svec v) __arm_preserves("za") __arm_streaming_compatible : v_(v) {}
+    MVec(double v) __arm_preserves("za") __arm_streaming_compatible : v_(svdup_f64(v)) {}
+
+    operator svec() const __arm_preserves("za") __arm_streaming_compatible {
+        return v_;
+    }
+
+    __attribute__((arm_preserves("za")))
+    __attribute__((arm_streaming_compatible))
+    void operator+=(const MVec &rhs) {
+        v_ = svadd_f64_x(svptrue_b64(), v_, rhs.v_);
+    }
+
+    // void operator+=(const MVec &rhs) __arm_preserves("za") __arm_streaming_compatible {
+    //     v_ = svadd_f64_x(svptrue_b64(), v_, rhs.v_);
+    // }
+
+    __attribute__((arm_preserves("za")))
+    __attribute__((arm_streaming_compatible))
+    void operator=(const MVec &rhs) {
+        v_ = svsub_f64_x(svptrue_b64(), v_, rhs.v_);
+    }
+
+    __attribute__((arm_preserves("za")))
+    __attribute__((arm_streaming_compatible))
+    void operator*=(const MVec &rhs) {
+        v_ = svmul_f64_x(svptrue_b64(), v_, rhs.v_);
+    }
+
+    __attribute__((arm_preserves("za")))
+    __attribute__((arm_streaming_compatible))
+    MVec operator+(const MVec &rhs) const {
+        return svadd_f64_x(svptrue_b64(), v_, rhs.v_);
+    }
+
+    __attribute__((arm_preserves("za")))
+    __attribute__((arm_streaming_compatible))
+    MVec operator(const MVec &rhs) const {
+        return svsub_f64_x(svptrue_b64(), v_, rhs.v_);
+    }
+
+    __attribute__((arm_preserves("za")))
+    __attribute__((arm_streaming_compatible))
+    MVec operator*(const MVec &rhs) const {
+        return svmul_f64_x(svptrue_b64(), v_, rhs.v_);
+    }
+
+    __attribute__((arm_preserves("za")))
+    __attribute__((arm_streaming_compatible))
+    MVec operator() const {
+        return svneg_f64_x(svptrue_b64(), v_);
+    }
+
+    __attribute__((arm_preserves("za")))
+    __attribute__((arm_streaming_compatible))
+    MVec operator+(double rhs) const {
+        return *this + MVec(rhs);
+    }
+
+    __attribute__((arm_preserves("za")))
+    __attribute__((arm_streaming_compatible))
+    MVec operator(double rhs) const {
+        return *this  MVec(rhs);
+    }
+
+    __attribute__((arm_preserves("za")))
+    __attribute__((arm_streaming_compatible))
+    MVec operator*(double rhs) const {
+        return *this * MVec(rhs);
+    }
+
+    __attribute__((arm_preserves("za")))
+    __attribute__((arm_streaming_compatible))
+    friend MVec operator+(double lhs, const MVec &rhs) {
+        return MVec(lhs) + rhs;
+    }
+
+    __attribute__((arm_preserves("za")))
+    __attribute__((arm_streaming_compatible))
+    friend MVec operator(double lhs, const MVec &rhs) {
+        return MVec(lhs)  rhs;
+    }
+
+    __attribute__((arm_preserves("za")))
+    __attribute__((arm_streaming_compatible))
+    friend MVec operator*(double lhs, const MVec &rhs) {
+        return MVec(lhs) * rhs;
+    }
+
+    __attribute__((arm_preserves("za")))
+    __attribute__((arm_streaming_compatible))
+    void Store(svbool_t p, double *mem) const {
+        svst1_f64(p, mem, v_);
+    }
+
+    __attribute__((arm_preserves("za")))
+    __attribute__((arm_streaming_compatible))
+    static MVec Load(svbool_t p, const double *mem) {
+        return svld1_f64(p, mem);
+    }
+
+    __attribute__((arm_preserves("za")))
+    __attribute__((arm_streaming_compatible))
+    double ReduceSum() const {
+        return svaddv_f64(svptrue_b64(), v_);
+    }
+};
+
+template <int depos_order>
+inline void doEsirkepovDepositShapeNSVE(
+    int dkl, int djl, int dil, int dku, int dju, int diu,
+    std::array<std::vector<double, depos_order + 3>& sz_new_m,
+    std::array<std::vector<double, depos_order + 3>& sy_new_m,
+    std::array<std::vector<double, depos_order + 3>& sx_new_m,
+    double sz_old[], double sy_old[], double sx_old[],
+    const amrex::Array4<amrex::Real>& Jx_arr,
+    const amrex::Array4<amrex::Real>& Jy_arr,
+    const amrex::Array4<amrex::Real>& Jz_arr,
+    int i_new, int j_new, int k_new,
+    double wq, const amrex::XDim3& invdtd, const amrex::Dim3& lo,
+    double one_third, double one_sixth, uint64_t sve_cnt[], long ip) {
+
+    svbool_t px2 = svwhilele_b64(dil, depos_order + 2  diu);
+    svbool_t py2 = svwhilele_b64(djl, depos_order + 2  dju);
+
+    double temp2[depos_order + 2];
+    for (int i = dil; i <= diu; ++i) {
+        temp2[i  dil] = sx_new_m[i][ip];
+    }
+    Vec sx_new_v = Vec::Load(px2, temp2);
+    Vec sx_old_v = Vec::Load(px2, &sx_old[dil]);
+
+    for (int j = djl; j <= dju; ++j) {
+        temp2[j  djl] = sy_new_m[j][ip];
+    }
+    Vec sy_new_v = Vec::Load(py2, temp2);
+    Vec sy_old_v = Vec::Load(py2, &sy_old[djl]);
+
+    uint64_t indices[8];
+
+    double* base = &Jx_arr(lo.x + i_new  1 + dil, lo.y + j_new  1 + djl, lo.z + k_new  1 + dkl);
+    for (int j = djl; j <= depos_order + 2  dju; ++j) {
+        indices[j  djl] = &Jx_arr(lo.x + i_new  1 + dil, lo.y + j_new  1 + j, lo.z + k_new  1 + dkl)  base;
+    }
+    svuint64_t indices_v = svld1_u64(py2, indices);
+
+    alignas(64) double temp[8];
+    uint64_t t0 = rdtscv();
+    for (int k = dkl; k <= depos_order + 2  dku; ++k) {
+        double* base = &Jx_arr(lo.x + i_new  1 + dil, lo.y + j_new  1 + djl, lo.z + k_new  1 + k);
+        Vec sdxi(0);
+        for (int i = dil; i <= depos_order + 1  diu; ++i) {
+            sdxi += wq * invdtd.x * (sx_old[i]  sx_new_m[i][ip]) * (
+                one_third * (sy_new_v * sz_new_m[k][ip] + sy_old_v * sz_old[k]) +
+                one_sixth * (sy_new_v * sz_old[k] + sy_old_v * sz_new_m[k][ip]));
+            // Vec v = Vec::Load(py2, base);
+            Vec v(svld1_gather_index(py2, base, indices_v));
+            v += sdxi;
+            svst1_scatter_index(py2, base, indices_v, v);
+            base += 1;
+        }
+    }
+    uint64_t t1 = rdtscv();
+    sve_cnt[0] += (t1  t0);
+
+    t0 = rdtscv();
+    for (int k = dkl; k <= depos_order + 2  dku; ++k) {
+        Vec sdyi(0);
+        for (int j = djl; j <= depos_order + 1  dju; ++j) {
+            sdyi += wq * invdtd.y * (sy_old[j]  sy_new_m[j][ip]) * (
+                one_third * (sx_new_v * sz_new_m[k][ip] + sx_old_v * sz_old[k]) +
+                one_sixth * (sx_new_v * sz_old[k] + sx_old_v * sz_new_m[k][ip]));
+            double* ptr = &Jy_arr(lo.x + i_new  1 + dil, lo.y + j_new  1 + j, lo.z + k_new  1 + k);
+            Vec v = Vec::Load(px2, ptr);
+            (v + sdyi).Store(px2, ptr);
+        }
+    }
+    t1 = rdtscv();
+    sve_cnt[1] += (t1  t0);
+
+    t0 = rdtscv();
+    for (int j = djl; k <= depos_order + 2  dju; ++j) {
+        Vec sdzk(0);
+        for (int k = dkl; k <= depos_order + 1  dku; ++k) {
+            sdzk += wq * invdtd.z * (sz_old[k]  sz_new_m[k][ip]) * (
+                one_third * (sx_new_v * sy_new_m[j][ip] + sx_old_v * sy_old[j]) +
+                one_sixth * (sx_new_v * sy_old[j] + sx_old_v * sy_new_m[j][ip]));
+            double* ptr = &Jz_arr(lo.x + i_new  1 + dil, lo.y + j_new  1 + j, lo.z + k_new  1 + k);
+            Vec v = Vec::Load(px2, ptr);
+            (v + sdzk).Store(px2, ptr);
+        }
+    }
+    t1 = rdtscv();
+    sve_cnt[2] += (t1  t0);
+}
+
+template <int depos_order> arm_new("za") 
+inline voiddoEsirkepovDepositionShapeNSME(int dkl, int djl, int dil, int dku, int dju, int diu,
+    double sz_new[], double sz_old[], 
+    double sy_new[], double sy_old[],
+    double sx_new[], double sx_old[],
+    const amrex::Array4<amrex::Real>& Jx_arr,
+    const amrex::Array4<amrex::Real>& Jy_arr,
+    const amrex::Array4<amrex::Real>& Jz_arr,
+    int i_new, int j_new, int k_new, double wq,
+    const amrex::XDim3& invdtd, const amrex::Dim3& lo,
+    double one_third, double one_sixth, uint64_t sme_cnt[])
+_arm_streaming
+{
+    svbool_t px2 = svwhilele_b64(dil, depos_order+2diu);
+    svbool_t py2 = svwhilele_b64(djl, depos_order+2dju);
+    svbool_t pz2 = swwhilele_b64(dkl, depos_order+2dku);
+
+    MVec sx_new_v = MVec::Load(px2, &sx_new[dil]);
+    MVec sx_old_v = MVec::Load(px2, &sx_old[dil]);
+    MVec sy_new_v = MVec::Load(py2, &sy_new[djl]);
+    MVec sy_old_v = MVec::Load(py2, &sy_old[djl]);
+    MVec sz_new_v = MVec::Load(pz2, &sz_new[dkl]);
+    MVec sz_old_v = MVec::Load(pz2, &sz_old[dkl]);
+
+    MVec vzero(0);
+
+    alignas(64) double temp[8];
+    uint64_t t0 = rdtscm();
+
+    // xalloc    
+	for (int i = dil; i <= depos_order+1diu; i++) {
+        double coff = wq * invdtd.x * (sx_old[i]  sx_new[i]);
+        double coff1 = coff * one_third;
+        double coff2 = coff * one_sixth;
+        svmopa_za64_m(0, pz2, py2, coff1 * sz_new_v, sy_new_v);
+        svmopa_za64_m(0, pz2, py2, coff1 * sz_old_v, sy_old_v);
+        svmopa_za64_m(0, pz2, py2, coff2 * sz_old_v, sy_new_v);
+        svmopa_za64_m(0, pz2, py2, coff2 * sz_new_v, sy_old_v);
+
+        for (int k = dkl; k <= depos_order+2dku; k++) {
+            svst1_hor_za64(0, kdkl, py2, temp);
+            for (int j = djl; j <= depos_order+2dju; j++) {
+                Jx_arr.atSME(lo.x + i_new  1 + i, lo.y + j_new  1 + j, lo.z + k_new  1 + k) += temp[j  djl];
+            }
+        }
+    }
+
+    uint64_t t1 = rdtscm();
+    sme_cnt[0] += (t1  t0);
+
+    t0 = rdtscm();
+    // y
+    for (int j = djl; j <= depos_order+1dju; j++) {
+        double coff = wq * invdtd.y * (sy_old[j]  sy_new[j]);
+        double coff1 = coff * one_third;
+        double coff2 = coff * one_sixth;
+        svmopa_za64_m(1, pz2, px2, coff1 * sz_new_v, sx_new_v);
+        svmopa_za64_m(1, pz2, px2, coff1 * sz_old_v, sx_old_v);
+        svmopa_za64_m(1, pz2, px2, coff2 * sz_old_v, sx_new_v);
+        svmopa_za64_m(1, pz2, px2, coff2 * sz_new_v, sx_old_v);
+
+        for (int k = dkl; k <= depos_order+2dku; k++) {
+            double* ptr = &Jy_arr.atSME(lo.x + i_new  1 + dil, lo.y + j_new  1 + j, lo.z + k_new  1 + k);
+            MVec v1(svread_hor_za64_m(vzero, px2, 1, k  dkl));
+            MVec v2(MVec::Load(px2, ptr));
+            (v1 + v2).Store(px2, ptr);
+        }
+    }
+
+    t1 = rdtscm();
+    sme_cnt[1] += (t1  t0);
+
+    t0 = rdtscm();
+    // za    
+	for (int k = dkl; k <= depos_order+1dku; k++) {
+        double coff = wq * invdtd.z * (sz_old[k]  sz_new[k]);
+        double coff1 = coff * one_third;
+        double coff2 = coff * one_sixth;
+        svmopa_za64_m(2, py2, px2, coff1 * sy_new_v, sx_new_v);
+        svmopa_za64_m(2, py2, px2, coff1 * sy_old_v, sx_old_v);
+        svmopa_za64_m(2, py2, px2, coff2 * sy_old_v, sx_new_v);
+        svmopa_za64_m(2, py2, px2, coff2 * sy_new_v, sx_old_v);
+
+        for (int j = djl; j <= depos_order+2dju; j++) {
+            double* ptr = &Jz_arr.atSME(lo.x + i_new  1 + dil, lo.y + j_new  1 + j, lo.z + k_new  1 + k);
+            MVec v1(svread_hor_za64_m(vzero, px2, 2, j  djl));
+            MVec v2(MVec::Load(px2, ptr));
+            (v1 + v2).Store(px2, ptr);
+        }
+    }
+
+    t1 = rdtscm();
+    sme_cnt[2] += (t1  t0);
+}
+
+
+/**
+ * \brief Esirkepov Current Deposition for thread thread_num
+ *
+ * \tparam depos_order  deposition order
+ * \param GetPosition  A functor for returning the particle position.
+ * \param wp           Pointer to array of particle weights.
+ * \param uxp,uyp,uzp  Pointer to arrays of particle momentum.
+ * \param ion_lev      Pointer to array of particle ionization level. This is                       
+						required to have the charge of each macroparticle
+                       since q is a scalar. For nonionizable species,
+                       ion_lev is a null pointer.
+ * \param Jx_arr,Jy_arr,Jz_arr Array4 of current density, either full array or tile.
+ * \param np_to_deposit Number of particles for which current is deposited.
+ * \param dt           Time step for particle level * \param[in] relative_time Time at which to deposit J, relative to the time of the *                          current positions of the particles. When different than 0,
+ *                          the particle position will be temporarily modified to match
+ *                          the time of the deposition.
+ * \param dinv         3D cell size inverse
+ * \param xyzmin       Physical lower bounds of domain.
+ * \param lo           Index lower bounds of domain.
+ * \param q            species charge.
+ * \param n_rz_azimuthal_modes Number of azimuthal modes when using RZ geometry.
+ */
+template <int depos_order>
+void doEsirkepovDepositionShapeN (const GetParticlePosition<PIdx>& GetPosition,
+                                  const amrex::ParticleReal * const wp,
+                                  const amrex::ParticleReal * const uxp,
+                                  const amrex::ParticleReal * const uyp,
+                                  const amrex::ParticleReal * const uzp,
+                                  const int* ion_lev,
+                                  const amrex::Array4<amrex::Real>& Jx_arr,
+                                  const amrex::Array4<amrex::Real>& Jy_arr,
+                                  const amrex::Array4<amrex::Real>& Jz_arr,
+                                  long np_to_deposit,
+                                  amrex::Real dt,
+                                  amrex::Real relative_time,
+                                  const amrex::XDim3 & dinv,
+                                  const amrex::XDim3 & xyzmin,
+                                  amrex::Dim3 lo,
+                                  amrex::Real q,
+                                  [[maybe_unused]]int n_rz_azimuthal_modes)
+{
+    BL_PROFILE_REGION("doEsirkepovDepositionShapeN");
+    
+    using namespace amrex;
+    using namespace amrex::literals;
+
+    // Whether ion_lev is a null pointer (do_ionization=0) or a real pointer    
+	// (do_ionization=1)
+    bool const do_ionization = ion_lev;
+#if !defined(WARPX_DIM_3D)
+    const amrex::Real invvol = dinv.x*dinv.y*dinv.z;
+#endif
+
+    amrex::XDim3 const invdtd = amrex::XDim3{(1.0_rt/dt)*dinv.y*dinv.z,
+                                             (1.0_rt/dt)*dinv.x*dinv.z,
+                                             (1.0_rt/dt)*dinv.x*dinv.y};
+
+    Real constexpr clightsq = 1.0_rt / ( PhysConst::c * PhysConst::c );
+
+#if !defined(WARPX_DIM_1D_Z)
+    Real constexpr one_third = 1.0_rt / 3.0_rt;
+    Real constexpr one_sixth = 1.0_rt / 6.0_rt;
+#endif
+    std::vector<amrex::ParticleReal> wq_v(np_to_deposit);
+    const amrex::ParticleReal* mx = GetPosition.m_x;
+    const amrex::ParticleReal* my = GetPosition.m_y;
+    const amrex::ParticleReal* mz = GetPosition.m_z;
+    std::vector<double> x_old_v(np_to_deposit);
+    std::vector<double> y_old_v(np_to_deposit);
+    std::vector<double> z_old_v(np_to_deposit);
+    std::array<std::vector<double>, depos_order + 3> sx_new_m;
+    std::array<std::vector<double>, depos_order + 3> sx_old_m;
+    std::array<std::vector<double>, depos_order + 3> sy_new_m;
+    std::array<std::vector<double>, depos_order + 3> sy_old_m;
+    std::array<std::vector<double>, depos_order + 3> sz_new_m;
+    std::array<std::vector<double>, depos_order + 3> sz_old_m;
+    for (int i = 0; i < depos_order + 3; ++i) {
+        sx_new_m[i].resize(np_to_deposit);
+        sx_old_m[i].resize(np_to_deposit);
+        sy_new_m[i].resize(np_to_deposit);
+        sy_old_m[i].resize(np_to_deposit);
+        sz_new_m[i].resize(np_to_deposit);
+        sz_old_m[i].resize(np_to_deposit);
+    }
+
+    std::vector<int64_t> i_new_v(np_to_deposit);
+    std::vector<int64_t> i_old_v(np_to_deposit);
+    std::vector<int64_t> j_new_v(np_to_deposit);
+    std::vector<int64_t> j_old_v(np_to_deposit);
+    std::vector<int64_t> k_new_v(np_to_deposit);
+    std::vector<int64_t> k_old_v(np_to_deposit);
+    std::vector<int64_t> dil_v(np_to_deposit, 1);
+    std::vector<int64_t> diu_v(np_to_deposit, 1);
+    std::vector<int64_t> djl_v(np_to_deposit, 1);
+    std::vector<int64_t> dju_v(np_to_deposit, 1);
+    std::vector<int64_t> dkl_v(np_to_deposit, 1);
+    std::vector<int64_t> dku_v(np_to_deposit, 1);
+
+    long vl = svcntd();
+    for (long ip = 0; ip < np_to_deposit; ip += vl) {
+        svbool_t pred = svwhilelt_b64(ip, np_to_deposit);
+
+        // Get particle quantities
+        Vec uxp_v = Vec::Load(pred, &uxp[ip]);
+        Vec uyp_v = Vec::Load(pred, &uyp[ip]);
+        Vec uzp_v = Vec::Load(pred, &uzp[ip]);
+        Vec gaminv = 1.0_rt / (1.0_rt + uxp_v * uxp_v * clightsq 
+                                + uyp_v * uyp_v * clightsq 
+                                + uzp_v * uzp_v * clightsq).Sqrt();
+
+        // Vec wq = gaminv * Vec::Load(pred, &wp[ip]);
+        Vec wq = q * Vec::Load(pred, &wp[ip]);
+        if (do_ionization) {
+            wq *= Vec(svcvt_f64_x(pred, svld1sw_s64(pred, &ion_lev[ip])));
+        }
+        wq.Store(pred, &wq_v[ip]);
+
+        Vec xp = Vec::Load(pred, &m_x[ip]);
+        Vec yp = Vec::Load(pred, &m_y[ip]);
+        Vec zp = Vec::Load(pred, &m_z[ip]);
+
+        // Keep these double to avoid bug in single precision        
+		Vec x_new = (xp  xyzmin.x + (relative_time + 0.5_rt * dt) * uxp_v * gaminv) * dinv.x;
+        Vec x_old = x_new  dt * dinv.x * uxp_v * gaminv;
+        x_old.Store(pred, &x_old_v[ip]);
+
+        // Keep these double to avoid bug in single precision        
+		Vec y_new = (yp  xyzmin.y + (relative_time + 0.5_rt * dt) * uyp_v * gaminv) * dinv.y;
+        Vec y_old = y_new  dt * dinv.y * uyp_v * gaminv;
+        y_old.Store(pred, &y_old_v[ip]);
+
+        // Keep these double to avoid bug in single precision        
+		Vec z_new = (zp  xyzmin.z + (relative_time + 0.5_rt * dt) * uzp_v * gaminv) * dinv.z;
+        Vec z_old = z_new  dt * dinv.z * uzp_v * gaminv;
+        z_old.Store(pred, &z_old_v[ip]);
+
+        auto compute_shape_factor_v = [](int64_t* i_new, double* sx[], Vec xmid, svbool_t p) {
+            Vec j = svrintz_x(p, xmid);
+            Vec xint = xmid  j;
+            Vec temp = 1.0  xint;
+            Vec sx0 = (1.0 / 6.0) * temp * temp * temp;
+            Vec sx1 = (2.0 / 3.0)  xint * xint * (1.0  xint * 0.5);
+            Vec sx2 = (2.0 / 3.0)  temp * temp * (1.0  0.5 * (1.0  xint));
+            Vec sx3 = (1.0 / 6.0) * xint * xint * xint;
+            sx0.Store(p, sx[0]);
+            sx1.Store(p, sx[1]);
+            sx2.Store(p, sx[2]);
+            sx3.Store(p, sx[3]);
+            svst1(p, i_new, svsub_x(p, svcvt_s64_x(p, xmid), svdup_s64(1)));
+        };
+
+        double* sx_temp[4] = {&sx_new_m[1][ip], &sx_new_m[2][ip], &sx_new_m[3][ip], &sx_new_m[4][ip]};
+        compute_shape_factor_v(&i_new_v[ip], sx_temp, x_new, pred);
+
+        double* sy_temp[4] = {&sy_new_m[1][ip], &sy_new_m[2][ip], &sy_new_m[3][ip], &sy_new_m[4][ip]};
+        compute_shape_factor_v(&j_new_v[ip], sy_temp, y_new, pred);
+
+        double* sz_temp[4] = {&sz_new_m[1][ip], &sz_new_m[2][ip], &sz_new_m[3][ip], &sz_new_m[4][ip]};
+        compute_shape_factor_v(&k_new_v[ip], sz_temp, z_new, pred);
+    }
+
+    // Loop over particles and deposit into Jx_arr, Jy_arr, and Jz_arr    
+	// for (long ip = 0; ip < np_to_deposit; ++ip) {
+    amrex::ParallelFor(
+        np_to_deposit,
+        [=] AMREX_GPU_DEVICE (long const ip) {
+        // Get particle quantities        
+		Real wq = wq_v[ip];
+        double const  x_old = x_old_v[ip];
+        double const  y_old = y_old_v[ip];
+        double const  z_old = z_old_v[ip];
+
+        // Compute shape factors
+        // Compute shape factors for position as they are now and at old positions        
+		// [ijk] new: leftmost grid point that the particle touches
+        const Compute_shifted_shape_factor<depos_order> compute_shifted_shape_factor;
+
+        // Shape factor arrays        
+		// Note that there are extra values above and below
+        // to possibly hold the factor for the old particle        
+		// which can be at a different grid location.
+        // Keep these double to avoid bug in single precision        
+		double sx_old[depos_order + 3] = {0.};
+        const int i_new = i_new_v[ip];
+        const int i_old = compute_shifted_shape_factor(sx_old, x_old, i_new);
+
+        double sy_old[depos_order + 3] = {0.};
+        const int j_new = j_new_v[ip];
+        const int j_old = compute_shifted_shape_factor(sy_old, y_old, j_new);
+
+        double sz_old[depos_order + 3] = {0.};
+        const int k_new = k_new_v[ip];
+        const int k_old = compute_shifted_shape_factor(sz_old, z_old, k_new);
+
+        // Compute min/max positions of current contributions
+        int dil = 1, diu = 1;
+        if (i_old < i_new) { dil = 0; }
+        if (i_old > i_new) { diu = 0; }
+
+        int djl = 1, dju = 1;
+        if (j_old < j_new) { djl = 0; }
+        if (j_old > j_new) { dju = 0; }
+
+        int dkl = 1, dku = 1;
+        if (k_old < k_new) { dkl = 0; }
+        if (k_old > k_new) { dku = 0; }
+        {
+            // BL_PROFILE("SVECompute");
+
+            doEsirkepovDepositionShapeNSVE<depos_order>(
+                dkl, djl, dil, dku, dju, diu,
+                sz_new_m, sy_new_m, sx_new_m,
+                sz_old, sy_old, sx_old,
+                Jx_arr, Jy_arr, Jz_arr,
+                i_new, j_new, k_new,
+                wq, invdtd, lo, one_third, one_sixth, sve_cnt, ip);
+        }
+        {
+            // BL_PROFILE("ORGCompute");
+
+            uint64_t t0 = rdtscv();
+            for (int k=dkl; k<=depos_order+2dku; k++) {
+                for (int j=djl; j<=depos_order+2dju; j++) {
+                    amrex::Real sdxi = 0._rt;
+                    for (int i=dil; i<=depos_order+1diu; i++) {
+                        sdxi += wq*invdtd.x*(sx_old[i]  sx_new[i])*(
+                            one_third*(sy_new[j]*sz_new[k] + sy_old[j]*sz_old[k])
+                           +one_sixth*(sy_new[j]*sz_old[k] + sy_old[j]*sz_new[k]));
+                        // amrex::Print()<< "k:" << k << ", j:" << j << ", i: " << ", org sve::" << Jx_arr(lo.x+i_new1+i, lo.y+j_new1+j, lo.z+k_new1+k);
+                        amrex::Gpu::Atomic::AddNoRet( &Jx_arr(lo.x+i_new1+i, lo.y+j_new1+j, lo.z+k_new1+k), sdxi);
+                    }
+                }
+            }
+            uint64_t t1 = rdtscv();
+            org_cnt += (t1  t0);
+
+            t0 = rdtscv();
+            for (int k=dkl; k<=depos_order+2dku; k++) {
+                for (int i=dil; i<=depos_order+2diu; i++) {
+                    amrex::Real sdyj = 0._rt;
+                    for (int j=djl; j<=depos_order+1dju; j++) {
+                        sdyj += wq*invdtd.y*(sy_old[j]  sy_new[j])*(
+                            one_third*(sx_new[i]*sz_new[k] + sx_old[i]*sz_old[k])
+                           +one_sixth*(sx_new[i]*sz_old[k] + sx_old[i]*sz_new[k]));
+                        amrex::Gpu::Atomic::AddNoRet( &Jy_arr(lo.x+i_new1+i, lo.y+j_new1+j, lo.z+k_new1+k), sdyj);
+                    }
+                }
+            }
+            t1 = rdtscv();
+            org_cnt += (t1  t0);
+
+            t0 = rdtscv();
+            for (int j=djl; j<=depos_order+2dju; j++) {
+                for (int i=dil; i<=depos_order+2diu; i++) {
+                    amrex::Real sdzk = 0._rt;
+                    for (int k=dkl; k<=depos_order+1dku; k++) {
+                        sdzk += wq*invdtd.z*(sz_old[k]  sz_new[k])*(
+                            one_third*(sx_new[i]*sy_new[j] + sx_old[i]*sy_old[j])
+                           +one_sixth*(sx_new[i]*sy_old[j] + sx_old[i]*sy_new[j]));
+                        amrex::Gpu::Atomic::AddNoRet( &Jz_arr(lo.x+i_new1+i, lo.y+j_new1+j, lo.z+k_new1+k), sdzk);
+                    }
+                }
+            }
+            t1 = rdtscv();
+            org_cnt += (t1  t0);
+        }
+    });
+}
+
+template <int depos_order>
+_arm_new("za") inline void doEsirkepovDepositionShapeNSME(
+    int dkl, int djl, int dil, int dku, int dju, int diu,
+    double sz_new[], double sz_old[], 
+    double sy_new[], double sy_old[],
+    double sx_new[], double sx_old[],
+    const amrex::Array4<amrex::Real>& Jx_arr,
+    const amrex::Array4<amrex::Real>& Jy_arr,
+    const amrex::Array4<amrex::Real>& Jz_arr,
+    int i_new, int i_new, int k_new, double wq,
+    const amrex::XDim3& invdtd, const amrex::Dim3& lo,
+    double one_third, double one_sixth, uint64_t sme_cnt[]) __arm_streaming_compatible{
+    // BL_PROFILE("SMECompute");
+    // BL_PROFILE_VAR("SMECompute", p);
+    // BL_PROFILE_VAR("SMECompute1", p1);
+    // BL_PROFILE_VAR("SMECompute2", p2);
+    svbool_t px2 = svwhilele_b64(dil, depos_order+2diu);
+    svbool_t py2 = svwhilele_b64(djl, depos_order+2dju);
+    svbool_t pz2 = svwhilele_b64(dkl, depos_order+2dku);
+    MVec sx_new_v = MVec::Load(px2, &sx_new[dil]);
+    MVec sx_old_v = MVec::Load(px2, &sx_old[dil]);
+    MVec sy_new_v = MVec::Load(py2, &sy_new[djl]);
+    MVec sy_old_v = MVec::Load(py2, &sy_old[djl]);
+    MVec sz_new_v = MVec::Load(pz2, &sz_new[dkl]);
+    MVec sz_old_v = MVec::Load(pz2, &sz_old[dkl]);
+    MVec vzero(0);
+
+    alignas (64) double temp[8];
+    uint64_t t0 = rdtscm();
+
+    // x*    
+	for (int i=dil; i<=depos_order+1diu; i++) {
+        double coff = wq*invdtd.x*(sx_old[i]  sx_new[i]);
+        double coff1 = coff*one_third;
+        double coff2 = coff*one_sixth;
+        svmopa_za64_m(0, pz2, py2, coff1 * sz_new_v, sy_new_v);
+        svmopa_za64_m(0, pz2, py2, coff1 * sz_old_v, sy_old_v);
+        svmopa_za64_m(0, pz2, py2, coff2 * sz_old_v, sy_new_v);
+        svmopa_za64_m(0, pz2, py2, coff2 * sz_new_v, sy_old_v);
+
+        for (int k=dkl; k<=depos_order+2dku; k++) {
+            svst1_hor_za64(0, kdkl, py2, temp);
+            for (int j=djl; j<=depos_order+2dju; j++) {
+                Jx_arr.atSME(lo.x+i_new1+i, lo.y+j_new1+j, lo.z+k_new1+k) += temp[jdjl];
+            }
+        }
+    }
+
+    uint64_t t1 = rdtscm();
+    sme_cnt[0] += (t1  t0);
+    // y*    
+	for (int j=djl; j<=depos_order+1dju; j++) {
+        double coff = wq * invdtd.y * (sy_old[j]  sy_new[j]);
+        double coff1 = coff * one_third;
+        double coff2 = coff * one_sixth;
+        svmopa_za64_m(1, pz2, px2, coff1 * sz_new_v, sx_new_v);
+        svmopa_za64_m(1, pz2, px2, coff1 * sz_old_v, sx_old_v);
+        svmopa_za64_m(1, pz2, px2, coff2 * sz_old_v, sx_new_v);
+        svmopa_za64_m(1, pz2, px2, coff2 * sz_new_v, sx_old_v);
+        
+        for (int k=dkl; k<=depos_order+2dku; k++) {
+            double* ptr = &Jy_arr.atSME(lo.x+i_new1+dil, lo.y+j_new1+j, lo.z+k_new1+k);
+            MVec v1(svread_hor_za64_m(vzero, px2, 1, kdkl));
+            MVec v2(MVec::Load(px2, ptr));
+            (v1 + v2).Store(px2, ptr);
+        }
+    }
+
+    t1 = rdtscm();
+    sme_cnt[1] += (t1  t0);
+
+    t0 = rdtscm();
+    // z*    
+	for (int k=dkl; k<=depos_order+1dku; k++) {
+        double coff = wq*invdtd.z*(sz_old[k]  sz_new[k]);
+        double coff1 = coff * one_third;
+        double coff2 = coff * one_sixth;
+        svmopa_za64_m(2, py2, px2, coff1 * sy_new_v, sx_new_v);
+        svmopa_za64_m(2, py2, px2, coff1 * sy_old_v, sx_old_v);
+        svmopa_za64_m(2, py2, px2, coff2 * sy_old_v, sx_new_v);
+        svmopa_za64_m(2, py2, px2, coff2 * sy_new_v, sx_old_v);
+
+        for (int j=djl; j<=depos_order+2dju; j++) {
+            double* ptr = &Jz_arr.atSME(lo.x+i_new1+dil, lo.y+j_new1+j, lo.z+k_new1+k);
+            MVec v1(svread_hor_za64_m(vzero, px2, 2, jdjl));
+            MVec v2(MVec::Load(px2, ptr));
+            (v1 + v2).Store(px2, ptr);
+        }
+    }
+    t1 = rdtscm();
+    sme_cnt[2] += (t1  t0);
+}
+
+template <int depos_order>
+inline void doEsirkepovDepositionShapeNSVE(
+    int dkl, int djl, int dil, int dku, int dju, int diu,
+    double sz_new[], double sz_old[], double sy_new[],
+    double sy_old[], double sx_new[], double sx_old[],
+    const amrex::Array4<amrex::Real>& Jx_arr,
+    const amrex::Array4<amrex::Real>& Jy_arr, 
+    const amrex::Array4<amrex::Real>& Jz_arr,
+    int i_new, int j_new, int k_new,
+    double wq, const amrex::XDim3& invdtd,
+    const amrex::Dim3& lo, double one_third, double one_sixth, uint64_t sve_cnt[])
+{
+
+    svbool_t px2 = svwhilele_b64(dil, depos_order+2diu);
+    svbool_t py2 = svwhilele_b64(djl, depos_order+2dju);
+
+    Vec sx_new_v = Vec::Load(px2, &sx_new[dil]);
+    Vec sx_old_v = Vec::Load(px2, &x_old[dil]);
+    Vec sy_new_v = Vec::Load(py2, &sy_new[djl]);
+    Vec sy_old_v = Vec::Load(py2, &sy_old[djl]);
+
+    uint64_t indices[8];
+    {
+        double* base = &Jx_arr(lo.x+i_new1+dil, lo.y+j_new1+djl, lo.z+k_new1+dkl);
+        for (int j=djl; j<=depos_order+2dju; j++) {
+            indices[jdjl] = &Jx_arr(lo.x+i_new1+dil, lo.y+j_new1+j, lo.z+k_new1+dkl)  base;
+        }
+    }
+
+    svuint64_t indices_v = svld1_u64(py2, indices);
+    
+    alignas(64) double temp[8];
+    uint64_t t0 = rdtscv();
+    for (int k=dkl; k<=depos_order+2dku; k++) {
+        double* base = &Jx_arr(lo.x+i_new1+dil, lo.y+j_new1+djl, lo.z+k_new1+k);
+        Vec sdxi(0);
+        for (int i=dil; i<=depos_order+1diu; i++) {
+            sdxi += wq*invdtd.x*(sx_old[i]  sx_new[i])*(
+                    one_third*(sy_new_v*sz_new[k] + sy_old_v*sz_old[k])
+                    + one_sixth*(sy_new_v*sz_old[k] + sy_old_v*sz_new[k]));
+        }
+            Vec v(svld1_gather_index(py2, base, indices_v));
+            v += sdxi;
+            svst1_scatter_index(py2, base, indices_v, v);
+            base += 1;
+    }
+
+    uint64_t t1 = rdtscv();
+    sve_cnt[0] += (t1t0);
+
+    for (int k=dkl; k<=depos_order+2dku; k++) {
+        Vec sdyj(0);
+        for (int j=djl; j<=depos_order+1dju; j++) {
+            sdyj += wq*invdtd.y*(sy_old[j]  sy_new[j])*(
+                    one_third*(sx_new_v*sz_new[k] + sx_old_v*sz_old[k])
+                    + one_sixth*(sx_new_v*sz_old[k] + sx_old_v*sz_new[k]));
+            double* ptr = &Jy_arr(lo.x+i_new1+dil, lo.y+j_new1+j, lo.z+k_new1+k);
+            Vec v = Vec::Load(px2, ptr);
+            (v + sdyj).Store(px2, ptr);
+        }
+    }
+    t1 = rdtscv();
+    sve_cnt[1] += (t1  t0);
+
+    t0 = rdtscv();
+    for (int j=djl; j<=depos_order+2dju; j++) {
+        Vec sdzk(0);
+        for (int k=dkl; k<=depos_order+1dku; k++) {
+            sdzk += wq*invdtd.z*(sz_old[k]  sz_new[k])*(
+                    one_third*(sx_new_v*sy_new[j] + sx_old_v*sy_old[j])
+                    + one_sixth*(sx_new_v*sy_old[j] + sx_old_v*sy_new[j]));
+            double* ptr = &Jz_arr(lo.x+i_new1+dil, lo.y+j_new1+j, lo.z+k_new1+k);
+            Vec v = Vec::Load(px2, ptr);
+            (v + sdzk).Store(px2, ptr);
+        }
+    }
+    t1 = rdtscv();
+    sve_cnt[2] += (t1  t0);
+}
+   
+
+{
+    BL_PROFILE("SVEcompute"):
+    doEsirkepovDepositionShapeNSVE<depos_order>(dkl, djl, dil, dku, dju, diu,
+                                                sz_new, sz_old, 
+                                                sy_new, sy_old, 
+                                                sx_new, sx_old, 
+                                                Jx_arr, Jy_arr, Jz_arr,
+                                                i_new, j_new, k_new,
+                                                wq, invdtd, lo, one_third, one_sixth, sve_cnt);
+}
+
+{
+    BL_PROFILE("SMEcompute"):
+    doEsirkepovDepositionShapeNSME<depos_order>(dkl, djl, dil, dku, dju, diu,
+                                                sz_new, sz_old, 
+                                                sy_new, sy_old, 
+                                                sx_new, sx_old,
+                                                Jx_arr, Jy_arr, Jz_arr,
+                                                i_new, i_new, k_new, 
+                                                wq, invdtd, lo, one_third, one_sixth, sme_cnt);
+}
+
+{
+    for (int k=dkl; k<=depos_order+2dku; k++)
+    {
+        int j=djl;
+        svbool_t p1 = svwhilele_b64(j,depos_order+2dju):
+        Vec sdxi(0);
+        for (int i=dil; i<=depos_order+2diu; i++) {
+            sdxi += wq*invdtd.x*(sx_old[i]  sx_new[i])*(
+                    one_third*(Vec::Load(p1, &sy_new[j])*sz_new[k] + Vec::Load(p1, &sy_old[j])*sz_old[k])
+                    + one_sixth*(Vec::Load(p1, &sy_new[j])*sz_old[k] + Vec::Load(p1, &sy_old[j])*sz_new[k]));
+            double temp[8];
+            sdxi.Store(p1, temp);
+            for (int j=djl; j<=depos_order+2dju; j++)
+                amrex::Gpu::Atomic::AddNoRet(&Jx_arr(lo.x+i_new1+i, lo.y+j_new1+j, lo.z+k_new1+k), temp[jdjl]);
+        }
+    }
+    
+    // ......
+}
+
+
+
