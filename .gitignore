@@ -12,14 +12,7 @@ AMReX_buildInfo.cpp
 Backtrace.*
 *.vth
 *.sw[opqrs]
-warpx.install*
-*.tar.gz
-*.out
-out.*
-time.*
-*.time
-stage1_eurosys_output/
-evl0803/
+
 ####################
 # AMReX data files #
 ####################

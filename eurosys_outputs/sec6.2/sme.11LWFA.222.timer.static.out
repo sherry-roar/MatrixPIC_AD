@@ -1,0 +1,162 @@
+Loading bisheng/kml25.0.0/kml
+  Loading requirement: /pacific_fs/HPCKit/latest/modulefiles/bisheng/kml25.0.0/kspblas/omp /pacific_fs/HPCKit/latest/modulefiles/bisheng/kml25.0.0/kvml/serial
+    /pacific_fs/HPCKit/latest/modulefiles/bisheng/kml25.0.0/kblas/multi
+Currently Loaded Modulefiles:
+ 1) bisheng/compiler4.2.0/bishengmodule   3) /pacific_fs/HPCKit/latest/modulefiles/bisheng/kml25.0.0/kspblas/omp <aL>   5) /pacific_fs/HPCKit/latest/modulefiles/bisheng/kml25.0.0/kblas/multi <aL>  
+ 2) bisheng/hmpi25.0.0/hmpi               4) /pacific_fs/HPCKit/latest/modulefiles/bisheng/kml25.0.0/kvml/serial <aL>   6) bisheng/kml25.0.0/kml                                                     
+
+Key:
+<module-tag>  <aL>=auto-loaded  
+Running job !!!!!
+Initializing AMReX (24.07)...
+MPI initialized with 16 MPI processes
+MPI initialized with thread support level 1
+OMP initialized with 32 OMP threads
+AMReX (24.07) initialized
+WarpX (Unknown)
+
+    __        __             __  __
+    \ \      / /_ _ _ __ _ __\ \/ /
+     \ \ /\ / / _` | '__| '_ \\  /
+      \ V  V / (_| | |  | |_) /  \
+       \_/\_/ \__,_|_|  | .__/_/\_\
+                        |_|
+
+Level 0: dt = 4.343827613e-16 ; dx = 9.375e-07 ; dy = 9.375e-07 ; dz = 1.328125e-07
+
+Grids Summary:
+  Level 0   16 grids  2097152 cells  100 % of domain
+            smallest grid: 64 x 64 x 32  biggest grid: 64 x 64 x 32
+
+-------------------------------------------------------------------------------
+--------------------------- MAIN EM PIC PARAMETERS ----------------------------
+-------------------------------------------------------------------------------
+Precision:            | DOUBLE
+Particle precision:   | DOUBLE
+Geometry:             | 3D (XYZ)
+Operation mode:       | Electromagnetic
+                      | - vacuum
+-------------------------------------------------------------------------------
+Current Deposition:   | direct 
+Particle Pusher:      | Boris 
+Charge Deposition:    | standard 
+Field Gathering:      | energy-conserving 
+Particle Shape Factor:| 1
+-------------------------------------------------------------------------------
+Maxwell Solver:       | CKC 
+                      | - collocated grid 
+-------------------------------------------------------------------------------
+For full input parameters, see the file: warpx_used_inputs
+
+STEP 1 starts ...
+
+ Sustained Performence: 6.623300 TFLOPS 
+
+ Peak Performence: 6.623300 TFLOPS 
+arvg_metric: 20122693.275702
+
+Unused ParmParse Variables:
+  [TOP]::diag1.diag_type(nvals = 1)  :: [Full]
+  [TOP]::diag1.fields_to_plot(nvals = 10)  :: [Ex, Ey, Ez, Bx, By, Bz, jx, jy, jz, rho]
+  [TOP]::diag1.intervals(nvals = 1)  :: [100]
+  [TOP]::warpx.moving_window_dir(nvals = 1)  :: [z]
+  [TOP]::warpx.moving_window_v(nvals = 1)  :: [1.0]
+  [TOP]::warpx.sort_intervals(nvals = 1)  :: [-1]
+
+
+**** WARNINGS ******************************************************************
+* GLOBAL warning list  after  [ FIRST STEP ]
+*
+* No recorded warnings.
+********************************************************************************
+
+STEP 1 ends. TIME = 4.343827613e-16 DT = 4.343827613e-16
+Evolve time = 0.158101482 s; This step = 0.158101482 s; Avg. per step = 0.158101482 s
+
+STEP 2 starts ...
+
+ Sustained Performence: 13.578748 TFLOPS 
+
+ Peak Performence: 13.578748 TFLOPS 
+arvg_metric: 38528482.290564
+STEP 2 ends. TIME = 8.687655226e-16 DT = 4.343827613e-16
+Evolve time = 0.211923696 s; This step = 0.053822214 s; Avg. per step = 0.105961848 s
+
+STEP 3 starts ...
+
+ Sustained Performence: 14.134296 TFLOPS 
+
+ Peak Performence: 14.134296 TFLOPS 
+arvg_metric: 38638244.442053
+STEP 3 ends. TIME = 1.303148284e-15 DT = 4.343827613e-16
+Evolve time = 0.357011329 s; This step = 0.145087633 s; Avg. per step = 0.1190037763 s
+
+STEP 4 starts ...
+
+ Sustained Performence: 13.934814 TFLOPS 
+
+ Peak Performence: 14.134296 TFLOPS 
+arvg_metric: 35270046.290641
+STEP 4 ends. TIME = 1.737531045e-15 DT = 4.343827613e-16
+Evolve time = 0.415641253 s; This step = 0.058629924 s; Avg. per step = 0.1039103133 s
+
+STEP 5 starts ...
+
+ Sustained Performence: 13.552001 TFLOPS 
+
+ Peak Performence: 14.134296 TFLOPS 
+arvg_metric: 38526751.679621
+STEP 5 ends. TIME = 2.171913806e-15 DT = 4.343827613e-16
+Evolve time = 0.468896165 s; This step = 0.053254912 s; Avg. per step = 0.093779233 s
+
+STEP 6 starts ...
+
+ Sustained Performence: 14.082412 TFLOPS 
+
+ Peak Performence: 14.134296 TFLOPS 
+arvg_metric: 39031747.381964
+STEP 6 ends. TIME = 2.606296568e-15 DT = 4.343827613e-16
+Evolve time = 0.522165767 s; This step = 0.053269602 s; Avg. per step = 0.08702762783 s
+
+STEP 7 starts ...
+
+ Sustained Performence: 14.511110 TFLOPS 
+
+ Peak Performence: 14.511110 TFLOPS 
+arvg_metric: 39295121.608346
+STEP 7 ends. TIME = 3.040679329e-15 DT = 4.343827613e-16
+Evolve time = 0.574735028 s; This step = 0.052569261 s; Avg. per step = 0.082105004 s
+
+STEP 8 starts ...
+
+ Sustained Performence: 14.211229 TFLOPS 
+
+ Peak Performence: 14.511110 TFLOPS 
+arvg_metric: 39063622.130648
+STEP 8 ends. TIME = 3.47506209e-15 DT = 4.343827613e-16
+Evolve time = 0.627609879 s; This step = 0.052874851 s; Avg. per step = 0.07845123488 s
+
+STEP 9 starts ...
+
+ Sustained Performence: 14.328650 TFLOPS 
+
+ Peak Performence: 14.511110 TFLOPS 
+arvg_metric: 39136858.384109
+STEP 9 ends. TIME = 3.909444852e-15 DT = 4.343827613e-16
+Evolve time = 0.68056695 s; This step = 0.052957071 s; Avg. per step = 0.07561855 s
+
+STEP 10 starts ...
+Segfault
+Segfault
+Segfault
+See Backtrace.15.6 file for details
+See Backtrace.15.28 file for details
+See Backtrace.15.4 file for details
+--------------------------------------------------------------------------
+MPI_ABORT was invoked on rank 15 in communicator MPI COMMUNICATOR 3 DUP FROM 0
+with errorcode 11.
+
+NOTE: invoking MPI_ABORT causes Open MPI to kill all MPI processes.
+You may or may not see output from other processes, depending on
+exactly when Open MPI kills them.
+--------------------------------------------------------------------------

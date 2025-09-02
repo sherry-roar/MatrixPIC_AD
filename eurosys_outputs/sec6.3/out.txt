@@ -1,0 +1,291 @@
+Initializing AMReX (24.07)...
+MPI initialized with 1 MPI processes
+MPI initialized with thread support level 1
+OMP initialized with 1 OMP threads
+AMReX (24.07) initialized
+WarpX (dc25c5abf9ff-dirty)
+
+    __        __             __  __
+    \ \      / /_ _ _ __ _ __\ \/ /
+     \ \ /\ / / _` | '__| '_ \\  /
+      \ V  V / (_| | |  | |_) /  \
+       \_/\_/ \__,_|_|  | .__/_/\_\
+                        |_|
+
+Level 0: dt = 3.404424291e-15 ; dx = 1.25e-06 ; dy = 2.5e-06 ; dz = 2.5e-06
+
+Grids Summary:
+  Level 0   1 grids  8192 cells  100 % of domain
+
+-------------------------------------------------------------------------------
+--------------------------- MAIN EM PIC PARAMETERS ----------------------------
+-------------------------------------------------------------------------------
+Precision:            | DOUBLE
+Particle precision:   | DOUBLE
+Geometry:             | 3D (XYZ)
+Operation mode:       | Electromagnetic
+                      | - vacuum
+-------------------------------------------------------------------------------
+Current Deposition:   | direct 
+Particle Pusher:      | Boris 
+Charge Deposition:    | standard 
+Field Gathering:      | energy-conserving 
+Particle Shape Factor:| 1
+-------------------------------------------------------------------------------
+Maxwell Solver:       | Yee 
+                      | - collocated grid 
+-------------------------------------------------------------------------------
+For full input parameters, see the file: warpx_used_inputs
+
+STEP 1 starts ...
+[Process 0] Total: 4089102
+[Process 0]	 precompute: 168120
+[Process 0]	 cale_time: 3920982
+[Process 0]	 sort time: 0
+[Process 0]	 reduce time: 0
+
+----------------------------------------
+### Global Statistics (from Process 0) ###
+----------------------------------------
+Global Total: 4089102
+	 Global precompute: 168120
+	 Global cale_time: 3920982
+	 Global sort time: 0
+	 Global reduce time: 0
+----------------------------------------
+
+ TRUE Sustained Performence: 0.000003 TFLOPS 
+
+ TRUE Peak Performence: 0.000003 TFLOPS 
+arvg_metric: 3667.156821
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 1
+
+Unused ParmParse Variables:
+  [TOP]::chk.diag_type(nvals = 1)  :: [Full]
+  [TOP]::chk.intervals(nvals = 1)  :: [6]
+  [TOP]::diag1.diag_type(nvals = 1)  :: [Full]
+  [TOP]::diag1.electrons.variables(nvals = 7)  :: [x, y, z, ux, uy, uz, w]
+  [TOP]::diag1.fields_to_plot(nvals = 10)  :: [Bx, By, Bz, Ex, Ey, Ez, jx, jy, jz, rho]
+  [TOP]::diag1.intervals(nvals = 1)  :: [4]
+  [TOP]::warpx.sort_intervals(nvals = 1)  :: [-1]
+
+
+**** WARNINGS ******************************************************************
+* GLOBAL warning list  after  [ FIRST STEP ]
+*
+* No recorded warnings.
+********************************************************************************
+
+STEP 1 ends. TIME = 3.404424291e-15 DT = 3.404424291e-15
+Evolve time = 9.908390193 s; This step = 9.908390193 s; Avg. per step = 9.908390193 s
+
+STEP 2 starts ...
+[Process 0] Total: 3937056
+[Process 0]	 precompute: 169207
+[Process 0]	 cale_time: 3767849
+[Process 0]	 sort time: 0
+[Process 0]	 reduce time: 0
+
+----------------------------------------
+### Global Statistics (from Process 0) ###
+----------------------------------------
+Global Total: 3937056
+	 Global precompute: 169207
+	 Global cale_time: 3767849
+	 Global sort time: 0
+	 Global reduce time: 0
+----------------------------------------
+
+ TRUE Sustained Performence: 0.000003 TFLOPS 
+
+ TRUE Peak Performence: 0.000003 TFLOPS 
+arvg_metric: 3785.050446
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 2
+STEP 2 ends. TIME = 6.808848581e-15 DT = 3.404424291e-15
+Evolve time = 17.47206223 s; This step = 7.563672039 s; Avg. per step = 8.736031116 s
+
+STEP 3 starts ...
+[Process 0] Total: 3685051
+[Process 0]	 precompute: 162909
+[Process 0]	 cale_time: 3522142
+[Process 0]	 sort time: 0
+[Process 0]	 reduce time: 0
+
+----------------------------------------
+### Global Statistics (from Process 0) ###
+----------------------------------------
+Global Total: 3685051
+	 Global precompute: 162909
+	 Global cale_time: 3522142
+	 Global sort time: 0
+	 Global reduce time: 0
+----------------------------------------
+
+ TRUE Sustained Performence: 0.000003 TFLOPS 
+
+ TRUE Peak Performence: 0.000003 TFLOPS 
+arvg_metric: 3535.774699
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 3
+STEP 3 ends. TIME = 1.021327287e-14 DT = 3.404424291e-15
+Evolve time = 25.62688325 s; This step = 8.154821022 s; Avg. per step = 8.542294418 s
+
+STEP 4 starts ...
+[Process 0] Total: 5738686
+[Process 0]	 precompute: 2222829
+[Process 0]	 cale_time: 3515857
+[Process 0]	 sort time: 0
+[Process 0]	 reduce time: 0
+
+----------------------------------------
+### Global Statistics (from Process 0) ###
+----------------------------------------
+Global Total: 5738686
+	 Global precompute: 2222829
+	 Global cale_time: 3515857
+	 Global sort time: 0
+	 Global reduce time: 0
+----------------------------------------
+
+ TRUE Sustained Performence: 0.000003 TFLOPS 
+
+ TRUE Peak Performence: 0.000003 TFLOPS 
+arvg_metric: 3758.427882
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 4
+STEP 4 ends. TIME = 1.361769716e-14 DT = 3.404424291e-15
+Evolve time = 33.28399299 s; This step = 7.657109734 s; Avg. per step = 8.320998247 s
+
+STEP 5 starts ...
+[Process 0] Total: 3812168
+[Process 0]	 precompute: 164456
+[Process 0]	 cale_time: 3647712
+[Process 0]	 sort time: 0
+[Process 0]	 reduce time: 0
+
+----------------------------------------
+### Global Statistics (from Process 0) ###
+----------------------------------------
+Global Total: 3812168
+	 Global precompute: 164456
+	 Global cale_time: 3647712
+	 Global sort time: 0
+	 Global reduce time: 0
+----------------------------------------
+
+ TRUE Sustained Performence: 0.000003 TFLOPS 
+
+ TRUE Peak Performence: 0.000003 TFLOPS 
+arvg_metric: 3778.392934
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 5
+STEP 5 ends. TIME = 1.702212145e-14 DT = 3.404424291e-15
+Evolve time = 40.91738075 s; This step = 7.633387763 s; Avg. per step = 8.18347615 s
+
+STEP 6 starts ...
+[Process 0] Total: 4155466
+[Process 0]	 precompute: 163702
+[Process 0]	 cale_time: 3991764
+[Process 0]	 sort time: 0
+[Process 0]	 reduce time: 0
+
+----------------------------------------
+### Global Statistics (from Process 0) ###
+----------------------------------------
+Global Total: 4155466
+	 Global precompute: 163702
+	 Global cale_time: 3991764
+	 Global sort time: 0
+	 Global reduce time: 0
+----------------------------------------
+
+ TRUE Sustained Performence: 0.000003 TFLOPS 
+
+ TRUE Peak Performence: 0.000003 TFLOPS 
+arvg_metric: 3777.541199
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 6
+STEP 6 ends. TIME = 2.042654574e-14 DT = 3.404424291e-15
+Evolve time = 48.53683481 s; This step = 7.619454056 s; Avg. per step = 8.089472468 s
+
+STEP 7 starts ...
+[Process 0] Total: 4145384
+[Process 0]	 precompute: 167575
+[Process 0]	 cale_time: 3977809
+[Process 0]	 sort time: 0
+[Process 0]	 reduce time: 0
+
+----------------------------------------
+### Global Statistics (from Process 0) ###
+----------------------------------------
+Global Total: 4145384
+	 Global precompute: 167575
+	 Global cale_time: 3977809
+	 Global sort time: 0
+	 Global reduce time: 0
+----------------------------------------
+
+ TRUE Sustained Performence: 0.000003 TFLOPS 
+
+ TRUE Peak Performence: 0.000003 TFLOPS 
+arvg_metric: 3771.463231
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 7
+STEP 7 ends. TIME = 2.383097003e-14 DT = 3.404424291e-15
+Evolve time = 56.17738141 s; This step = 7.640546606 s; Avg. per step = 8.025340202 s
+
+STEP 8 starts ...
+[Process 0] Total: 3905582
+[Process 0]	 precompute: 162042
+[Process 0]	 cale_time: 3743540
+[Process 0]	 sort time: 0
+[Process 0]	 reduce time: 0
+
+----------------------------------------
+### Global Statistics (from Process 0) ###
+----------------------------------------
+Global Total: 3905582
+	 Global precompute: 162042
+	 Global cale_time: 3743540
+	 Global sort time: 0
+	 Global reduce time: 0
+----------------------------------------
+
+ TRUE Sustained Performence: 0.000003 TFLOPS 
+
+ TRUE Peak Performence: 0.000003 TFLOPS 
+arvg_metric: 3765.453789
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 8
+STEP 8 ends. TIME = 2.723539432e-14 DT = 3.404424291e-15
+Evolve time = 63.81360484 s; This step = 7.636223422 s; Avg. per step = 7.976700604 s
+
+STEP 9 starts ...
+[Process 0] Total: 3808541
+[Process 0]	 precompute: 160222
+[Process 0]	 cale_time: 3648319
+[Process 0]	 sort time: 0
+[Process 0]	 reduce time: 0
+
+----------------------------------------
+### Global Statistics (from Process 0) ###
+----------------------------------------
+Global Total: 3808541
+	 Global precompute: 160222
+	 Global cale_time: 3648319
+	 Global sort time: 0
+	 Global reduce time: 0
+----------------------------------------
+
+ TRUE Sustained Performence: 0.000003 TFLOPS 
+
+ TRUE Peak Performence: 0.000003 TFLOPS 
+arvg_metric: 3754.197278
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 9
+STEP 9 ends. TIME = 3.063981862e-14 DT = 3.404424291e-15
+Evolve time = 71.49429561 s; This step = 7.680690773 s; Avg. per step = 7.943810623 s
+
+STEP 10 starts ...

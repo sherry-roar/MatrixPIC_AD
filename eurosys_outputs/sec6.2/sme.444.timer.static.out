@@ -1,0 +1,1163 @@
+Loading bisheng/kml25.0.0/kml
+  Loading requirement: /pacific_fs/HPCKit/latest/modulefiles/bisheng/kml25.0.0/kspblas/omp /pacific_fs/HPCKit/latest/modulefiles/bisheng/kml25.0.0/kvml/serial
+    /pacific_fs/HPCKit/latest/modulefiles/bisheng/kml25.0.0/kblas/multi
+Currently Loaded Modulefiles:
+ 1) bisheng/compiler4.2.0/bishengmodule   3) /pacific_fs/HPCKit/latest/modulefiles/bisheng/kml25.0.0/kspblas/omp <aL>   5) /pacific_fs/HPCKit/latest/modulefiles/bisheng/kml25.0.0/kblas/multi <aL>  
+ 2) bisheng/hmpi25.0.0/hmpi               4) /pacific_fs/HPCKit/latest/modulefiles/bisheng/kml25.0.0/kvml/serial <aL>   6) bisheng/kml25.0.0/kml                                                     
+
+Key:
+<module-tag>  <aL>=auto-loaded  
+Running job !!!!!
+Initializing AMReX (24.07)...
+MPI initialized with 16 MPI processes
+MPI initialized with thread support level 1
+OMP initialized with 32 OMP threads
+AMReX (24.07) initialized
+WarpX (Unknown)
+
+    __        __             __  __
+    \ \      / /_ _ _ __ _ __\ \/ /
+     \ \ /\ / / _` | '__| '_ \\  /
+      \ V  V / (_| | |  | |_) /  \
+       \_/\_/ \__,_|_|  | .__/_/\_\
+                        |_|
+
+Level 0: dt = 4.255530363e-16 ; dx = 1.5625e-07 ; dy = 3.125e-07 ; dz = 3.125e-07
+
+Grids Summary:
+  Level 0   16 grids  4194304 cells  100 % of domain
+            smallest grid: 64 x 64 x 64  biggest grid: 64 x 64 x 64
+
+-------------------------------------------------------------------------------
+--------------------------- MAIN EM PIC PARAMETERS ----------------------------
+-------------------------------------------------------------------------------
+Precision:            | DOUBLE
+Particle precision:   | DOUBLE
+Geometry:             | 3D (XYZ)
+Operation mode:       | Electromagnetic
+                      | - vacuum
+-------------------------------------------------------------------------------
+Current Deposition:   | direct 
+Particle Pusher:      | Boris 
+Charge Deposition:    | standard 
+Field Gathering:      | energy-conserving 
+Particle Shape Factor:| 1
+-------------------------------------------------------------------------------
+Maxwell Solver:       | CKC 
+                      | - collocated grid 
+-------------------------------------------------------------------------------
+For full input parameters, see the file: warpx_used_inputs
+
+STEP 1 starts ...
+
+ Sustained Performence: 64.986608 TFLOPS 
+
+ Peak Performence: 64.986608 TFLOPS 
+arvg_metric: 597066599.193154
+
+Unused ParmParse Variables:
+  [TOP]::chk.diag_type(nvals = 1)  :: [Full]
+  [TOP]::chk.intervals(nvals = 1)  :: [6]
+  [TOP]::diag1.diag_type(nvals = 1)  :: [Full]
+  [TOP]::diag1.electrons.variables(nvals = 7)  :: [x, y, z, ux, uy, uz, w]
+  [TOP]::diag1.fields_to_plot(nvals = 10)  :: [Bx, By, Bz, Ex, Ey, Ez, jx, jy, jz, rho]
+  [TOP]::diag1.intervals(nvals = 1)  :: [4]
+  [TOP]::warpx.sort_intervals(nvals = 1)  :: [-1]
+
+
+**** WARNINGS ******************************************************************
+* GLOBAL warning list  after  [ FIRST STEP ]
+*
+* No recorded warnings.
+********************************************************************************
+
+STEP 1 ends. TIME = 4.255530363e-16 DT = 4.255530363e-16
+Evolve time = 1.837972128 s; This step = 1.837972128 s; Avg. per step = 1.837972128 s
+
+STEP 2 starts ...
+
+ Sustained Performence: 77.788252 TFLOPS 
+
+ Peak Performence: 77.788252 TFLOPS 
+arvg_metric: 695528578.311377
+STEP 2 ends. TIME = 8.511060727e-16 DT = 4.255530363e-16
+Evolve time = 2.325667197 s; This step = 0.487695069 s; Avg. per step = 1.162833599 s
+
+STEP 3 starts ...
+
+ Sustained Performence: 79.406283 TFLOPS 
+
+ Peak Performence: 79.406283 TFLOPS 
+arvg_metric: 705242004.021908
+STEP 3 ends. TIME = 1.276659109e-15 DT = 4.255530363e-16
+Evolve time = 2.808704996 s; This step = 0.483037799 s; Avg. per step = 0.9362349987 s
+
+STEP 4 starts ...
+
+ Sustained Performence: 79.925734 TFLOPS 
+
+ Peak Performence: 79.925734 TFLOPS 
+arvg_metric: 707219984.558891
+STEP 4 ends. TIME = 1.702212145e-15 DT = 4.255530363e-16
+Evolve time = 3.393135104 s; This step = 0.584430108 s; Avg. per step = 0.848283776 s
+
+STEP 5 starts ...
+
+ Sustained Performence: 76.912495 TFLOPS 
+
+ Peak Performence: 79.925734 TFLOPS 
+arvg_metric: 687682289.341156
+STEP 5 ends. TIME = 2.127765182e-15 DT = 4.255530363e-16
+Evolve time = 3.887792217 s; This step = 0.494657113 s; Avg. per step = 0.7775584434 s
+
+STEP 6 starts ...
+
+ Sustained Performence: 79.459942 TFLOPS 
+
+ Peak Performence: 79.925734 TFLOPS 
+arvg_metric: 705149982.581275
+STEP 6 ends. TIME = 2.553318218e-15 DT = 4.255530363e-16
+Evolve time = 4.370308634 s; This step = 0.482516417 s; Avg. per step = 0.7283847723 s
+
+STEP 7 starts ...
+
+ Sustained Performence: 37.296243 TFLOPS 
+
+ Peak Performence: 79.925734 TFLOPS 
+arvg_metric: 272923284.678151
+STEP 7 ends. TIME = 2.978871254e-15 DT = 4.255530363e-16
+Evolve time = 5.457068473 s; This step = 1.086759839 s; Avg. per step = 0.7795812104 s
+
+STEP 8 starts ...
+
+ Sustained Performence: 79.860092 TFLOPS 
+
+ Peak Performence: 79.925734 TFLOPS 
+arvg_metric: 710149181.655932
+STEP 8 ends. TIME = 3.404424291e-15 DT = 4.255530363e-16
+Evolve time = 5.937246655 s; This step = 0.480178182 s; Avg. per step = 0.7421558319 s
+
+STEP 9 starts ...
+
+ Sustained Performence: 78.563246 TFLOPS 
+
+ Peak Performence: 79.925734 TFLOPS 
+arvg_metric: 700464705.865772
+STEP 9 ends. TIME = 3.829977327e-15 DT = 4.255530363e-16
+Evolve time = 6.422194327 s; This step = 0.484947672 s; Avg. per step = 0.7135771474 s
+
+STEP 10 starts ...
+
+ Sustained Performence: 53.047609 TFLOPS 
+
+ Peak Performence: 79.925734 TFLOPS 
+arvg_metric: 507233042.325981
+STEP 10 ends. TIME = 4.255530363e-15 DT = 4.255530363e-16
+Evolve time = 7.132301667 s; This step = 0.71010734 s; Avg. per step = 0.7132301667 s
+
+STEP 11 starts ...
+
+ Sustained Performence: 78.786255 TFLOPS 
+
+ Peak Performence: 79.925734 TFLOPS 
+arvg_metric: 701520365.833250
+STEP 11 ends. TIME = 4.6810834e-15 DT = 4.255530363e-16
+Evolve time = 7.616366377 s; This step = 0.48406471 s; Avg. per step = 0.6923969434 s
+
+STEP 12 starts ...
+
+ Sustained Performence: 79.770249 TFLOPS 
+
+ Peak Performence: 79.925734 TFLOPS 
+arvg_metric: 708257111.184579
+STEP 12 ends. TIME = 5.106636436e-15 DT = 4.255530363e-16
+Evolve time = 8.09717784 s; This step = 0.480811463 s; Avg. per step = 0.67476482 s
+
+STEP 13 starts ...
+
+ Sustained Performence: 79.498841 TFLOPS 
+
+ Peak Performence: 79.925734 TFLOPS 
+arvg_metric: 707510666.975749
+STEP 13 ends. TIME = 5.532189472e-15 DT = 4.255530363e-16
+Evolve time = 8.579404306 s; This step = 0.482226466 s; Avg. per step = 0.6599541774 s
+
+STEP 14 starts ...
+
+ Sustained Performence: 78.576865 TFLOPS 
+
+ Peak Performence: 79.925734 TFLOPS 
+arvg_metric: 699673043.930913
+STEP 14 ends. TIME = 5.957742509e-15 DT = 4.255530363e-16
+Evolve time = 9.065745371 s; This step = 0.486341065 s; Avg. per step = 0.6475532408 s
+
+STEP 15 starts ...
+
+ Sustained Performence: 78.750801 TFLOPS 
+
+ Peak Performence: 79.925734 TFLOPS 
+arvg_metric: 700320969.587875
+STEP 15 ends. TIME = 6.383295545e-15 DT = 4.255530363e-16
+Evolve time = 9.551658536 s; This step = 0.485913165 s; Avg. per step = 0.6367772357 s
+
+STEP 16 starts ...
+
+ Sustained Performence: 40.105656 TFLOPS 
+
+ Peak Performence: 79.925734 TFLOPS 
+arvg_metric: 314504868.380083
+STEP 16 ends. TIME = 6.808848581e-15 DT = 4.255530363e-16
+Evolve time = 10.50784647 s; This step = 0.956187935 s; Avg. per step = 0.6567404044 s
+
+STEP 17 starts ...
+
+ Sustained Performence: 79.279687 TFLOPS 
+
+ Peak Performence: 79.925734 TFLOPS 
+arvg_metric: 704854999.444323
+STEP 17 ends. TIME = 7.234401618e-15 DT = 4.255530363e-16
+Evolve time = 10.9922518 s; This step = 0.484405331 s; Avg. per step = 0.6466030472 s
+
+STEP 18 starts ...
+
+ Sustained Performence: 79.429560 TFLOPS 
+
+ Peak Performence: 79.925734 TFLOPS 
+arvg_metric: 706002540.397665
+STEP 18 ends. TIME = 7.659954654e-15 DT = 4.255530363e-16
+Evolve time = 11.47378042 s; This step = 0.481528615 s; Avg. per step = 0.6374322454 s
+
+STEP 19 starts ...
+
+ Sustained Performence: 61.842842 TFLOPS 
+
+ Peak Performence: 79.925734 TFLOPS 
+arvg_metric: 576914818.229606
+STEP 19 ends. TIME = 8.08550769e-15 DT = 4.255530363e-16
+Evolve time = 12.0417508 s; This step = 0.567970383 s; Avg. per step = 0.6337763579 s
+
+STEP 20 starts ...
+
+ Sustained Performence: 79.287564 TFLOPS 
+
+ Peak Performence: 79.925734 TFLOPS 
+arvg_metric: 703975007.757098
+STEP 20 ends. TIME = 8.511060727e-15 DT = 4.255530363e-16
+Evolve time = 12.52533653 s; This step = 0.483585729 s; Avg. per step = 0.6262668265 s
+
+STEP 21 starts ...
+
+ Sustained Performence: 79.951096 TFLOPS 
+
+ Peak Performence: 79.951096 TFLOPS 
+arvg_metric: 710361111.611420
+STEP 21 ends. TIME = 8.936613763e-15 DT = 4.255530363e-16
+Evolve time = 13.00663836 s; This step = 0.481301834 s; Avg. per step = 0.6193637316 s
+
+STEP 22 starts ...
+
+ Sustained Performence: 69.004213 TFLOPS 
+
+ Peak Performence: 79.951096 TFLOPS 
+arvg_metric: 631138301.465088
+STEP 22 ends. TIME = 9.362166799e-15 DT = 4.255530363e-16
+Evolve time = 13.5341938 s; This step = 0.527555434 s; Avg. per step = 0.6151906271 s
+
+STEP 23 starts ...
+
+ Sustained Performence: 79.745929 TFLOPS 
+
+ Peak Performence: 79.951096 TFLOPS 
+arvg_metric: 707446499.020655
+STEP 23 ends. TIME = 9.787719836e-15 DT = 4.255530363e-16
+Evolve time = 14.01876676 s; This step = 0.484572961 s; Avg. per step = 0.6095115982 s
+
+STEP 24 starts ...
+
+ Sustained Performence: 79.136199 TFLOPS 
+
+ Peak Performence: 79.951096 TFLOPS 
+arvg_metric: 704249673.159120
+STEP 24 ends. TIME = 1.021327287e-14 DT = 4.255530363e-16
+Evolve time = 14.50270954 s; This step = 0.48394278 s; Avg. per step = 0.6042795641 s
+
+STEP 25 starts ...
+
+ Sustained Performence: 24.837415 TFLOPS 
+
+ Peak Performence: 79.951096 TFLOPS 
+arvg_metric: 256816217.847858
+STEP 25 ends. TIME = 1.063882591e-14 DT = 4.255530363e-16
+Evolve time = 15.64962964 s; This step = 1.146920098 s; Avg. per step = 0.6259851854 s
+
+STEP 26 starts ...
+
+ Sustained Performence: 79.639503 TFLOPS 
+
+ Peak Performence: 79.951096 TFLOPS 
+arvg_metric: 705809409.629643
+STEP 26 ends. TIME = 1.106437894e-14 DT = 4.255530363e-16
+Evolve time = 16.13279981 s; This step = 0.483170178 s; Avg. per step = 0.6204923005 s
+
+STEP 27 starts ...
+
+ Sustained Performence: 79.893911 TFLOPS 
+
+ Peak Performence: 79.951096 TFLOPS 
+arvg_metric: 709590585.346101
+STEP 27 ends. TIME = 1.148993198e-14 DT = 4.255530363e-16
+Evolve time = 16.61392968 s; This step = 0.481129864 s; Avg. per step = 0.6153307288 s
+
+STEP 28 starts ...
+
+ Sustained Performence: 76.097684 TFLOPS 
+
+ Peak Performence: 79.951096 TFLOPS 
+arvg_metric: 679682451.079213
+STEP 28 ends. TIME = 1.191548502e-14 DT = 4.255530363e-16
+Evolve time = 17.11113372 s; This step = 0.497204039 s; Avg. per step = 0.6111119185 s
+
+STEP 29 starts ...
+
+ Sustained Performence: 66.316952 TFLOPS 
+
+ Peak Performence: 79.951096 TFLOPS 
+arvg_metric: 610422031.921718
+STEP 29 ends. TIME = 1.234103805e-14 DT = 4.255530363e-16
+Evolve time = 17.65400942 s; This step = 0.542875698 s; Avg. per step = 0.6087589453 s
+
+STEP 30 starts ...
+
+ Sustained Performence: 79.001350 TFLOPS 
+
+ Peak Performence: 79.951096 TFLOPS 
+arvg_metric: 702951695.814299
+STEP 30 ends. TIME = 1.276659109e-14 DT = 4.255530363e-16
+Evolve time = 18.13832035 s; This step = 0.48431093 s; Avg. per step = 0.6046106782 s
+
+STEP 31 starts ...
+
+ Sustained Performence: 79.715855 TFLOPS 
+
+ Peak Performence: 79.951096 TFLOPS 
+arvg_metric: 708693665.066924
+STEP 31 ends. TIME = 1.319214413e-14 DT = 4.255530363e-16
+Evolve time = 18.61994142 s; This step = 0.481621075 s; Avg. per step = 0.6006432716 s
+
+STEP 32 starts ...
+
+ Sustained Performence: 80.102696 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 709083258.432447
+STEP 32 ends. TIME = 1.361769716e-14 DT = 4.255530363e-16
+Evolve time = 19.10646405 s; This step = 0.486522626 s; Avg. per step = 0.5970770014 s
+
+STEP 33 starts ...
+
+ Sustained Performence: 79.471449 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 705867763.871002
+STEP 33 ends. TIME = 1.40432502e-14 DT = 4.255530363e-16
+Evolve time = 19.5889777 s; This step = 0.482513657 s; Avg. per step = 0.5936053849 s
+
+STEP 34 starts ...
+
+ Sustained Performence: 79.186392 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 638811979.133250
+STEP 34 ends. TIME = 1.446880324e-14 DT = 4.255530363e-16
+Evolve time = 20.88857155 s; This step = 1.299593849 s; Avg. per step = 0.6143697515 s
+
+STEP 35 starts ...
+
+ Sustained Performence: 79.368298 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 540585103.337518
+STEP 35 ends. TIME = 1.489435627e-14 DT = 4.255530363e-16
+Evolve time = 21.64722884 s; This step = 0.758657285 s; Avg. per step = 0.6184922525 s
+
+STEP 36 starts ...
+
+ Sustained Performence: 64.539916 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 503934910.857059
+STEP 36 ends. TIME = 1.531990931e-14 DT = 4.255530363e-16
+Evolve time = 22.50215836 s; This step = 0.854929525 s; Avg. per step = 0.6250599545 s
+
+STEP 37 starts ...
+
+ Sustained Performence: 68.694436 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 518163201.095859
+STEP 37 ends. TIME = 1.574546234e-14 DT = 4.255530363e-16
+Evolve time = 23.26734223 s; This step = 0.76518387 s; Avg. per step = 0.6288470874 s
+
+STEP 38 starts ...
+
+ Sustained Performence: 72.954549 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 575924648.571015
+STEP 38 ends. TIME = 1.617101538e-14 DT = 4.255530363e-16
+Evolve time = 23.97276939 s; This step = 0.705427161 s; Avg. per step = 0.6308623524 s
+
+STEP 39 starts ...
+
+ Sustained Performence: 71.425990 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 555477170.043695
+STEP 39 ends. TIME = 1.659656842e-14 DT = 4.255530363e-16
+Evolve time = 24.65487254 s; This step = 0.68210315 s; Avg. per step = 0.6321762191 s
+
+STEP 40 starts ...
+
+ Sustained Performence: 79.634413 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 707389024.944018
+STEP 40 ends. TIME = 1.702212145e-14 DT = 4.255530363e-16
+Evolve time = 25.86179545 s; This step = 1.206922909 s; Avg. per step = 0.6465448863 s
+
+STEP 41 starts ...
+
+ Sustained Performence: 79.120822 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 704372288.927429
+STEP 41 ends. TIME = 1.744767449e-14 DT = 4.255530363e-16
+Evolve time = 26.34427037 s; This step = 0.482474917 s; Avg. per step = 0.6425431797 s
+
+STEP 42 starts ...
+
+ Sustained Performence: 59.644999 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 559686371.543321
+STEP 42 ends. TIME = 1.787322753e-14 DT = 4.255530363e-16
+Evolve time = 26.92694809 s; This step = 0.582677724 s; Avg. per step = 0.6411178117 s
+
+STEP 43 starts ...
+
+ Sustained Performence: 78.942410 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 703073212.834765
+STEP 43 ends. TIME = 1.829878056e-14 DT = 4.255530363e-16
+Evolve time = 27.41138194 s; This step = 0.484433851 s; Avg. per step = 0.6374739987 s
+
+STEP 44 starts ...
+
+ Sustained Performence: 79.412732 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 704631258.134911
+STEP 44 ends. TIME = 1.87243336e-14 DT = 4.255530363e-16
+Evolve time = 27.97181874 s; This step = 0.560436796 s; Avg. per step = 0.6357231532 s
+
+STEP 45 starts ...
+
+ Sustained Performence: 79.887833 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 708902411.071551
+STEP 45 ends. TIME = 1.914988663e-14 DT = 4.255530363e-16
+Evolve time = 28.45210018 s; This step = 0.480281442 s; Avg. per step = 0.6322688929 s
+
+STEP 46 starts ...
+
+ Sustained Performence: 79.218294 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 702180168.437607
+STEP 46 ends. TIME = 1.957543967e-14 DT = 4.255530363e-16
+Evolve time = 28.93681096 s; This step = 0.484710781 s; Avg. per step = 0.6290611079 s
+
+STEP 47 starts ...
+
+ Sustained Performence: 78.855738 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 701048249.682884
+STEP 47 ends. TIME = 2.000099271e-14 DT = 4.255530363e-16
+Evolve time = 29.42207262 s; This step = 0.485261662 s; Avg. per step = 0.6260015452 s
+
+STEP 48 starts ...
+
+ Sustained Performence: 23.448823 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 243834303.641782
+STEP 48 ends. TIME = 2.042654574e-14 DT = 4.255530363e-16
+Evolve time = 30.62535315 s; This step = 1.20328053 s; Avg. per step = 0.6380281907 s
+
+STEP 49 starts ...
+
+ Sustained Performence: 79.658185 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 707065892.455154
+STEP 49 ends. TIME = 2.085209878e-14 DT = 4.255530363e-16
+Evolve time = 31.11066464 s; This step = 0.485311483 s; Avg. per step = 0.6349115232 s
+
+STEP 50 starts ...
+
+ Sustained Performence: 79.530489 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 704654239.111274
+STEP 50 ends. TIME = 2.127765182e-14 DT = 4.255530363e-16
+Evolve time = 31.59296478 s; This step = 0.482300146 s; Avg. per step = 0.6318592957 s
+
+STEP 51 starts ...
+
+ Sustained Performence: 74.505923 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 569594962.916011
+STEP 51 ends. TIME = 2.170320485e-14 DT = 4.255530363e-16
+Evolve time = 32.16678302 s; This step = 0.573818235 s; Avg. per step = 0.6307212357 s
+
+STEP 52 starts ...
+
+ Sustained Performence: 78.390121 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 693305260.694461
+STEP 52 ends. TIME = 2.212875789e-14 DT = 4.255530363e-16
+Evolve time = 32.65649129 s; This step = 0.489708272 s; Avg. per step = 0.6280094479 s
+
+STEP 53 starts ...
+
+ Sustained Performence: 79.085976 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 702573522.292440
+STEP 53 ends. TIME = 2.255431093e-14 DT = 4.255530363e-16
+Evolve time = 33.15453986 s; This step = 0.498048571 s; Avg. per step = 0.6255573559 s
+
+STEP 54 starts ...
+
+ Sustained Performence: 78.550773 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 699601931.485730
+STEP 54 ends. TIME = 2.297986396e-14 DT = 4.255530363e-16
+Evolve time = 33.63946586 s; This step = 0.484926002 s; Avg. per step = 0.6229530716 s
+
+STEP 55 starts ...
+
+ Sustained Performence: 78.501386 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 696939389.781043
+STEP 55 ends. TIME = 2.3405417e-14 DT = 4.255530363e-16
+Evolve time = 34.13213284 s; This step = 0.492666978 s; Avg. per step = 0.6205842335 s
+
+STEP 56 starts ...
+
+ Sustained Performence: 79.464553 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 704903120.889146
+STEP 56 ends. TIME = 2.383097003e-14 DT = 4.255530363e-16
+Evolve time = 34.61720426 s; This step = 0.485071422 s; Avg. per step = 0.6181643619 s
+
+STEP 57 starts ...
+
+ Sustained Performence: 79.177603 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 704307260.665924
+STEP 57 ends. TIME = 2.425652307e-14 DT = 4.255530363e-16
+Evolve time = 35.83154294 s; This step = 1.214338674 s; Avg. per step = 0.6286235603 s
+
+STEP 58 starts ...
+
+ Sustained Performence: 79.422718 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 705696333.728506
+STEP 58 ends. TIME = 2.468207611e-14 DT = 4.255530363e-16
+Evolve time = 36.31405719 s; This step = 0.482514256 s; Avg. per step = 0.6261044344 s
+
+STEP 59 starts ...
+
+ Sustained Performence: 79.159437 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 593437385.857809
+STEP 59 ends. TIME = 2.510762914e-14 DT = 4.255530363e-16
+Evolve time = 36.87004123 s; This step = 0.555984036 s; Avg. per step = 0.6249159531 s
+
+STEP 60 starts ...
+
+ Sustained Performence: 79.369335 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 704906930.918857
+STEP 60 ends. TIME = 2.553318218e-14 DT = 4.255530363e-16
+Evolve time = 37.35364945 s; This step = 0.483608219 s; Avg. per step = 0.6225608241 s
+
+STEP 61 starts ...
+
+ Sustained Performence: 64.595119 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 586418059.774703
+STEP 61 ends. TIME = 2.595873522e-14 DT = 4.255530363e-16
+Evolve time = 37.91419836 s; This step = 0.560548915 s; Avg. per step = 0.6215442355 s
+
+STEP 62 starts ...
+
+ Sustained Performence: 79.223315 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 704373428.989840
+STEP 62 ends. TIME = 2.638428825e-14 DT = 4.255530363e-16
+Evolve time = 38.39760395 s; This step = 0.483405588 s; Avg. per step = 0.6193161928 s
+
+STEP 63 starts ...
+
+ Sustained Performence: 79.358264 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 703371932.113731
+STEP 63 ends. TIME = 2.680984129e-14 DT = 4.255530363e-16
+Evolve time = 38.88211158 s; This step = 0.484507631 s; Avg. per step = 0.6171763743 s
+
+STEP 64 starts ...
+
+ Sustained Performence: 80.100017 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 708914959.991104
+STEP 64 ends. TIME = 2.723539432e-14 DT = 4.255530363e-16
+Evolve time = 39.3640506 s; This step = 0.481939015 s; Avg. per step = 0.6150632906 s
+
+STEP 65 starts ...
+
+ Sustained Performence: 30.337567 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 280584196.856554
+STEP 65 ends. TIME = 2.766094736e-14 DT = 4.255530363e-16
+Evolve time = 40.42457988 s; This step = 1.06052928 s; Avg. per step = 0.6219166135 s
+
+STEP 66 starts ...
+
+ Sustained Performence: 78.969480 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 701770353.380891
+STEP 66 ends. TIME = 2.80865004e-14 DT = 4.255530363e-16
+Evolve time = 40.90896519 s; This step = 0.48438531 s; Avg. per step = 0.6198328059 s
+
+STEP 67 starts ...
+
+ Sustained Performence: 79.807338 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 709528059.475177
+STEP 67 ends. TIME = 2.851205343e-14 DT = 4.255530363e-16
+Evolve time = 41.39019404 s; This step = 0.481228854 s; Avg. per step = 0.6177640902 s
+
+STEP 68 starts ...
+
+ Sustained Performence: 77.723189 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 611046538.857297
+STEP 68 ends. TIME = 2.893760647e-14 DT = 4.255530363e-16
+Evolve time = 41.93303761 s; This step = 0.542843567 s; Avg. per step = 0.6166623178 s
+
+STEP 69 starts ...
+
+ Sustained Performence: 68.592906 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 627587778.927863
+STEP 69 ends. TIME = 2.936315951e-14 DT = 4.255530363e-16
+Evolve time = 42.46292073 s; This step = 0.52988312 s; Avg. per step = 0.6154046482 s
+
+STEP 70 starts ...
+
+ Sustained Performence: 79.621856 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 707695543.540725
+STEP 70 ends. TIME = 2.978871254e-14 DT = 4.255530363e-16
+Evolve time = 42.94501028 s; This step = 0.482089556 s; Avg. per step = 0.6135001469 s
+
+STEP 71 starts ...
+
+ Sustained Performence: 79.106563 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 703753655.113972
+STEP 71 ends. TIME = 3.021426558e-14 DT = 4.255530363e-16
+Evolve time = 43.42876507 s; This step = 0.483754789 s; Avg. per step = 0.6116727475 s
+
+STEP 72 starts ...
+
+ Sustained Performence: 79.125921 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 665739834.534700
+STEP 72 ends. TIME = 3.063981862e-14 DT = 4.255530363e-16
+Evolve time = 43.94603923 s; This step = 0.517274152 s; Avg. per step = 0.6103616559 s
+
+STEP 73 starts ...
+
+ Sustained Performence: 78.473496 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 604087514.611959
+STEP 73 ends. TIME = 3.106537165e-14 DT = 4.255530363e-16
+Evolve time = 44.5392257 s; This step = 0.593186477 s; Avg. per step = 0.6101263795 s
+
+STEP 74 starts ...
+
+ Sustained Performence: 29.125057 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 297510242.797791
+STEP 74 ends. TIME = 3.149092469e-14 DT = 4.255530363e-16
+Evolve time = 45.54395066 s; This step = 1.004724959 s; Avg. per step = 0.6154587927 s
+
+STEP 75 starts ...
+
+ Sustained Performence: 79.319218 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 705557018.242817
+STEP 75 ends. TIME = 3.191647772e-14 DT = 4.255530363e-16
+Evolve time = 46.02673686 s; This step = 0.482786197 s; Avg. per step = 0.6136898248 s
+
+STEP 76 starts ...
+
+ Sustained Performence: 78.247260 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 581575153.714008
+STEP 76 ends. TIME = 3.234203076e-14 DT = 4.255530363e-16
+Evolve time = 46.59156664 s; This step = 0.564829785 s; Avg. per step = 0.6130469295 s
+
+STEP 77 starts ...
+
+ Sustained Performence: 78.997069 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 701760066.550086
+STEP 77 ends. TIME = 3.27675838e-14 DT = 4.255530363e-16
+Evolve time = 47.07728345 s; This step = 0.485716804 s; Avg. per step = 0.6113932915 s
+
+STEP 78 starts ...
+
+ Sustained Performence: 79.624282 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 706854932.081817
+STEP 78 ends. TIME = 3.319313683e-14 DT = 4.255530363e-16
+Evolve time = 47.55962315 s; This step = 0.482339706 s; Avg. per step = 0.6097387584 s
+
+STEP 79 starts ...
+
+ Sustained Performence: 79.322416 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 704765828.362045
+STEP 79 ends. TIME = 3.361868987e-14 DT = 4.255530363e-16
+Evolve time = 48.0431681 s; This step = 0.483544948 s; Avg. per step = 0.6081413684 s
+
+STEP 80 starts ...
+
+ Sustained Performence: 79.016544 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 701665918.554620
+STEP 80 ends. TIME = 3.404424291e-14 DT = 4.255530363e-16
+Evolve time = 48.60476981 s; This step = 0.561601708 s; Avg. per step = 0.6075596226 s
+
+STEP 81 starts ...
+
+ Sustained Performence: 79.435999 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 703598663.795388
+STEP 81 ends. TIME = 3.446979594e-14 DT = 4.255530363e-16
+Evolve time = 49.08832437 s; This step = 0.483554559 s; Avg. per step = 0.6060286959 s
+
+STEP 82 starts ...
+
+ Sustained Performence: 79.151264 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 705301887.318390
+STEP 82 ends. TIME = 3.489534898e-14 DT = 4.255530363e-16
+Evolve time = 49.57240461 s; This step = 0.48408024 s; Avg. per step = 0.6045415196 s
+
+STEP 83 starts ...
+
+ Sustained Performence: 75.114192 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 573729328.811002
+STEP 83 ends. TIME = 3.532090202e-14 DT = 4.255530363e-16
+Evolve time = 50.72415031 s; This step = 1.151745697 s; Avg. per step = 0.611134341 s
+
+STEP 84 starts ...
+
+ Sustained Performence: 78.474651 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 699113141.397498
+STEP 84 ends. TIME = 3.574645505e-14 DT = 4.255530363e-16
+Evolve time = 51.21470281 s; This step = 0.490552504 s; Avg. per step = 0.609698843 s
+
+STEP 85 starts ...
+
+ Sustained Performence: 79.452518 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 705526970.909495
+STEP 85 ends. TIME = 3.617200809e-14 DT = 4.255530363e-16
+Evolve time = 51.72357559 s; This step = 0.508872783 s; Avg. per step = 0.608512654 s
+
+STEP 86 starts ...
+
+ Sustained Performence: 79.705551 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 708450596.201090
+STEP 86 ends. TIME = 3.659756112e-14 DT = 4.255530363e-16
+Evolve time = 52.25428474 s; This step = 0.530709151 s; Avg. per step = 0.6076079621 s
+
+STEP 87 starts ...
+
+ Sustained Performence: 79.143042 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 702248917.183986
+STEP 87 ends. TIME = 3.702311416e-14 DT = 4.255530363e-16
+Evolve time = 52.80587357 s; This step = 0.551588826 s; Avg. per step = 0.606964064 s
+
+STEP 88 starts ...
+
+ Sustained Performence: 78.949018 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 699067090.947679
+STEP 88 ends. TIME = 3.74486672e-14 DT = 4.255530363e-16
+Evolve time = 53.29164642 s; This step = 0.485772853 s; Avg. per step = 0.6055868912 s
+
+STEP 89 starts ...
+
+ Sustained Performence: 77.474527 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 692520466.626438
+STEP 89 ends. TIME = 3.787422023e-14 DT = 4.255530363e-16
+Evolve time = 53.78199989 s; This step = 0.490353463 s; Avg. per step = 0.6042921336 s
+
+STEP 90 starts ...
+
+ Sustained Performence: 79.621264 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 704121614.055127
+STEP 90 ends. TIME = 3.829977327e-14 DT = 4.255530363e-16
+Evolve time = 54.26684409 s; This step = 0.484844202 s; Avg. per step = 0.6029649343 s
+
+STEP 91 starts ...
+
+ Sustained Performence: 27.526819 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 283646791.566312
+STEP 91 ends. TIME = 3.872532631e-14 DT = 4.255530363e-16
+Evolve time = 55.36931529 s; This step = 1.102471201 s; Avg. per step = 0.6084540142 s
+
+STEP 92 starts ...
+
+ Sustained Performence: 79.508818 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 704164159.300050
+STEP 92 ends. TIME = 3.915087934e-14 DT = 4.255530363e-16
+Evolve time = 55.85249753 s; This step = 0.483182238 s; Avg. per step = 0.6070923644 s
+
+STEP 93 starts ...
+
+ Sustained Performence: 79.546997 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 707571338.922753
+STEP 93 ends. TIME = 3.957643238e-14 DT = 4.255530363e-16
+Evolve time = 56.33551873 s; This step = 0.483021208 s; Avg. per step = 0.605758266 s
+
+STEP 94 starts ...
+
+ Sustained Performence: 64.728439 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 514824798.066452
+STEP 94 ends. TIME = 4.000198541e-14 DT = 4.255530363e-16
+Evolve time = 56.95917556 s; This step = 0.623656823 s; Avg. per step = 0.6059486761 s
+
+STEP 95 starts ...
+
+ Sustained Performence: 78.692275 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 700401417.545319
+STEP 95 ends. TIME = 4.042753845e-14 DT = 4.255530363e-16
+Evolve time = 57.48284645 s; This step = 0.523670896 s; Avg. per step = 0.6050825943 s
+
+STEP 96 starts ...
+
+ Sustained Performence: 79.811085 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 707664596.458771
+STEP 96 ends. TIME = 4.085309149e-14 DT = 4.255530363e-16
+Evolve time = 57.96387587 s; This step = 0.481029413 s; Avg. per step = 0.6037903736 s
+
+STEP 97 starts ...
+
+ Sustained Performence: 79.441854 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 706511341.996673
+STEP 97 ends. TIME = 4.127864452e-14 DT = 4.255530363e-16
+Evolve time = 58.44743558 s; This step = 0.483559718 s; Avg. per step = 0.6025508823 s
+
+STEP 98 starts ...
+
+ Sustained Performence: 79.013153 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 702387437.289237
+STEP 98 ends. TIME = 4.170419756e-14 DT = 4.255530363e-16
+Evolve time = 59.00971791 s; This step = 0.562282329 s; Avg. per step = 0.6021399787 s
+
+STEP 99 starts ...
+
+ Sustained Performence: 79.271338 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 703571290.058544
+STEP 99 ends. TIME = 4.21297506e-14 DT = 4.255530363e-16
+Evolve time = 59.49305646 s; This step = 0.483338548 s; Avg. per step = 0.6009399643 s
+
+STEP 100 starts ...
+
+ Sustained Performence: 25.498819 TFLOPS 
+
+ Peak Performence: 80.102696 TFLOPS 
+arvg_metric: 264617277.705892
+STEP 100 ends. TIME = 4.255530363e-14 DT = 4.255530363e-16
+Evolve time = 60.74187019 s; This step = 1.248813728 s; Avg. per step = 0.6074187019 s
+
+
+**** WARNINGS ******************************************************************
+* GLOBAL warning list  after  [ THE END ]
+*
+* No recorded warnings.
+********************************************************************************
+
+Total Time                     : 69.63631002
+
+
+TinyProfiler total time across processes [min...avg...max]: 69.62 ... 69.63 ... 69.64
+
+----------------------------------------------------------------------------------------------------------
+Name                                                       NCalls  Excl. Min  Excl. Avg  Excl. Max   Max %
+----------------------------------------------------------------------------------------------------------
+PhysicalParticleContainer::Evolve::GatherAndPush             1494      14.04      14.18      14.44  20.73%
+WarpX::OneStep_nosub()                                        100      5.147      6.539      11.74  16.86%
+FabArray::ParallelCopy_finish()                               300      2.592      7.048      8.849  12.71%
+PhysicalParticleContainer::AddPlasma()                          1      7.013      7.121      7.621  10.94%
+[1] USER SME_sortanrpre                                      1494      5.863      6.364      6.783   9.74%
+FillBoundary_finish()                                        1207      3.354      5.117      6.141   8.82%
+WarpX::Evolve::step                                           100      5.029      5.097      5.241   7.53%
+ParticleContainer::RedistributeCPU()                          102      4.284      4.471      5.214   7.49%
+PhysicalParticleContainer::Evolve()                           100       1.52      1.945      3.937   5.65%
+[0] USER doDepositionShapeN_special()                        1494      1.975      2.608      3.219   4.62%
+[2] USER SME_kernal                                          1494      2.443      2.813      3.071   4.41%
+ParticleContainer::RedistributeMPI()                          102     0.2914      1.937      2.687   3.86%
+WarpXParticleContainer::DepositCurrent::CurrentDeposition    1494     0.9423      1.143      1.419   2.04%
+FillBoundary_nowait()                                        1207     0.4676      0.623      1.298   1.86%
+DenseBins<T>::buildOpenMP                                     512    0.07874     0.1722      1.034   1.49%
+WarpXParticleContainer::SortParticlesByBin()                    1     0.9356     0.9651     0.9907   1.42%
+amrex::Copy()                                                1206     0.0403     0.0836     0.4933   0.71%
+Filter::ApplyStencil(MultiFab)                                300     0.2148     0.2723     0.4532   0.65%
+PhysicalParticleContainer::PushP()                              2       0.25     0.2508      0.255   0.37%
+FabArray::ParallelCopy_nowait()                               300     0.1194     0.1432     0.2041   0.29%
+WarpXParticleContainer::DepositCurrent::Accumulate           1494     0.1213     0.1557       0.19   0.27%
+[3] USER SME_post                                            1494    0.09354     0.1293      0.159   0.23%
+main()                                                          1    0.05934    0.07222     0.1478   0.21%
+WarpX::SyncCurrent()                                          100    0.01385    0.01747    0.02157   0.03%
+ablastr::utils::communication::FillBoundary                  1206    0.01677     0.0192    0.02122   0.03%
+WarpX::InitData()                                               1   0.000754    0.00154    0.01027   0.01%
+FabArray<FAB>::SumBoundary_nowait()                           300   0.005975   0.007014    0.01006   0.01%
+FabArray<FAB>::SumBoundary_finish()                           300   0.004769   0.006047   0.007916   0.01%
+FabArray::FillBoundary()                                      607   0.005111   0.005908   0.007381   0.01%
+FabArray::FillBoundaryAndSync()                               600   0.002298   0.003002   0.004196   0.01%
+FillBoundaryAndSync_finish()                                  600   0.001782   0.002678   0.004136   0.01%
+FabArray<FAB>::SumBoundary()                                  300   0.001649    0.00236   0.004006   0.01%
+FillBoundaryAndSync_nowait()                                  600   0.001831    0.00241   0.003081   0.00%
+MultiFab::Copy()                                              906   0.002229   0.002485   0.002719   0.00%
+ablastr::utils::communication::SumBoundary                    300  0.0008613   0.000983     0.0012   0.00%
+WarpX::Evolve()                                                 1  0.0004678  0.0006364  0.0007814   0.00%
+PhysicalParticleContainer::AddParticles()                       2   3.61e-05  5.495e-05  0.0001955   0.00%
+REG::WarpX::Evolve()                                            1  1.742e-05  2.274e-05  2.951e-05   0.00%
+Other                                                        3341     0.1679     0.3133     0.3803   0.55%
+----------------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------------
+Name                                                       NCalls  Incl. Min  Incl. Avg  Incl. Max   Max %
+----------------------------------------------------------------------------------------------------------
+main()                                                          1      69.62      69.63      69.64 100.00%
+REG::WarpX::Evolve()                                            1      59.83      60.67      60.77  87.26%
+WarpX::Evolve()                                                 1      59.83      60.67      60.77  87.26%
+WarpX::Evolve::step                                           100      59.83      60.67      60.77  87.26%
+WarpX::OneStep_nosub()                                        100      44.66      44.83      45.28  65.03%
+PhysicalParticleContainer::Evolve()                           100      28.49      29.33      30.65  44.02%
+PhysicalParticleContainer::Evolve::GatherAndPush             1494      14.04      14.18      14.44  20.73%
+WarpXParticleContainer::DepositCurrent::CurrentDeposition    1494       12.1      13.06      13.84  19.87%
+[0] USER doDepositionShapeN_special()                        1494      11.06      11.91      12.48  17.93%
+WarpX::InitData()                                               1      8.748      8.895      9.731  13.97%
+WarpX::SyncCurrent()                                          100      3.095        7.6      9.314  13.38%
+ablastr::utils::communication::SumBoundary                    300      2.784      7.244      9.033  12.97%
+FabArray<FAB>::SumBoundary()                                  300      2.783      7.243      9.032  12.97%
+FabArray<FAB>::SumBoundary_finish()                           300      2.598      7.054      8.854  12.72%
+FabArray::ParallelCopy_finish()                               300      2.592      7.048      8.849  12.71%
+PhysicalParticleContainer::AddParticles()                       2      7.013      7.121      7.621  10.94%
+PhysicalParticleContainer::AddPlasma()                          1      7.013      7.121      7.621  10.94%
+ParticleContainer::RedistributeCPU()                          102      5.437      6.459       7.05  10.12%
+[1] USER SME_sortanrpre                                      1494      5.863      6.364      6.783   9.74%
+ablastr::utils::communication::FillBoundary                  1206      4.636      5.759       6.67   9.58%
+FillBoundary_finish()                                        1207      3.354      5.117      6.141   8.82%
+FabArray::FillBoundary()                                      607      3.409      4.542        5.4   7.75%
+[2] USER SME_kernal                                          1494      2.443      2.813      3.071   4.41%
+ParticleContainer::RedistributeMPI()                          102     0.2918      1.938      2.687   3.86%
+WarpXParticleContainer::SortParticlesByBin()                    1      1.028      1.137       1.97   2.83%
+FillBoundary_nowait()                                        1207     0.4734     0.6294      1.304   1.87%
+FabArray::FillBoundaryAndSync()                               600       1.08      1.218      1.298   1.86%
+FillBoundaryAndSync_finish()                                  600     0.8567      0.995       1.12   1.61%
+DenseBins<T>::buildOpenMP                                     512    0.07874     0.1722      1.034   1.49%
+amrex::Copy()                                                1206     0.0403     0.0836     0.4933   0.71%
+MultiFab::Copy()                                              906    0.02691    0.06794     0.4763   0.68%
+Filter::ApplyStencil(MultiFab)                                300     0.2148     0.2723     0.4532   0.65%
+FillBoundaryAndSync_nowait()                                  600     0.1759     0.2205     0.2982   0.43%
+PhysicalParticleContainer::PushP()                              2       0.25     0.2508      0.255   0.37%
+FabArray<FAB>::SumBoundary_nowait()                           300     0.1597     0.1872     0.2545   0.37%
+FabArray::ParallelCopy_nowait()                               300     0.1216     0.1454     0.2065   0.30%
+WarpXParticleContainer::DepositCurrent::Accumulate           1494     0.1213     0.1557       0.19   0.27%
+[3] USER SME_post                                            1494    0.09354     0.1293      0.159   0.23%
+Other                                                        3341     0.1982     0.4972     0.5658   0.81%
+----------------------------------------------------------------------------------------------------------
+
+
+
+BEGIN REGION WarpX::Evolve()
+
+----------------------------------------------------------------------------------------------------------
+Name                                                       NCalls  Excl. Min  Excl. Avg  Excl. Max   Max %
+----------------------------------------------------------------------------------------------------------
+PhysicalParticleContainer::Evolve::GatherAndPush             1494      14.04      14.18      14.44  20.73%
+WarpX::OneStep_nosub()                                        100      5.147      6.539      11.74  16.86%
+FabArray::ParallelCopy_finish()                               300      2.592      7.048      8.849  12.71%
+[1] USER SME_sortanrpre                                      1494      5.863      6.364      6.783   9.74%
+FillBoundary_finish()                                        1207      3.354      5.117      6.141   8.82%
+WarpX::Evolve::step                                           100      5.029      5.097      5.241   7.53%
+ParticleContainer::RedistributeCPU()                          100      4.234      4.421      5.166   7.42%
+PhysicalParticleContainer::Evolve()                           100       1.52      1.945      3.937   5.65%
+[0] USER doDepositionShapeN_special()                        1494      1.975      2.608      3.219   4.62%
+[2] USER SME_kernal                                          1494      2.443      2.813      3.071   4.41%
+ParticleContainer::RedistributeMPI()                          100     0.1231      1.477        2.1   3.02%
+WarpXParticleContainer::DepositCurrent::CurrentDeposition    1494     0.9423      1.143      1.419   2.04%
+FillBoundary_nowait()                                        1207     0.4676      0.623      1.298   1.86%
+amrex::Copy()                                                1206     0.0403     0.0836     0.4933   0.71%
+Filter::ApplyStencil(MultiFab)                                300     0.2148     0.2723     0.4532   0.65%
+PhysicalParticleContainer::PushP()                              2       0.25     0.2508      0.255   0.37%
+FabArray::ParallelCopy_nowait()                               300     0.1194     0.1432     0.2041   0.29%
+WarpX::SyncCurrent()                                          100    0.01385    0.01747    0.02157   0.03%
+ablastr::utils::communication::FillBoundary                  1206    0.01677     0.0192    0.02122   0.03%
+FabArray<FAB>::SumBoundary_nowait()                           300   0.005975   0.007014    0.01006   0.01%
+FabArray<FAB>::SumBoundary_finish()                           300   0.004769   0.006047   0.007916   0.01%
+FabArray::FillBoundary()                                      607   0.005111   0.005908   0.007381   0.01%
+FabArray::FillBoundaryAndSync()                               600   0.002298   0.003002   0.004196   0.01%
+FillBoundaryAndSync_finish()                                  600   0.001782   0.002678   0.004136   0.01%
+FabArray<FAB>::SumBoundary()                                  300   0.001649    0.00236   0.004006   0.01%
+FillBoundaryAndSync_nowait()                                  600   0.001831    0.00241   0.003081   0.00%
+MultiFab::Copy()                                              906   0.002229   0.002485   0.002719   0.00%
+ablastr::utils::communication::SumBoundary                    300  0.0008613   0.000983     0.0012   0.00%
+WarpX::Evolve()                                                 1  0.0004678  0.0006364  0.0007814   0.00%
+REG::WarpX::Evolve()                                            1  1.742e-05  2.274e-05  2.951e-05   0.00%
+Other                                                        6302     0.3696     0.4735     0.5925   0.85%
+----------------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------------
+Name                                                       NCalls  Incl. Min  Incl. Avg  Incl. Max   Max %
+----------------------------------------------------------------------------------------------------------
+REG::WarpX::Evolve()                                            1      59.83      60.67      60.77  87.26%
+WarpX::Evolve()                                                 1      59.83      60.67      60.77  87.26%
+WarpX::Evolve::step                                           100      59.83      60.67      60.77  87.26%
+WarpX::OneStep_nosub()                                        100      44.66      44.83      45.28  65.03%
+PhysicalParticleContainer::Evolve()                           100      28.49      29.33      30.65  44.02%
+PhysicalParticleContainer::Evolve::GatherAndPush             1494      14.04      14.18      14.44  20.73%
+WarpXParticleContainer::DepositCurrent::CurrentDeposition    1494       12.1      13.06      13.84  19.87%
+[0] USER doDepositionShapeN_special()                        1494      11.06      11.91      12.48  17.93%
+WarpX::SyncCurrent()                                          100      3.095        7.6      9.314  13.38%
+ablastr::utils::communication::SumBoundary                    300      2.784      7.244      9.033  12.97%
+FabArray<FAB>::SumBoundary()                                  300      2.783      7.243      9.032  12.97%
+FabArray<FAB>::SumBoundary_finish()                           300      2.598      7.054      8.854  12.72%
+FabArray::ParallelCopy_finish()                               300      2.592      7.048      8.849  12.71%
+[1] USER SME_sortanrpre                                      1494      5.863      6.364      6.783   9.74%
+ablastr::utils::communication::FillBoundary                  1206      4.636      5.759       6.67   9.58%
+ParticleContainer::RedistributeCPU()                          100      5.212      5.949      6.396   9.18%
+FillBoundary_finish()                                        1207      3.354      5.117      6.141   8.82%
+FabArray::FillBoundary()                                      607      3.409      4.542        5.4   7.75%
+[2] USER SME_kernal                                          1494      2.443      2.813      3.071   4.41%
+ParticleContainer::RedistributeMPI()                          100     0.1234      1.477        2.1   3.02%
+FillBoundary_nowait()                                        1207     0.4734     0.6294      1.304   1.87%
+FabArray::FillBoundaryAndSync()                               600       1.08      1.218      1.298   1.86%
+FillBoundaryAndSync_finish()                                  600     0.8567      0.995       1.12   1.61%
+amrex::Copy()                                                1206     0.0403     0.0836     0.4933   0.71%
+MultiFab::Copy()                                              906    0.02691    0.06794     0.4763   0.68%
+Filter::ApplyStencil(MultiFab)                                300     0.2148     0.2723     0.4532   0.65%
+FillBoundaryAndSync_nowait()                                  600     0.1759     0.2205     0.2982   0.43%
+PhysicalParticleContainer::PushP()                              2       0.25     0.2508      0.255   0.37%
+FabArray<FAB>::SumBoundary_nowait()                           300     0.1597     0.1872     0.2545   0.37%
+FabArray::ParallelCopy_nowait()                               300     0.1216     0.1454     0.2065   0.30%
+Other                                                        6302     0.3997       0.51     0.6201   0.89%
+----------------------------------------------------------------------------------------------------------
+
+END REGION WarpX::Evolve()
+Unused ParmParse Variables:
+  [TOP]::chk.diag_type(nvals = 1)  :: [Full]
+  [TOP]::chk.intervals(nvals = 1)  :: [6]
+  [TOP]::diag1.diag_type(nvals = 1)  :: [Full]
+  [TOP]::diag1.electrons.variables(nvals = 7)  :: [x, y, z, ux, uy, uz, w]
+  [TOP]::diag1.fields_to_plot(nvals = 10)  :: [Bx, By, Bz, Ex, Ey, Ez, jx, jy, jz, rho]
+  [TOP]::diag1.intervals(nvals = 1)  :: [4]
+  [TOP]::warpx.sort_intervals(nvals = 1)  :: [-1]
+
+Pinned Memory Usage:
+---------------------------------------------------------------------------------------------------------------------
+Name                            Nalloc  Nfree  AvgMem min  AvgMem avg  AvgMem max  MaxMem min  MaxMem avg  MaxMem max
+---------------------------------------------------------------------------------------------------------------------
+The_Pinned_Arena::Initialize()      16     16     194   B     240   B     301   B    8192 KiB    8192 KiB    8192 KiB
+main()                             928    928     607   B     607   B     607   B     608   B     608   B     608   B
+---------------------------------------------------------------------------------------------------------------------
+
+AMReX (24.07) finalized
+Done!

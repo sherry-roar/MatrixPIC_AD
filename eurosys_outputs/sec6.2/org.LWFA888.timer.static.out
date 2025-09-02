@@ -1,0 +1,913 @@
+Loading bisheng/kml25.0.0/kml
+  Loading requirement: /pacific_fs/HPCKit/latest/modulefiles/bisheng/kml25.0.0/kspblas/omp /pacific_fs/HPCKit/latest/modulefiles/bisheng/kml25.0.0/kvml/serial
+    /pacific_fs/HPCKit/latest/modulefiles/bisheng/kml25.0.0/kblas/multi
+Currently Loaded Modulefiles:
+ 1) bisheng/compiler4.2.0/bishengmodule   3) /pacific_fs/HPCKit/latest/modulefiles/bisheng/kml25.0.0/kspblas/omp <aL>   5) /pacific_fs/HPCKit/latest/modulefiles/bisheng/kml25.0.0/kblas/multi <aL>  
+ 2) bisheng/hmpi25.0.0/hmpi               4) /pacific_fs/HPCKit/latest/modulefiles/bisheng/kml25.0.0/kvml/serial <aL>   6) bisheng/kml25.0.0/kml                                                     
+
+Key:
+<module-tag>  <aL>=auto-loaded  
+Running job !!!!!
+Initializing AMReX (24.07)...
+MPI initialized with 16 MPI processes
+MPI initialized with thread support level 1
+OMP initialized with 32 OMP threads
+AMReX (24.07) initialized
+WarpX (Unknown)
+
+    __        __             __  __
+    \ \      / /_ _ _ __ _ __\ \/ /
+     \ \ /\ / / _` | '__| '_ \\  /
+      \ V  V / (_| | |  | |_) /  \
+       \_/\_/ \__,_|_|  | .__/_/\_\
+                        |_|
+
+Level 0: dt = 4.343827613e-16 ; dx = 9.375e-07 ; dy = 9.375e-07 ; dz = 1.328125e-07
+
+Grids Summary:
+  Level 0   16 grids  2097152 cells  100 % of domain
+            smallest grid: 64 x 64 x 32  biggest grid: 64 x 64 x 32
+
+-------------------------------------------------------------------------------
+--------------------------- MAIN EM PIC PARAMETERS ----------------------------
+-------------------------------------------------------------------------------
+Precision:            | DOUBLE
+Particle precision:   | DOUBLE
+Geometry:             | 3D (XYZ)
+Operation mode:       | Electromagnetic
+                      | - vacuum
+-------------------------------------------------------------------------------
+Current Deposition:   | direct 
+Particle Pusher:      | Boris 
+Charge Deposition:    | standard 
+Field Gathering:      | energy-conserving 
+Particle Shape Factor:| 1
+-------------------------------------------------------------------------------
+Maxwell Solver:       | CKC 
+                      | - collocated grid 
+-------------------------------------------------------------------------------
+For full input parameters, see the file: warpx_used_inputs
+
+STEP 1 starts ...
+
+ Sustained Performence: 16.492587 TFLOPS 
+
+ Peak Performence: 16.492587 TFLOPS 
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 1
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 1
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 1
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 1
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 1
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 1
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 1
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 1
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 1
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 1
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 1
+arvg_metric: 73205906.909677
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 1
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 1
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 1
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 1
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 1
+
+Unused ParmParse Variables:
+  [TOP]::diag1.diag_type(nvals = 1)  :: [Full]
+  [TOP]::diag1.fields_to_plot(nvals = 10)  :: [Ex, Ey, Ez, Bx, By, Bz, jx, jy, jz, rho]
+  [TOP]::diag1.intervals(nvals = 1)  :: [100]
+  [TOP]::warpx.moving_window_dir(nvals = 1)  :: [z]
+  [TOP]::warpx.moving_window_v(nvals = 1)  :: [1.0]
+  [TOP]::warpx.sort_intervals(nvals = 1)  :: [-1]
+
+
+**** WARNINGS ******************************************************************
+* GLOBAL warning list  after  [ FIRST STEP ]
+*
+* No recorded warnings.
+********************************************************************************
+
+STEP 1 ends. TIME = 4.343827613e-16 DT = 4.343827613e-16
+Evolve time = 3.671100884 s; This step = 3.671100884 s; Avg. per step = 3.671100884 s
+
+STEP 2 starts ...
+
+ Sustained Performence: 17.128364 TFLOPS 
+
+ Peak Performence: 17.128364 TFLOPS 
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 2
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 2
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 2
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 2
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 2
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 2
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 2
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 2
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 2
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 2
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 2
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 2
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 2
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 2
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 2
+arvg_metric: 156793858.947328
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 2
+STEP 2 ends. TIME = 8.687655226e-16 DT = 4.343827613e-16
+Evolve time = 4.533461235 s; This step = 0.862360351 s; Avg. per step = 2.266730618 s
+
+STEP 3 starts ...
+
+ Sustained Performence: 16.966749 TFLOPS 
+
+ Peak Performence: 17.128364 TFLOPS 
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 3
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 3
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 3
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 3
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 3
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 3
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 3
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 3
+arvg_metric: 150286039.039216
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 3
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 3
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 3
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 3
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 3
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 3
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 3
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 3
+STEP 3 ends. TIME = 1.303148284e-15 DT = 4.343827613e-16
+Evolve time = 5.405769019 s; This step = 0.872307784 s; Avg. per step = 1.801923006 s
+
+STEP 4 starts ...
+
+ Sustained Performence: 17.003664 TFLOPS 
+
+ Peak Performence: 17.128364 TFLOPS 
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 4
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 4
+arvg_metric: 144218137.327215
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 4
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 4
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 4
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 4
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 4
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 4
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 4
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 4
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 4
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 4
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 4
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 4
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 4
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 4
+STEP 4 ends. TIME = 1.737531045e-15 DT = 4.343827613e-16
+Evolve time = 6.31009059 s; This step = 0.904321571 s; Avg. per step = 1.577522648 s
+
+STEP 5 starts ...
+
+ Sustained Performence: 17.157782 TFLOPS 
+
+ Peak Performence: 17.157782 TFLOPS 
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 5
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 5
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 5
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 5
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 5
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 5
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 5
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 5
+arvg_metric: 125647873.869511
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 5
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 5
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 5
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 5
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 5
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 5
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 5
+------m_steps_since_last_rank_sort = 5
+STEP 5 ends. TIME = 2.171913806e-15 DT = 4.343827613e-16
+Evolve time = 7.78726454 s; This step = 1.47717395 s; Avg. per step = 1.557452908 s
+
+STEP 6 starts ...
+
+ Sustained Performence: 17.029088 TFLOPS 
+
+ Peak Performence: 17.157782 TFLOPS 
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 6
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 6
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 6
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 6
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 6
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 6
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 6
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 6
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 6
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 6
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 6
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 6
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 6
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 6
+arvg_metric: 156001468.345444
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 6
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 6
+STEP 6 ends. TIME = 2.606296568e-15 DT = 4.343827613e-16
+Evolve time = 8.66573479 s; This step = 0.87847025 s; Avg. per step = 1.444289132 s
+
+STEP 7 starts ...
+
+ Sustained Performence: 17.132871 TFLOPS 
+
+ Peak Performence: 17.157782 TFLOPS 
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 7
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 7
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 7
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 7
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 7
+arvg_metric: 153872300.742822
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 7
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 7
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 7
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 7
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 7
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 7
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 7
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 7
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 7
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 7
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 7
+STEP 7 ends. TIME = 3.040679329e-15 DT = 4.343827613e-16
+Evolve time = 9.528687652 s; This step = 0.862952862 s; Avg. per step = 1.361241093 s
+
+STEP 8 starts ...
+
+ Sustained Performence: 17.173457 TFLOPS 
+
+ Peak Performence: 17.173457 TFLOPS 
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 8
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 8
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 8
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 8
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 8
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 8
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 8
+arvg_metric: 154200193.165626
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 8
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 8
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 8
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 8
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 8
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 8
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 8
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 8
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 8
+STEP 8 ends. TIME = 3.47506209e-15 DT = 4.343827613e-16
+Evolve time = 10.39574803 s; This step = 0.867060382 s; Avg. per step = 1.299468504 s
+
+STEP 9 starts ...
+
+ Sustained Performence: 17.190649 TFLOPS 
+
+ Peak Performence: 17.190649 TFLOPS 
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 9
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 9
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 9
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 9
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 9
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 9
+arvg_metric: 154266589.249335
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 9
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 9
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 9
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 9
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 9
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 9
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 9
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 9
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 9
+[1] RankSort: Skipping rank sort due to minimum interval constraint.
+------m_steps_since_last_rank_sort = 9
+STEP 9 ends. TIME = 3.909444852e-15 DT = 4.343827613e-16
+Evolve time = 11.25676893 s; This step = 0.861020897 s; Avg. per step = 1.250752103 s
+
+STEP 10 starts ...
+
+ Sustained Performence: 16.979417 TFLOPS 
+
+ Peak Performence: 17.190649 TFLOPS 
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+arvg_metric: 110703574.825343
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+STEP 10 ends. TIME = 4.343827613e-15 DT = 4.343827613e-16
+Evolve time = 12.536724 s; This step = 1.279955068 s; Avg. per step = 1.2536724 s
+
+STEP 11 starts ...
+
+ Sustained Performence: 17.146788 TFLOPS 
+
+ Peak Performence: 17.190649 TFLOPS 
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+arvg_metric: 156293523.813030
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+STEP 11 ends. TIME = 4.778210374e-15 DT = 4.343827613e-16
+Evolve time = 13.42284331 s; This step = 0.886119308 s; Avg. per step = 1.220258482 s
+
+STEP 12 starts ...
+
+ Sustained Performence: 17.005772 TFLOPS 
+
+ Peak Performence: 17.190649 TFLOPS 
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+arvg_metric: 152916799.019185
+[6] RankSort: Skipping rank sort.
+STEP 12 ends. TIME = 5.212593136e-15 DT = 4.343827613e-16
+Evolve time = 14.30408864 s; This step = 0.881245336 s; Avg. per step = 1.192007387 s
+
+STEP 13 starts ...
+
+ Sustained Performence: 17.114028 TFLOPS 
+
+ Peak Performence: 17.190649 TFLOPS 
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+arvg_metric: 153750301.994972
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+STEP 13 ends. TIME = 5.646975897e-15 DT = 4.343827613e-16
+Evolve time = 15.1924433 s; This step = 0.888354652 s; Avg. per step = 1.168649484 s
+
+STEP 14 starts ...
+
+ Sustained Performence: 17.160025 TFLOPS 
+
+ Peak Performence: 17.190649 TFLOPS 
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+arvg_metric: 153909911.810051
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+STEP 14 ends. TIME = 6.081358658e-15 DT = 4.343827613e-16
+Evolve time = 16.07066346 s; This step = 0.878220168 s; Avg. per step = 1.147904533 s
+
+STEP 15 starts ...
+
+ Sustained Performence: 17.201661 TFLOPS 
+
+ Peak Performence: 17.201661 TFLOPS 
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+arvg_metric: 113024207.825655
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+STEP 15 ends. TIME = 6.515741419e-15 DT = 4.343827613e-16
+Evolve time = 17.21122726 s; This step = 1.140563795 s; Avg. per step = 1.147415151 s
+
+STEP 16 starts ...
+
+ Sustained Performence: 17.103163 TFLOPS 
+
+ Peak Performence: 17.201661 TFLOPS 
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+arvg_metric: 153823226.900579
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+STEP 16 ends. TIME = 6.950124181e-15 DT = 4.343827613e-16
+Evolve time = 18.07631906 s; This step = 0.865091797 s; Avg. per step = 1.129769941 s
+
+STEP 17 starts ...
+
+ Sustained Performence: 16.965830 TFLOPS 
+
+ Peak Performence: 17.201661 TFLOPS 
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+arvg_metric: 152513303.828607
+[6] RankSort: Skipping rank sort.
+STEP 17 ends. TIME = 7.384506942e-15 DT = 4.343827613e-16
+Evolve time = 18.95245887 s; This step = 0.876139813 s; Avg. per step = 1.114850522 s
+
+STEP 18 starts ...
+
+ Sustained Performence: 16.992249 TFLOPS 
+
+ Peak Performence: 17.201661 TFLOPS 
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+arvg_metric: 152825313.423042
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+STEP 18 ends. TIME = 7.818889703e-15 DT = 4.343827613e-16
+Evolve time = 19.83694354 s; This step = 0.884484673 s; Avg. per step = 1.102052419 s
+
+STEP 19 starts ...
+
+ Sustained Performence: 17.256347 TFLOPS 
+
+ Peak Performence: 17.256347 TFLOPS 
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+arvg_metric: 154946803.847368
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+STEP 19 ends. TIME = 8.253272465e-15 DT = 4.343827613e-16
+Evolve time = 20.70029911 s; This step = 0.863355572 s; Avg. per step = 1.089489427 s
+
+STEP 20 starts ...
+
+ Sustained Performence: 17.070892 TFLOPS 
+
+ Peak Performence: 17.256347 TFLOPS 
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+arvg_metric: 150731308.922182
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+[6] RankSort: Skipping rank sort.
+STEP 20 ends. TIME = 8.687655226e-15 DT = 4.343827613e-16
+Evolve time = 22.63231604 s; This step = 1.932016926 s; Avg. per step = 1.131615802 s
+
+
+**** WARNINGS ******************************************************************
+* GLOBAL warning list  after  [ THE END ]
+*
+* No recorded warnings.
+********************************************************************************
+
+Total Time                     : 23.09955577
+
+
+TinyProfiler total time across processes [min...avg...max]: 23.06 ... 23.08 ... 23.1
+
+----------------------------------------------------------------------------------------------------------
+Name                                                       NCalls  Excl. Min  Excl. Avg  Excl. Max   Max %
+----------------------------------------------------------------------------------------------------------
+WarpX::OneStep_nosub()                                         20      2.271      7.226      13.84  59.90%
+FabArray::ParallelCopy_finish()                                60     0.1071      3.684      9.127  39.51%
+ParticleContainer::RedistributeMPI()                           64     0.1445      4.444       5.91  25.59%
+PhysicalParticleContainer::Evolve::GatherAndPush               16          0     0.9197      5.227  22.63%
+FillBoundary_finish()                                         248     0.7664      2.379      4.684  20.28%
+ParticleContainer::RedistributeCPU()                           64     0.1532     0.5806      2.471  10.69%
+WarpXParticleContainer::SortParticlesByBin()                    2  0.0001015     0.4155      2.395  10.37%
+WarpXParticleContainer::ApplyBoundaryConditions()              40   0.003257     0.3918      2.165   9.37%
+WarpX::Evolve::step                                            20      1.611       1.77      2.022   8.75%
+[1] USER org_pre                                               19          0     0.2552      1.502   6.50%
+[2] USER org_cmp&sav                                           19          0     0.2283      1.325   5.73%
+FillBoundary_nowait()                                         248    0.05259     0.1557       0.91   3.94%
+PhysicalParticleContainer::Evolve()                            20   0.003126     0.1623     0.8117   3.51%
+PhysicalParticleContainer::PushP()                              2  0.0001575    0.08656     0.4893   2.12%
+amrex::Copy()                                                 246   0.006855    0.03275      0.354   1.53%
+PhysicalParticleContainer::AddPlasma()                          1   0.003657     0.0432     0.2194   0.95%
+FabArray::ParallelCopy_nowait()                                60    0.07527    0.08267    0.09591   0.42%
+FabArray::setVal()                                            143    0.02243    0.05792    0.09251   0.40%
+Filter::ApplyStencil(MultiFab)                                 60    0.02435     0.0337    0.08849   0.38%
+DenseBins<T>::buildOpenMP                                      31          0     0.0138    0.07977   0.35%
+RedistributeMPI_copy                                            2          0   0.005121    0.07899   0.34%
+main()                                                          1   0.002442    0.02627    0.04645   0.20%
+WarpXParticleContainer::DepositCurrent::CurrentDeposition      19          0   0.005727     0.0348   0.15%
+ParticleContainer::BuildRedistributeMask                       80   0.007125    0.01052    0.03095   0.13%
+WarpX::InitData()                                               1   0.001254   0.005481    0.02848   0.12%
+WarpX::Evolve()                                                 1  0.0001453     0.0106    0.01143   0.05%
+WarpX::SyncCurrent()                                           20   0.002854   0.003606   0.004773   0.02%
+ablastr::utils::communication::FillBoundary                   246    0.00208    0.00243   0.002909   0.01%
+[0] USER org()                                                 19          0  0.0004699   0.002797   0.01%
+FabArray<FAB>::SumBoundary_nowait()                            60   0.001145   0.001536   0.002041   0.01%
+FabArray<FAB>::SumBoundary_finish()                            60   0.001366   0.001668   0.001999   0.01%
+FabArray::FillBoundary()                                      128  0.0007644  0.0008912    0.00115   0.00%
+FabArray<FAB>::SumBoundary()                                   60  0.0004808  0.0005968  0.0006755   0.00%
+MultiFab::Copy()                                              186  0.0003598  0.0004365  0.0005127   0.00%
+FabArray::FillBoundaryAndSync()                               120  0.0002787  0.0003136  0.0003545   0.00%
+FillBoundaryAndSync_finish()                                  120  0.0002051  0.0002521  0.0003351   0.00%
+ablastr::utils::communication::SumBoundary                     60  0.0001588  0.0002003  0.0002511   0.00%
+PhysicalParticleContainer::AddParticles()                       2  2.655e-05  4.029e-05  5.848e-05   0.00%
+REG::WarpX::Evolve()                                            1   7.37e-06  1.022e-05   2.12e-05   0.00%
+Other                                                         688    0.02415     0.0404     0.1143   0.49%
+----------------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------------
+Name                                                       NCalls  Incl. Min  Incl. Avg  Incl. Max   Max %
+----------------------------------------------------------------------------------------------------------
+main()                                                          1      23.06      23.08       23.1 100.00%
+REG::WarpX::Evolve()                                            1      20.18      22.22      22.65  98.06%
+WarpX::Evolve()                                                 1      20.18      22.22      22.65  98.06%
+WarpX::Evolve::step                                            20      20.17      22.21      22.64  98.02%
+WarpX::OneStep_nosub()                                         20       11.7      13.09      14.56  63.01%
+WarpX::SyncCurrent()                                           20     0.2532      3.845      9.261  40.09%
+ablastr::utils::communication::SumBoundary                     60     0.1985      3.779      9.219  39.91%
+FabArray<FAB>::SumBoundary()                                   60     0.1983      3.779      9.219  39.91%
+FabArray<FAB>::SumBoundary_finish()                            60     0.1088      3.686      9.129  39.52%
+FabArray::ParallelCopy_finish()                                60     0.1071      3.684      9.127  39.51%
+PhysicalParticleContainer::Evolve()                            20   0.003126      1.574      8.724  37.77%
+ParticleContainer::RedistributeCPU()                           64      2.628      5.073      6.076  26.30%
+ParticleContainer::RedistributeMPI()                           64     0.1492       4.45      5.911  25.59%
+PhysicalParticleContainer::Evolve::GatherAndPush               16          0     0.9197      5.227  22.63%
+ablastr::utils::communication::FillBoundary                   246     0.8232      2.518      4.697  20.33%
+FillBoundary_finish()                                         248     0.7664      2.379      4.684  20.28%
+FabArray::FillBoundary()                                      128     0.7236      2.124      4.092  17.72%
+WarpX::InitData()                                               1     0.3939     0.8302      2.875  12.45%
+WarpXParticleContainer::DepositCurrent::CurrentDeposition      19          0     0.4897      2.865  12.40%
+[0] USER org()                                                 19          0      0.484       2.83  12.25%
+WarpXParticleContainer::SortParticlesByBin()                    2  0.0001015     0.4293      2.475  10.71%
+WarpXParticleContainer::ApplyBoundaryConditions()              40   0.003257     0.3918      2.165   9.37%
+[1] USER org_pre                                               19          0     0.2552      1.502   6.50%
+[2] USER org_cmp&sav                                           19          0     0.2283      1.325   5.73%
+FillBoundary_nowait()                                         248    0.05391     0.1573     0.9115   3.95%
+FabArray::FillBoundaryAndSync()                               120    0.09275     0.4136     0.7334   3.17%
+FillBoundaryAndSync_finish()                                  120      0.075      0.388     0.7126   3.09%
+PhysicalParticleContainer::PushP()                              2  0.0001575    0.08656     0.4893   2.12%
+amrex::Copy()                                                 246   0.006855    0.03275      0.354   1.53%
+MultiFab::Copy()                                              186   0.004317    0.02858     0.3511   1.52%
+PhysicalParticleContainer::AddParticles()                       2   0.003702    0.04324     0.2195   0.95%
+PhysicalParticleContainer::AddPlasma()                          1   0.003657     0.0432     0.2194   0.95%
+ParticleContainer::BuildRedistributeMask                       80   0.008941    0.04327     0.1539   0.67%
+FabArray<FAB>::SumBoundary_nowait()                            60    0.08267    0.09233     0.1162   0.50%
+FabArray::ParallelCopy_nowait()                                60    0.07573     0.0832    0.09634   0.42%
+FabArray::setVal()                                            143    0.02243    0.05792    0.09251   0.40%
+Filter::ApplyStencil(MultiFab)                                 60    0.02435     0.0337    0.08849   0.38%
+DenseBins<T>::buildOpenMP                                      31          0     0.0138    0.07977   0.35%
+RedistributeMPI_copy                                            2          0   0.005121    0.07899   0.34%
+Other                                                         688    0.03847    0.08297     0.1889   0.82%
+----------------------------------------------------------------------------------------------------------
+
+
+
+BEGIN REGION WarpX::Evolve()
+
+----------------------------------------------------------------------------------------------------------
+Name                                                       NCalls  Excl. Min  Excl. Avg  Excl. Max   Max %
+----------------------------------------------------------------------------------------------------------
+WarpX::OneStep_nosub()                                         20      2.271      7.226      13.84  59.90%
+FabArray::ParallelCopy_finish()                                60     0.1071      3.684      9.127  39.51%
+ParticleContainer::RedistributeMPI()                           60     0.1415      4.172       5.55  24.03%
+PhysicalParticleContainer::Evolve::GatherAndPush               16          0     0.9197      5.227  22.63%
+FillBoundary_finish()                                         248     0.7664      2.379      4.684  20.28%
+ParticleContainer::RedistributeCPU()                           60     0.1423     0.5502      2.348  10.16%
+WarpXParticleContainer::ApplyBoundaryConditions()              40   0.003257     0.3918      2.165   9.37%
+WarpX::Evolve::step                                            20      1.611       1.77      2.022   8.75%
+[1] USER org_pre                                               19          0     0.2552      1.502   6.50%
+[2] USER org_cmp&sav                                           19          0     0.2283      1.325   5.73%
+FillBoundary_nowait()                                         248    0.05259     0.1557       0.91   3.94%
+PhysicalParticleContainer::Evolve()                            20   0.003126     0.1623     0.8117   3.51%
+PhysicalParticleContainer::PushP()                              2  0.0001575    0.08656     0.4893   2.12%
+amrex::Copy()                                                 246   0.006855    0.03275      0.354   1.53%
+FabArray::ParallelCopy_nowait()                                60    0.07527    0.08267    0.09591   0.42%
+Filter::ApplyStencil(MultiFab)                                 60    0.02435     0.0337    0.08849   0.38%
+RedistributeMPI_copy                                            1          0   0.005004    0.07898   0.34%
+WarpXParticleContainer::DepositCurrent::CurrentDeposition      19          0   0.005727     0.0348   0.15%
+ParticleContainer::BuildRedistributeMask                       80   0.007125    0.01052    0.03095   0.13%
+WarpX::Evolve()                                                 1  0.0001453     0.0106    0.01143   0.05%
+WarpX::SyncCurrent()                                           20   0.002854   0.003606   0.004773   0.02%
+ablastr::utils::communication::FillBoundary                   246    0.00208    0.00243   0.002909   0.01%
+[0] USER org()                                                 19          0  0.0004699   0.002797   0.01%
+FabArray<FAB>::SumBoundary_nowait()                            60   0.001145   0.001536   0.002041   0.01%
+FabArray<FAB>::SumBoundary_finish()                            60   0.001366   0.001668   0.001999   0.01%
+FabArray::FillBoundary()                                      128  0.0007644  0.0008912    0.00115   0.00%
+FabArray<FAB>::SumBoundary()                                   60  0.0004808  0.0005968  0.0006755   0.00%
+MultiFab::Copy()                                              186  0.0003598  0.0004365  0.0005127   0.00%
+FabArray::FillBoundaryAndSync()                               120  0.0002787  0.0003136  0.0003545   0.00%
+FillBoundaryAndSync_finish()                                  120  0.0002051  0.0002521  0.0003351   0.00%
+ablastr::utils::communication::SumBoundary                     60  0.0001588  0.0002003  0.0002511   0.00%
+REG::WarpX::Evolve()                                            1   7.37e-06  1.022e-05   2.12e-05   0.00%
+Other                                                         799    0.02995    0.04856     0.1372   0.59%
+----------------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------------
+Name                                                       NCalls  Incl. Min  Incl. Avg  Incl. Max   Max %
+----------------------------------------------------------------------------------------------------------
+REG::WarpX::Evolve()                                            1      20.18      22.22      22.65  98.06%
+WarpX::Evolve()                                                 1      20.18      22.22      22.65  98.06%
+WarpX::Evolve::step                                            20      20.17      22.21      22.64  98.02%
+WarpX::OneStep_nosub()                                         20       11.7      13.09      14.56  63.01%
+WarpX::SyncCurrent()                                           20     0.2532      3.845      9.261  40.09%
+ablastr::utils::communication::SumBoundary                     60     0.1985      3.779      9.219  39.91%
+FabArray<FAB>::SumBoundary()                                   60     0.1983      3.779      9.219  39.91%
+FabArray<FAB>::SumBoundary_finish()                            60     0.1088      3.686      9.129  39.52%
+FabArray::ParallelCopy_finish()                                60     0.1071      3.684      9.127  39.51%
+PhysicalParticleContainer::Evolve()                            20   0.003126      1.574      8.724  37.77%
+ParticleContainer::RedistributeCPU()                           60        2.5      4.771      5.705  24.70%
+ParticleContainer::RedistributeMPI()                           60     0.1437      4.178       5.55  24.03%
+PhysicalParticleContainer::Evolve::GatherAndPush               16          0     0.9197      5.227  22.63%
+ablastr::utils::communication::FillBoundary                   246     0.8232      2.518      4.697  20.33%
+FillBoundary_finish()                                         248     0.7664      2.379      4.684  20.28%
+FabArray::FillBoundary()                                      128     0.7236      2.124      4.092  17.72%
+WarpXParticleContainer::DepositCurrent::CurrentDeposition      19          0     0.4897      2.865  12.40%
+[0] USER org()                                                 19          0      0.484       2.83  12.25%
+WarpXParticleContainer::ApplyBoundaryConditions()              40   0.003257     0.3918      2.165   9.37%
+[1] USER org_pre                                               19          0     0.2552      1.502   6.50%
+[2] USER org_cmp&sav                                           19          0     0.2283      1.325   5.73%
+FillBoundary_nowait()                                         248    0.05391     0.1573     0.9115   3.95%
+FabArray::FillBoundaryAndSync()                               120    0.09275     0.4136     0.7334   3.17%
+FillBoundaryAndSync_finish()                                  120      0.075      0.388     0.7126   3.09%
+PhysicalParticleContainer::PushP()                              2  0.0001575    0.08656     0.4893   2.12%
+amrex::Copy()                                                 246   0.006855    0.03275      0.354   1.53%
+MultiFab::Copy()                                              186   0.004317    0.02858     0.3511   1.52%
+ParticleContainer::BuildRedistributeMask                       80   0.008941    0.04327     0.1539   0.67%
+FabArray<FAB>::SumBoundary_nowait()                            60    0.08267    0.09233     0.1162   0.50%
+FabArray::ParallelCopy_nowait()                                60    0.07573     0.0832    0.09634   0.42%
+Filter::ApplyStencil(MultiFab)                                 60    0.02435     0.0337    0.08849   0.38%
+RedistributeMPI_copy                                            1          0   0.005004    0.07898   0.34%
+Other                                                         799    0.04351    0.07549      0.193   0.84%
+----------------------------------------------------------------------------------------------------------
+
+END REGION WarpX::Evolve()
+Unused ParmParse Variables:
+  [TOP]::diag1.diag_type(nvals = 1)  :: [Full]
+  [TOP]::diag1.fields_to_plot(nvals = 10)  :: [Ex, Ey, Ez, Bx, By, Bz, jx, jy, jz, rho]
+  [TOP]::diag1.intervals(nvals = 1)  :: [100]
+  [TOP]::warpx.moving_window_dir(nvals = 1)  :: [z]
+  [TOP]::warpx.moving_window_v(nvals = 1)  :: [1.0]
+  [TOP]::warpx.sort_intervals(nvals = 1)  :: [-1]
+
+Pinned Memory Usage:
+-----------------------------------------------------------------------------------------------------------------------------
+Name                                    Nalloc  Nfree  AvgMem min  AvgMem avg  AvgMem max  MaxMem min  MaxMem avg  MaxMem max
+-----------------------------------------------------------------------------------------------------------------------------
+The_Pinned_Arena::Initialize()              16     16     626   B     700   B     957   B    8192 KiB    8192 KiB    8192 KiB
+WarpX::InitData()                          460    460       3   B       4   B      12   B      25 KiB      32 KiB      59 KiB
+main()                                    1216   1216     798   B     798   B     799   B     800   B     800   B     800   B
+PhysicalParticleContainer::AddPlasma()      32     32     159   B     159   B     159   B     160   B     160   B     160   B
+-----------------------------------------------------------------------------------------------------------------------------
+
+AMReX (24.07) finalized
+Done!
