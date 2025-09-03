@@ -1370,7 +1370,7 @@
                         GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
                         uyp.dataPtr() + offset, uzp.dataPtr() + offset, ion_lev,
                         jx_fab,  jy_fab, jz_fab, np_to_deposit, relative_time, dinv,
-                        xyzmin, lo, hi,len, q,ptile,tbox,WarpX::n_rz_azimuthal_modes,inner_timer);
+                        xyzmin, lo, hi,len, q,ptile,tbox,WarpX::n_rz_azimuthal_modes,inner_timer,newbin);
                     doDepositionShapeN_sve_rhocell_sme_order3<3>(
                         GetPosition, wp.dataPtr() + offset, uxp.dataPtr() + offset,
                         uyp.dataPtr() + offset, uzp.dataPtr() + offset, ion_lev,
