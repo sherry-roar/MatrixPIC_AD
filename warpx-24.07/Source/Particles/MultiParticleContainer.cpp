@@ -505,10 +505,34 @@ MultiParticleContainer::Evolve (int lev,
     // double max_tflops=0.0;
     if(rank==0)
     {
-        double ss_tflops=total_flops/(max_time*1e12);
-        max_tflops=(max_tflops > ss_tflops) ? max_tflops : ss_tflops;
-        printf("\n Sustained Performence: %f TFLOPS \n", ss_tflops);
-        printf("\n Peak Performence: %f TFLOPS \n", max_tflops);
+ 
+        static double total_ss_tflops_sum = 0.0;
+        static int step_counter = 0;
+
+        double avg_time = total_time / rank_size;
+        double current_ss_tflops = 0.0; 
+        
+        if (max_time > 0) {
+            current_ss_tflops = total_flops / (max_time * 1.0e12);
+        }
+        max_tflops=(max_tflops>current_ss_tflops) ? max_tflops : current_ss_tflops;
+
+        total_ss_tflops_sum += current_ss_tflops;
+        step_counter++;
+        double avg_ss_tflops = total_ss_tflops_sum / step_counter; 
+
+        printf("\n--- Performance Metrics (Current Step) ---\n");
+        printf("\tKernel Time (Max)         : %f s\n", max_time);
+        printf("\tKernel Time (Avg)         : %f s\n", avg_time);
+        printf("\tPeak Performance     : %f TFLOP/s\n", max_tflops);
+        printf("\tSustained Performance     : %f TFLOP/s\n", current_ss_tflops);
+        if (total_time > 0) {
+            double particles_per_sec = static_cast<double>(global_total_particles) / total_time;
+            printf("\tProcessing Rate     : %.2e particles/s (total particles/total time)\n", particles_per_sec);
+        }
+        printf("--- Overall Performance ---\n");
+        printf("\tRunning Average Sustained : %f TFLOP/s (over %d steps)\n", avg_ss_tflops, step_counter);
+        printf("-----------------------------------------\n");
     }
 
 }

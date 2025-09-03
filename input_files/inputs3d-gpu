@@ -1,0 +1,64 @@
+#################################
+####### GENERAL PARAMETERS ######
+#################################
+max_step = 100
+amr.n_cell = 256 256 128 # 32 32 16 # 256 128 128
+amr.max_grid_size = 64
+amr.blocking_factor = 8
+amr.max_level = 0
+geometry.dims = 3
+geometry.prob_lo = -20.e-6   -20.e-6   -20.e-6    # physical domain
+geometry.prob_hi =  20.e-6    20.e-6    20.e-6
+
+#################################
+####### Boundary condition ######
+#################################
+boundary.field_lo = periodic periodic periodic
+boundary.field_hi = periodic periodic periodic
+
+#################################
+############ NUMERICS ###########
+#################################
+warpx.serialize_initial_conditions = 0
+warpx.verbose = 1
+warpx.cfl = 1.0
+
+# Order of particle shape factors
+algo.particle_shape = 3
+algo.current_deposition =  direct # esirkepov  direct
+algo.maxwell_solver = yee # psatd ckc yee
+algo.particle_pusher = boris # boris vay
+particles.do_tiling = false
+particles.tile_size= 2 2 4
+
+warpx.grid_type= collocated # staggered  collocated
+
+warpx.sort_intervals = 10
+warpx.do_shared_mem_current_deposition = 0
+
+#################################
+############ PLASMA #############
+#################################
+particles.species_names = electrons
+
+electrons.species_type = electron
+electrons.injection_style = "NUniformPerCell"
+electrons.num_particles_per_cell_each_dim = 8 8 8 # 64 32 32
+electrons.profile = constant
+electrons.density = 1.e25  # number of electrons per m^3
+electrons.momentum_distribution_type = "gaussian"
+electrons.ux_th  = 0.01 # uth the std of the (unitless) momentum
+electrons.uy_th  = 0.01 # uth the std of the (unitless) momentum
+electrons.uz_th  = 0.01 # uth the std of the (unitless) momentum
+
+# Diagnostics
+diagnostics.diags_names = diag1 chk
+diagnostics.enable = 0
+diag1.intervals = 4
+diag1.diag_type = Full
+diag1.electrons.variables = x y z ux uy uz w
+diag1.fields_to_plot = Bx By Bz Ex Ey Ez jx jy jz rho
+
+chk.intervals = 6
+chk.diag_type = Full
+chk.format = checkpoint

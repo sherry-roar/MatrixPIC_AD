@@ -5204,28 +5204,28 @@ void doDepositionShapeN_sve_rhocell_order3_sort (const GetParticlePosition<PIdx>
 }
 
 template <int depos_order>
- void doDepositionShapeN_org_sp_GPMA_order3(const GetParticlePosition<PIdx> &GetPosition,
-                                           const amrex::ParticleReal *const wp,
-                                           const amrex::ParticleReal *const uxp,
-                                           const amrex::ParticleReal *const uyp,
-                                           const amrex::ParticleReal *const uzp,
-                                           const int *ion_lev,
-                                           amrex::FArrayBox &jx_fab,
-                                           amrex::FArrayBox &jy_fab,
-                                           amrex::FArrayBox &jz_fab,
-                                           long np_to_deposit,
-                                           amrex::Real relative_time,
-                                           const amrex::XDim3 &dinv,
-                                           const amrex::XDim3 &xyzmin,
-                                           amrex::Dim3 lo,
-                                           amrex::Dim3 hi,
-                                           amrex::Dim3 len,
-                                           amrex::Real q,
-                                           WarpXParticleContainer::ParticleTileType &ptile, const amrex::Box &box,
-                                           [[maybe_unused]] int n_rz_azimuthal_modes,
-                                           std::vector<uint64_t>& inner_timer
-                                        )
- {
+void doDepositionShapeN_org_sp_GPMA_order3(const GetParticlePosition<PIdx> &GetPosition,
+                                        const amrex::ParticleReal *const wp,
+                                        const amrex::ParticleReal *const uxp,
+                                        const amrex::ParticleReal *const uyp,
+                                        const amrex::ParticleReal *const uzp,
+                                        const int *ion_lev,
+                                        amrex::FArrayBox &jx_fab,
+                                        amrex::FArrayBox &jy_fab,
+                                        amrex::FArrayBox &jz_fab,
+                                        long np_to_deposit,
+                                        amrex::Real relative_time,
+                                        const amrex::XDim3 &dinv,
+                                        const amrex::XDim3 &xyzmin,
+                                        amrex::Dim3 lo,
+                                        amrex::Dim3 hi,
+                                        amrex::Dim3 len,
+                                        amrex::Real q,
+                                        WarpXParticleContainer::ParticleTileType &ptile, const amrex::Box &box,
+                                        [[maybe_unused]] int n_rz_azimuthal_modes,
+                                        std::vector<uint64_t>& inner_timer
+                                    )
+{
     using namespace amrex::literals;
     #ifdef BREAKDWON
     using namespace std::chrono;
@@ -5272,9 +5272,9 @@ template <int depos_order>
 
     std::vector<amrex::Real> wqx(np_to_deposit, 0.0_rt), wqy(np_to_deposit, 0.0_rt), wqz(np_to_deposit, 0.0_rt);
     
-    std::vector<amrex::Real> sx_m(2 * np_to_deposit, 0);
-    std::vector<amrex::Real> sy_m(2 * np_to_deposit, 0);
-    std::vector<amrex::Real> sz_m(2 * np_to_deposit, 0);
+    std::vector<amrex::Real> sx_m(4 * np_to_deposit, 0);
+    std::vector<amrex::Real> sy_m(4 * np_to_deposit, 0);
+    std::vector<amrex::Real> sz_m(4 * np_to_deposit, 0);
     alignas(64) std::vector<int> newbin(np_to_deposit,-1);
     long nnx = len.x;
     long nny = len.y;
@@ -5333,7 +5333,7 @@ template <int depos_order>
 
         for (int ix = 0; ix <= depos_order; ix++)
         {
-            sx_m[ip * 2 + ix] = ((jx_type[0] == NODE) ? amrex::Real(sx_node[ix]) : amrex::Real(sx_cell[ix]));
+            sx_m[ip * 4 + ix] = ((jx_type[0] == NODE) ? amrex::Real(sx_node[ix]) : amrex::Real(sx_cell[ix]));
         }
 
         int jm = ((jz_type[0] == NODE) ? j_node : j_cell);
@@ -5355,7 +5355,7 @@ template <int depos_order>
         }
         for (int iy = 0; iy <= depos_order; iy++)
         {
-            sy_m[ip * 2 + iy] = ((jx_type[1] == NODE) ? amrex::Real(sy_node[iy]) : amrex::Real(sy_cell[iy]));
+            sy_m[ip * 4 + iy] = ((jx_type[1] == NODE) ? amrex::Real(sy_node[iy]) : amrex::Real(sy_cell[iy]));
         }
         int km = ((jx_type[1] == NODE) ? k_node : k_cell);
 
@@ -5377,7 +5377,7 @@ template <int depos_order>
         }
         for (int iz = 0; iz <= depos_order; iz++)
         {
-            sz_m[ip * 2 + iz] = ((jx_type[zdir] == NODE) ? amrex::Real(sz_node[iz]) : amrex::Real(sz_cell[iz]));
+            sz_m[ip * 4 + iz] = ((jx_type[zdir] == NODE) ? amrex::Real(sz_node[iz]) : amrex::Real(sz_cell[iz]));
         }
         int lm = ((jz_type[zdir] == NODE) ? l_node : l_cell);
         newbin[ip]=jm+km*nnx+lm*nnxny;
@@ -5405,7 +5405,7 @@ template <int depos_order>
     #endif
 
     // The order of deposition is 3 for this version.
-    const int depos_order = 3; 
+    // const int depos_order = 3; 
 
     // Loop over all bins in the tile
     #pragma omp unroll 

@@ -1,0 +1,1962 @@
+#################################
+####### GENERAL PARAMETERS ######
+#################################
+max_step = 100
+amr.n_cell = 256 256 128 # 32 32 16 # 256 128 128
+amr.max_grid_size = 64
+amr.blocking_factor = 8
+amr.max_level = 0
+geometry.dims = 3
+geometry.prob_lo = -20.e-6   -20.e-6   -20.e-6    # physical domain
+geometry.prob_hi =  20.e-6    20.e-6    20.e-6
+
+#################################
+####### Boundary condition ######
+#################################
+boundary.field_lo = periodic periodic periodic
+boundary.field_hi = periodic periodic periodic
+
+#################################
+############ NUMERICS ###########
+#################################
+warpx.serialize_initial_conditions = 0
+warpx.verbose = 1
+warpx.cfl = 1.0
+
+# Order of particle shape factors
+algo.particle_shape = 3
+algo.current_deposition =  direct # esirkepov  direct
+algo.maxwell_solver = yee # psatd ckc yee
+algo.particle_pusher = boris # boris vay
+particles.do_tiling = false
+particles.tile_size= 2 2 4
+
+warpx.grid_type= collocated # staggered  collocated
+
+warpx.sort_intervals = 10
+warpx.do_shared_mem_current_deposition = 0
+
+#################################
+############ PLASMA #############
+#################################
+particles.species_names = electrons
+
+electrons.species_type = electron
+electrons.injection_style = "NUniformPerCell"
+electrons.num_particles_per_cell_each_dim = 8 8 8 # 64 32 32
+electrons.profile = constant
+electrons.density = 1.e25  # number of electrons per m^3
+electrons.momentum_distribution_type = "gaussian"
+electrons.ux_th  = 0.01 # uth the std of the (unitless) momentum
+electrons.uy_th  = 0.01 # uth the std of the (unitless) momentum
+electrons.uz_th  = 0.01 # uth the std of the (unitless) momentum
+
+# Diagnostics
+diagnostics.diags_names = diag1 chk
+diagnostics.enable = 0
+diag1.intervals = 4
+diag1.diag_type = Full
+diag1.electrons.variables = x y z ux uy uz w
+diag1.fields_to_plot = Bx By Bz Ex Ey Ez jx jy jz rho
+
+chk.intervals = 6
+chk.diag_type = Full
+chk.format = checkpoint
+Initializing AMReX (24.07)...
+MPI initialized with 8 MPI processes
+MPI initialized with thread support level 0
+Initializing CUDA...
+CUDA initialized with 8 devices.
+AMReX (24.07) initialized
+WarpX (Unknown)
+
+    __        __             __  __
+    \ \      / /_ _ _ __ _ __\ \/ /
+     \ \ /\ / / _` | '__| '_ \\  /
+      \ V  V / (_| | |  | |_) /  \
+       \_/\_/ \__,_|_|  | .__/_/\_\
+                        |_|
+
+Level 0: dt = 3.474625992e-16 ; dx = 1.5625e-07 ; dy = 1.5625e-07 ; dz = 3.125e-07
+
+Grids Summary:
+  Level 0   32 grids  8388608 cells  100 % of domain
+            smallest grid: 64 x 64 x 64  biggest grid: 64 x 64 x 64
+
+-------------------------------------------------------------------------------
+--------------------------- MAIN EM PIC PARAMETERS ----------------------------
+-------------------------------------------------------------------------------
+Precision:            | DOUBLE
+Particle precision:   | DOUBLE
+Geometry:             | 3D (XYZ)
+Operation mode:       | Electromagnetic
+                      | - vacuum
+-------------------------------------------------------------------------------
+Current Deposition:   | direct 
+Particle Pusher:      | Boris 
+Charge Deposition:    | standard 
+Field Gathering:      | energy-conserving 
+Particle Shape Factor:| 3
+-------------------------------------------------------------------------------
+Maxwell Solver:       | Yee 
+                      | - collocated grid 
+-------------------------------------------------------------------------------
+For full input parameters, see the file: warpx_used_inputs
+
+STEP 1 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 5.962491 s
+	Kernel Time (Avg)         : 5.941585 s
+	Peak Performance     : 2.414550 TFLOP/s
+	Sustained Performance     : 2.414550 TFLOP/s
+	Processing Rate     : 7.23e+08 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 2.414550 TFLOP/s (over 1 steps)
+-----------------------------------------
+
+	FOM 648323021.917900, AVG FOM 648323021.917900, PEAK FOM 648323021.917900
+
+Unused ParmParse Variables:
+  [TOP]::chk.diag_type(nvals = 1)  :: [Full]
+  [TOP]::chk.intervals(nvals = 1)  :: [6]
+  [TOP]::diag1.diag_type(nvals = 1)  :: [Full]
+  [TOP]::diag1.electrons.variables(nvals = 7)  :: [x, y, z, ux, uy, uz, w]
+  [TOP]::diag1.fields_to_plot(nvals = 10)  :: [Bx, By, Bz, Ex, Ey, Ez, jx, jy, jz, rho]
+  [TOP]::diag1.intervals(nvals = 1)  :: [4]
+
+
+**** WARNINGS ******************************************************************
+* GLOBAL warning list  after  [ FIRST STEP ]
+*
+* No recorded warnings.
+********************************************************************************
+
+STEP 1 ends. TIME = 3.474625992e-16 DT = 3.474625992e-16
+Evolve time = 7.36202029 s; This step = 7.36202029 s; Avg. per step = 7.36202029 s
+
+STEP 2 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 5.859173 s
+	Kernel Time (Avg)         : 5.837247 s
+	Peak Performance     : 2.457127 TFLOP/s
+	Sustained Performance     : 2.457127 TFLOP/s
+	Processing Rate     : 7.36e+08 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 2.435838 TFLOP/s (over 2 steps)
+-----------------------------------------
+
+	FOM 659755203.817303, AVG FOM 654039112.867601, PEAK FOM 659755203.817303
+STEP 2 ends. TIME = 6.949251983e-16 DT = 3.474625992e-16
+Evolve time = 13.62606534 s; This step = 6.264045047 s; Avg. per step = 6.813032668 s
+
+STEP 3 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 5.860949 s
+	Kernel Time (Avg)         : 5.837582 s
+	Peak Performance     : 2.457127 TFLOP/s
+	Sustained Performance     : 2.456382 TFLOP/s
+	Processing Rate     : 7.36e+08 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 2.442686 TFLOP/s (over 3 steps)
+-----------------------------------------
+
+	FOM 659555318.640705, AVG FOM 655877848.125303, PEAK FOM 659755203.817303
+STEP 3 ends. TIME = 1.042387797e-15 DT = 3.474625992e-16
+Evolve time = 19.88350497 s; This step = 6.25743963 s; Avg. per step = 6.627834989 s
+
+STEP 4 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 5.851375 s
+	Kernel Time (Avg)         : 5.830541 s
+	Peak Performance     : 2.460401 TFLOP/s
+	Sustained Performance     : 2.460401 TFLOP/s
+	Processing Rate     : 7.37e+08 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 2.447115 TFLOP/s (over 4 steps)
+-----------------------------------------
+
+	FOM 660634456.159847, AVG FOM 657067000.133939, PEAK FOM 660634456.159847
+STEP 4 ends. TIME = 1.389850397e-15 DT = 3.474625992e-16
+Evolve time = 26.1167133 s; This step = 6.233208331 s; Avg. per step = 6.529178325 s
+
+STEP 5 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 5.827865 s
+	Kernel Time (Avg)         : 5.808752 s
+	Peak Performance     : 2.470327 TFLOP/s
+	Sustained Performance     : 2.470327 TFLOP/s
+	Processing Rate     : 7.39e+08 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 2.451757 TFLOP/s (over 5 steps)
+-----------------------------------------
+
+	FOM 663299519.118436, AVG FOM 658313503.930838, PEAK FOM 663299519.118436
+STEP 5 ends. TIME = 1.737312996e-15 DT = 3.474625992e-16
+Evolve time = 32.33742455 s; This step = 6.220711255 s; Avg. per step = 6.467484911 s
+
+STEP 6 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 5.789006 s
+	Kernel Time (Avg)         : 5.770277 s
+	Peak Performance     : 2.486909 TFLOP/s
+	Sustained Performance     : 2.486909 TFLOP/s
+	Processing Rate     : 7.44e+08 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 2.457616 TFLOP/s (over 6 steps)
+-----------------------------------------
+
+	FOM 667751886.240654, AVG FOM 659886567.649141, PEAK FOM 667751886.240654
+STEP 6 ends. TIME = 2.084775595e-15 DT = 3.474625992e-16
+Evolve time = 38.51790812 s; This step = 6.18048357 s; Avg. per step = 6.419651354 s
+
+STEP 7 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 5.747506 s
+	Kernel Time (Avg)         : 5.725266 s
+	Peak Performance     : 2.504865 TFLOP/s
+	Sustained Performance     : 2.504865 TFLOP/s
+	Processing Rate     : 7.50e+08 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 2.464366 TFLOP/s (over 7 steps)
+-----------------------------------------
+
+	FOM 672573385.568477, AVG FOM 661698970.209046, PEAK FOM 672573385.568477
+STEP 7 ends. TIME = 2.432238194e-15 DT = 3.474625992e-16
+Evolve time = 44.63235038 s; This step = 6.114442257 s; Avg. per step = 6.376050054 s
+
+STEP 8 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 5.703263 s
+	Kernel Time (Avg)         : 5.681442 s
+	Peak Performance     : 2.524297 TFLOP/s
+	Sustained Performance     : 2.524297 TFLOP/s
+	Processing Rate     : 7.56e+08 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 2.471857 TFLOP/s (over 8 steps)
+-----------------------------------------
+
+	FOM 677790903.123450, AVG FOM 663710461.823347, PEAK FOM 677790903.123450
+STEP 8 ends. TIME = 2.779700793e-15 DT = 3.474625992e-16
+Evolve time = 50.72215921 s; This step = 6.089808831 s; Avg. per step = 6.340269901 s
+
+STEP 9 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 5.657934 s
+	Kernel Time (Avg)         : 5.635899 s
+	Peak Performance     : 2.544521 TFLOP/s
+	Sustained Performance     : 2.544521 TFLOP/s
+	Processing Rate     : 7.62e+08 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 2.479931 TFLOP/s (over 9 steps)
+-----------------------------------------
+
+	FOM 683221154.160773, AVG FOM 665878316.527505, PEAK FOM 683221154.160773
+STEP 9 ends. TIME = 3.127163392e-15 DT = 3.474625992e-16
+Evolve time = 56.77689647 s; This step = 6.054737262 s; Avg. per step = 6.308544053 s
+
+STEP 10 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 5.611816 s
+	Kernel Time (Avg)         : 5.592954 s
+	Peak Performance     : 2.565432 TFLOP/s
+	Sustained Performance     : 2.565432 TFLOP/s
+	Processing Rate     : 7.68e+08 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 2.488481 TFLOP/s (over 10 steps)
+-----------------------------------------
+
+	FOM 688835818.874499, AVG FOM 668174066.762205, PEAK FOM 688835818.874499
+--- INFO    : re-sorting particles
+STEP 10 ends. TIME = 3.474625992e-15 DT = 3.474625992e-16
+Evolve time = 63.11965811 s; This step = 6.342761634 s; Avg. per step = 6.311965811 s
+
+STEP 11 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.623485 s
+	Kernel Time (Avg)         : 0.622683 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 23.090731 TFLOP/s
+	Processing Rate     : 6.90e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 4.361413 TFLOP/s (over 11 steps)
+-----------------------------------------
+
+	FOM 6200018089.281007, AVG FOM 1171068977.900278, PEAK FOM 6200018089.281007
+STEP 11 ends. TIME = 3.822088591e-15 DT = 3.474625992e-16
+Evolve time = 64.17541045 s; This step = 1.055752345 s; Avg. per step = 5.834128223 s
+
+STEP 12 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.645279 s
+	Kernel Time (Avg)         : 0.644695 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 22.310856 TFLOP/s
+	Processing Rate     : 6.66e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 5.857200 TFLOP/s (over 12 steps)
+-----------------------------------------
+
+	FOM 5990616243.789851, AVG FOM 1572697916.724409, PEAK FOM 6200018089.281007
+STEP 12 ends. TIME = 4.16955119e-15 DT = 3.474625992e-16
+Evolve time = 65.24923702 s; This step = 1.073826565 s; Avg. per step = 5.437436418 s
+
+STEP 13 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.666513 s
+	Kernel Time (Avg)         : 0.666102 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 21.600079 TFLOP/s
+	Processing Rate     : 6.45e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 7.068191 TFLOP/s (over 13 steps)
+-----------------------------------------
+
+	FOM 5799767949.860232, AVG FOM 1897857150.042549, PEAK FOM 6200018089.281007
+STEP 13 ends. TIME = 4.517013789e-15 DT = 3.474625992e-16
+Evolve time = 66.35611187 s; This step = 1.106874858 s; Avg. per step = 5.104316298 s
+
+STEP 14 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.687477 s
+	Kernel Time (Avg)         : 0.686823 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 20.941398 TFLOP/s
+	Processing Rate     : 6.25e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 8.059134 TFLOP/s (over 14 steps)
+-----------------------------------------
+
+	FOM 5622907670.966111, AVG FOM 2163932187.251375, PEAK FOM 6200018089.281007
+STEP 14 ends. TIME = 4.864476388e-15 DT = 3.474625992e-16
+Evolve time = 67.49179776 s; This step = 1.135685886 s; Avg. per step = 4.820842697 s
+
+STEP 15 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.707759 s
+	Kernel Time (Avg)         : 0.707183 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 20.341276 TFLOP/s
+	Processing Rate     : 6.07e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 8.877943 TFLOP/s (over 15 steps)
+-----------------------------------------
+
+	FOM 5461770716.436420, AVG FOM 2383788089.197045, PEAK FOM 6200018089.281007
+STEP 15 ends. TIME = 5.211938987e-15 DT = 3.474625992e-16
+Evolve time = 68.6582342 s; This step = 1.166436434 s; Avg. per step = 4.577215613 s
+
+STEP 16 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.727780 s
+	Kernel Time (Avg)         : 0.727285 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 19.781699 TFLOP/s
+	Processing Rate     : 5.91e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 9.559428 TFLOP/s (over 16 steps)
+-----------------------------------------
+
+	FOM 5311520448.235279, AVG FOM 2566771361.636934, PEAK FOM 6200018089.281007
+STEP 16 ends. TIME = 5.559401587e-15 DT = 3.474625992e-16
+Evolve time = 69.8477028 s; This step = 1.189468609 s; Avg. per step = 4.365481425 s
+
+STEP 17 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.747581 s
+	Kernel Time (Avg)         : 0.747239 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 19.257758 TFLOP/s
+	Processing Rate     : 5.75e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 10.129918 TFLOP/s (over 17 steps)
+-----------------------------------------
+
+	FOM 5170838906.354143, AVG FOM 2719951805.443829, PEAK FOM 6200018089.281007
+STEP 17 ends. TIME = 5.906864186e-15 DT = 3.474625992e-16
+Evolve time = 71.06310844 s; This step = 1.215405631 s; Avg. per step = 4.180182849 s
+
+STEP 18 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.767543 s
+	Kernel Time (Avg)         : 0.767110 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 18.756908 TFLOP/s
+	Processing Rate     : 5.60e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 10.609195 TFLOP/s (over 18 steps)
+-----------------------------------------
+
+	FOM 5036357091.558750, AVG FOM 2848640988.005769, PEAK FOM 6200018089.281007
+STEP 18 ends. TIME = 6.254326785e-15 DT = 3.474625992e-16
+Evolve time = 72.30592622 s; This step = 1.242817787 s; Avg. per step = 4.016995901 s
+
+STEP 19 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.787335 s
+	Kernel Time (Avg)         : 0.786901 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 18.285401 TFLOP/s
+	Processing Rate     : 5.46e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 11.013206 TFLOP/s (over 19 steps)
+-----------------------------------------
+
+	FOM 4909754444.140668, AVG FOM 2957120643.591816, PEAK FOM 6200018089.281007
+STEP 19 ends. TIME = 6.601789384e-15 DT = 3.474625992e-16
+Evolve time = 73.56335988 s; This step = 1.257433658 s; Avg. per step = 3.871755783 s
+
+STEP 20 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.807479 s
+	Kernel Time (Avg)         : 0.806865 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 17.829240 TFLOP/s
+	Processing Rate     : 5.32e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 11.354008 TFLOP/s (over 20 steps)
+-----------------------------------------
+
+	FOM 4787272036.660585, AVG FOM 3048628213.245255, PEAK FOM 6200018089.281007
+--- INFO    : re-sorting particles
+STEP 20 ends. TIME = 6.949251983e-15 DT = 3.474625992e-16
+Evolve time = 75.04288499 s; This step = 1.479525105 s; Avg. per step = 3.752144249 s
+
+STEP 21 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.624894 s
+	Kernel Time (Avg)         : 0.624271 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 23.038670 TFLOP/s
+	Processing Rate     : 6.88e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 11.910420 TFLOP/s (over 21 steps)
+-----------------------------------------
+
+	FOM 6186039274.413584, AVG FOM 3198028739.967556, PEAK FOM 6200018089.281007
+STEP 21 ends. TIME = 7.296714582e-15 DT = 3.474625992e-16
+Evolve time = 76.07855413 s; This step = 1.035669142 s; Avg. per step = 3.622788292 s
+
+STEP 22 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.644318 s
+	Kernel Time (Avg)         : 0.643828 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 22.344122 TFLOP/s
+	Processing Rate     : 6.67e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 12.384680 TFLOP/s (over 22 steps)
+-----------------------------------------
+
+	FOM 5999548598.369180, AVG FOM 3325370551.713084, PEAK FOM 6200018089.281007
+STEP 22 ends. TIME = 7.644177182e-15 DT = 3.474625992e-16
+Evolve time = 77.15264604 s; This step = 1.074091914 s; Avg. per step = 3.506938456 s
+
+STEP 23 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.663418 s
+	Kernel Time (Avg)         : 0.662972 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 21.700858 TFLOP/s
+	Processing Rate     : 6.48e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 12.789731 TFLOP/s (over 23 steps)
+-----------------------------------------
+
+	FOM 5826827731.942853, AVG FOM 3434129559.549161, PEAK FOM 6200018089.281007
+STEP 23 ends. TIME = 7.991639781e-15 DT = 3.474625992e-16
+Evolve time = 78.25761444 s; This step = 1.104968403 s; Avg. per step = 3.402504976 s
+
+STEP 24 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.681934 s
+	Kernel Time (Avg)         : 0.681494 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 21.111619 TFLOP/s
+	Processing Rate     : 6.30e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 13.136476 TFLOP/s (over 24 steps)
+-----------------------------------------
+
+	FOM 5668613094.004279, AVG FOM 3527233040.151457, PEAK FOM 6200018089.281007
+STEP 24 ends. TIME = 8.33910238e-15 DT = 3.474625992e-16
+Evolve time = 79.37899303 s; This step = 1.121378587 s; Avg. per step = 3.307458043 s
+
+STEP 25 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.700357 s
+	Kernel Time (Avg)         : 0.699967 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 20.556272 TFLOP/s
+	Processing Rate     : 6.14e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 13.433268 TFLOP/s (over 25 steps)
+-----------------------------------------
+
+	FOM 5519498739.337317, AVG FOM 3606923668.118892, PEAK FOM 6200018089.281007
+STEP 25 ends. TIME = 8.686564979e-15 DT = 3.474625992e-16
+Evolve time = 80.5345434 s; This step = 1.155550371 s; Avg. per step = 3.221381736 s
+
+STEP 26 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.718577 s
+	Kernel Time (Avg)         : 0.718204 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 20.035051 TFLOP/s
+	Processing Rate     : 5.98e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 13.687183 TFLOP/s (over 26 steps)
+-----------------------------------------
+
+	FOM 5379547175.019201, AVG FOM 3675101495.307365, PEAK FOM 6200018089.281007
+STEP 26 ends. TIME = 9.034027578e-15 DT = 3.474625992e-16
+Evolve time = 81.70791458 s; This step = 1.17337118 s; Avg. per step = 3.142612099 s
+
+STEP 27 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.737075 s
+	Kernel Time (Avg)         : 0.736660 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 19.532253 TFLOP/s
+	Processing Rate     : 5.83e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 13.903667 TFLOP/s (over 27 steps)
+-----------------------------------------
+
+	FOM 5244542518.380938, AVG FOM 3733228940.606386, PEAK FOM 6200018089.281007
+STEP 27 ends. TIME = 9.381490177e-15 DT = 3.474625992e-16
+Evolve time = 82.9012173 s; This step = 1.193302722 s; Avg. per step = 3.070415456 s
+
+STEP 28 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.755870 s
+	Kernel Time (Avg)         : 0.755062 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 19.046570 TFLOP/s
+	Processing Rate     : 5.69e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 14.087342 TFLOP/s (over 28 steps)
+-----------------------------------------
+
+	FOM 5114133509.381252, AVG FOM 3782546960.919774, PEAK FOM 6200018089.281007
+STEP 28 ends. TIME = 9.728952777e-15 DT = 3.474625992e-16
+Evolve time = 84.12152373 s; This step = 1.220306421 s; Avg. per step = 3.004340133 s
+
+STEP 29 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.774054 s
+	Kernel Time (Avg)         : 0.773632 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 18.599122 TFLOP/s
+	Processing Rate     : 5.55e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 14.242921 TFLOP/s (over 29 steps)
+-----------------------------------------
+
+	FOM 4993990654.802718, AVG FOM 3824320881.398497, PEAK FOM 6200018089.281007
+STEP 29 ends. TIME = 1.007641538e-14 DT = 3.474625992e-16
+Evolve time = 85.36232679 s; This step = 1.240803065 s; Avg. per step = 2.94352851 s
+
+STEP 30 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.792779 s
+	Kernel Time (Avg)         : 0.792284 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 18.159829 TFLOP/s
+	Processing Rate     : 5.42e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 14.373484 TFLOP/s (over 30 steps)
+-----------------------------------------
+
+	FOM 4876037439.212800, AVG FOM 3859378099.992307, PEAK FOM 6200018089.281007
+--- INFO    : re-sorting particles
+STEP 30 ends. TIME = 1.042387797e-14 DT = 3.474625992e-16
+Evolve time = 86.80243195 s; This step = 1.440105164 s; Avg. per step = 2.893414398 s
+
+STEP 31 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.625766 s
+	Kernel Time (Avg)         : 0.625430 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 23.006576 TFLOP/s
+	Processing Rate     : 6.87e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 14.651971 TFLOP/s (over 31 steps)
+-----------------------------------------
+
+	FOM 6177421932.588305, AVG FOM 3934153707.495403, PEAK FOM 6200018089.281007
+STEP 31 ends. TIME = 1.077134057e-14 DT = 3.474625992e-16
+Evolve time = 87.84815028 s; This step = 1.045718323 s; Avg. per step = 2.833811299 s
+
+STEP 32 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.644415 s
+	Kernel Time (Avg)         : 0.644156 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 22.340766 TFLOP/s
+	Processing Rate     : 6.67e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 14.892246 TFLOP/s (over 32 steps)
+-----------------------------------------
+
+	FOM 5998647383.969738, AVG FOM 3998669134.885226, PEAK FOM 6200018089.281007
+STEP 32 ends. TIME = 1.111880317e-14 DT = 3.474625992e-16
+Evolve time = 88.92762959 s; This step = 1.079479314 s; Avg. per step = 2.778988425 s
+
+STEP 33 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.662863 s
+	Kernel Time (Avg)         : 0.662597 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 21.719017 TFLOP/s
+	Processing Rate     : 6.48e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 15.099118 TFLOP/s (over 33 steps)
+-----------------------------------------
+
+	FOM 5831703562.803775, AVG FOM 4054215632.700940, PEAK FOM 6200018089.281007
+STEP 33 ends. TIME = 1.146626577e-14 DT = 3.474625992e-16
+Evolve time = 90.03290086 s; This step = 1.105271266 s; Avg. per step = 2.728269723 s
+
+STEP 34 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.680988 s
+	Kernel Time (Avg)         : 0.680715 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 21.140941 TFLOP/s
+	Processing Rate     : 6.31e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 15.276818 TFLOP/s (over 34 steps)
+-----------------------------------------
+
+	FOM 5676486185.353734, AVG FOM 4101929472.484845, PEAK FOM 6200018089.281007
+STEP 34 ends. TIME = 1.181372837e-14 DT = 3.474625992e-16
+Evolve time = 91.16161948 s; This step = 1.128718619 s; Avg. per step = 2.681224102 s
+
+STEP 35 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.698913 s
+	Kernel Time (Avg)         : 0.698666 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 20.598743 TFLOP/s
+	Processing Rate     : 6.15e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 15.428873 TFLOP/s (over 35 steps)
+-----------------------------------------
+
+	FOM 5530902281.244378, AVG FOM 4142757267.020832, PEAK FOM 6200018089.281007
+STEP 35 ends. TIME = 1.216119097e-14 DT = 3.474625992e-16
+Evolve time = 92.30954865 s; This step = 1.14792917 s; Avg. per step = 2.637415676 s
+
+STEP 36 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.716926 s
+	Kernel Time (Avg)         : 0.716645 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 20.081194 TFLOP/s
+	Processing Rate     : 5.99e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 15.558104 TFLOP/s (over 36 steps)
+-----------------------------------------
+
+	FOM 5391936845.121767, AVG FOM 4177456699.745858, PEAK FOM 6200018089.281007
+STEP 36 ends. TIME = 1.250865357e-14 DT = 3.474625992e-16
+Evolve time = 93.47922152 s; This step = 1.169672877 s; Avg. per step = 2.596645042 s
+
+STEP 37 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.734939 s
+	Kernel Time (Avg)         : 0.734615 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 19.589011 TFLOP/s
+	Processing Rate     : 5.85e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 15.667048 TFLOP/s (over 37 steps)
+-----------------------------------------
+
+	FOM 5259782358.927851, AVG FOM 4206708744.588615, PEAK FOM 6200018089.281007
+STEP 37 ends. TIME = 1.285611617e-14 DT = 3.474625992e-16
+Evolve time = 94.67260468 s; This step = 1.193383159 s; Avg. per step = 2.558719045 s
+
+STEP 38 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.753028 s
+	Kernel Time (Avg)         : 0.752663 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 19.118454 TFLOP/s
+	Processing Rate     : 5.71e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 15.757874 TFLOP/s (over 38 steps)
+-----------------------------------------
+
+	FOM 5133434700.706951, AVG FOM 4231096269.749623, PEAK FOM 6200018089.281007
+STEP 38 ends. TIME = 1.320357877e-14 DT = 3.474625992e-16
+Evolve time = 95.88946459 s; This step = 1.216859912 s; Avg. per step = 2.523406963 s
+
+STEP 39 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.771493 s
+	Kernel Time (Avg)         : 0.770953 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 18.660876 TFLOP/s
+	Processing Rate     : 5.57e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 15.832310 TFLOP/s (over 39 steps)
+-----------------------------------------
+
+	FOM 5010571960.343864, AVG FOM 4251082825.918706, PEAK FOM 6200018089.281007
+STEP 39 ends. TIME = 1.355104137e-14 DT = 3.474625992e-16
+Evolve time = 97.13993568 s; This step = 1.250471081 s; Avg. per step = 2.490767581 s
+
+STEP 40 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.789872 s
+	Kernel Time (Avg)         : 0.789369 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 18.226663 TFLOP/s
+	Processing Rate     : 5.44e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 15.892169 TFLOP/s (over 40 steps)
+-----------------------------------------
+
+	FOM 4893982912.607717, AVG FOM 4267155328.085932, PEAK FOM 6200018089.281007
+--- INFO    : re-sorting particles
+STEP 40 ends. TIME = 1.389850397e-14 DT = 3.474625992e-16
+Evolve time = 98.57086583 s; This step = 1.430930157 s; Avg. per step = 2.464271646 s
+
+STEP 41 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.627362 s
+	Kernel Time (Avg)         : 0.626842 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 22.948055 TFLOP/s
+	Processing Rate     : 6.85e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 16.064264 TFLOP/s (over 41 steps)
+-----------------------------------------
+
+	FOM 6161708502.535900, AVG FOM 4313363942.096907, PEAK FOM 6200018089.281007
+STEP 41 ends. TIME = 1.424596657e-14 DT = 3.474625992e-16
+Evolve time = 99.61730068 s; This step = 1.046434845 s; Avg. per step = 2.42969026 s
+
+STEP 42 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.646171 s
+	Kernel Time (Avg)         : 0.645459 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 22.280074 TFLOP/s
+	Processing Rate     : 6.65e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 16.212259 TFLOP/s (over 42 steps)
+-----------------------------------------
+
+	FOM 5982351293.305477, AVG FOM 4353101736.173302, PEAK FOM 6200018089.281007
+STEP 42 ends. TIME = 1.459342916e-14 DT = 3.474625992e-16
+Evolve time = 100.6919721 s; This step = 1.074671462 s; Avg. per step = 2.397427908 s
+
+STEP 43 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.664241 s
+	Kernel Time (Avg)         : 0.663643 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 21.673953 TFLOP/s
+	Processing Rate     : 6.47e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 16.339276 TFLOP/s (over 43 steps)
+-----------------------------------------
+
+	FOM 5819603447.851628, AVG FOM 4387206427.142565, PEAK FOM 6200018089.281007
+STEP 43 ends. TIME = 1.494089176e-14 DT = 3.474625992e-16
+Evolve time = 101.7935646 s; This step = 1.101592437 s; Avg. per step = 2.367292199 s
+
+STEP 44 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.682161 s
+	Kernel Time (Avg)         : 0.681577 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 21.104585 TFLOP/s
+	Processing Rate     : 6.30e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 16.447578 TFLOP/s (over 44 steps)
+-----------------------------------------
+
+	FOM 5666724487.697411, AVG FOM 4416286383.064266, PEAK FOM 6200018089.281007
+STEP 44 ends. TIME = 1.528835436e-14 DT = 3.474625992e-16
+Evolve time = 102.9233471 s; This step = 1.129782508 s; Avg. per step = 2.339166979 s
+
+STEP 45 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.700007 s
+	Kernel Time (Avg)         : 0.699373 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 20.566563 TFLOP/s
+	Processing Rate     : 6.14e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 16.539111 TFLOP/s (over 45 steps)
+-----------------------------------------
+
+	FOM 5522261750.561835, AVG FOM 4440863613.453100, PEAK FOM 6200018089.281007
+STEP 45 ends. TIME = 1.563581696e-14 DT = 3.474625992e-16
+Evolve time = 104.0799814 s; This step = 1.15663431 s; Avg. per step = 2.312888475 s
+
+STEP 46 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.717812 s
+	Kernel Time (Avg)         : 0.717204 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 20.056415 TFLOP/s
+	Processing Rate     : 5.99e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 16.615574 TFLOP/s (over 46 steps)
+-----------------------------------------
+
+	FOM 5385283598.462780, AVG FOM 4461394482.692441, PEAK FOM 6200018089.281007
+STEP 46 ends. TIME = 1.598327956e-14 DT = 3.474625992e-16
+Evolve time = 105.2554556 s; This step = 1.175474215 s; Avg. per step = 2.288162078 s
+
+STEP 47 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.735550 s
+	Kernel Time (Avg)         : 0.734974 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 19.572735 TFLOP/s
+	Processing Rate     : 5.84e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 16.678492 TFLOP/s (over 47 steps)
+-----------------------------------------
+
+	FOM 5255412211.126525, AVG FOM 4478288476.914443, PEAK FOM 6200018089.281007
+STEP 47 ends. TIME = 1.633074216e-14 DT = 3.474625992e-16
+Evolve time = 106.4489059 s; This step = 1.193450287 s; Avg. per step = 2.264870338 s
+
+STEP 48 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.753454 s
+	Kernel Time (Avg)         : 0.752988 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 19.107650 TFLOP/s
+	Processing Rate     : 5.70e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 16.729100 TFLOP/s (over 48 steps)
+-----------------------------------------
+
+	FOM 5130533869.666558, AVG FOM 4491876922.596779, PEAK FOM 6200018089.281007
+STEP 48 ends. TIME = 1.667820476e-14 DT = 3.474625992e-16
+Evolve time = 107.6719811 s; This step = 1.223075209 s; Avg. per step = 2.243166273 s
+
+STEP 49 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.771630 s
+	Kernel Time (Avg)         : 0.771180 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 18.657558 TFLOP/s
+	Processing Rate     : 5.57e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 16.768456 TFLOP/s (over 49 steps)
+-----------------------------------------
+
+	FOM 5009681066.377190, AVG FOM 4502444354.102502, PEAK FOM 6200018089.281007
+STEP 49 ends. TIME = 1.702566736e-14 DT = 3.474625992e-16
+Evolve time = 108.9089077 s; This step = 1.236926575 s; Avg. per step = 2.222630769 s
+
+STEP 50 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.789845 s
+	Kernel Time (Avg)         : 0.789383 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 18.227290 TFLOP/s
+	Processing Rate     : 5.44e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 16.797633 TFLOP/s (over 50 steps)
+-----------------------------------------
+
+	FOM 4894151199.562626, AVG FOM 4510278491.011704, PEAK FOM 6200018089.281007
+--- INFO    : re-sorting particles
+STEP 50 ends. TIME = 1.737312996e-14 DT = 3.474625992e-16
+Evolve time = 110.3427916 s; This step = 1.433883922 s; Avg. per step = 2.206855832 s
+
+STEP 51 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.628330 s
+	Kernel Time (Avg)         : 0.627938 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 22.912681 TFLOP/s
+	Processing Rate     : 6.84e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 16.917536 TFLOP/s (over 51 steps)
+-----------------------------------------
+
+	FOM 6152210425.676121, AVG FOM 4542473234.828653, PEAK FOM 6200018089.281007
+STEP 51 ends. TIME = 1.772059256e-14 DT = 3.474625992e-16
+Evolve time = 111.3866715 s; This step = 1.043879906 s; Avg. per step = 2.184052383 s
+
+STEP 52 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.646761 s
+	Kernel Time (Avg)         : 0.646250 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 22.259729 TFLOP/s
+	Processing Rate     : 6.65e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 17.020270 TFLOP/s (over 52 steps)
+-----------------------------------------
+
+	FOM 5976888417.111850, AVG FOM 4570058142.180253, PEAK FOM 6200018089.281007
+STEP 52 ends. TIME = 1.806805516e-14 DT = 3.474625992e-16
+Evolve time = 112.4643663 s; This step = 1.077694822 s; Avg. per step = 2.162776276 s
+
+STEP 53 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.664752 s
+	Kernel Time (Avg)         : 0.664438 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 21.657286 TFLOP/s
+	Processing Rate     : 6.46e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 17.107761 TFLOP/s (over 53 steps)
+-----------------------------------------
+
+	FOM 5815128343.590038, AVG FOM 4593550032.772890, PEAK FOM 6200018089.281007
+STEP 53 ends. TIME = 1.841551776e-14 DT = 3.474625992e-16
+Evolve time = 113.5686574 s; This step = 1.104291024 s; Avg. per step = 2.142804856 s
+
+STEP 54 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.682488 s
+	Kernel Time (Avg)         : 0.682217 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 21.094484 TFLOP/s
+	Processing Rate     : 6.30e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 17.181589 TFLOP/s (over 54 steps)
+-----------------------------------------
+
+	FOM 5664012274.714249, AVG FOM 4613373407.623656, PEAK FOM 6200018089.281007
+STEP 54 ends. TIME = 1.876298035e-14 DT = 3.474625992e-16
+Evolve time = 114.7000005 s; This step = 1.13134314 s; Avg. per step = 2.124074083 s
+
+STEP 55 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.700232 s
+	Kernel Time (Avg)         : 0.699914 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 20.559943 TFLOP/s
+	Processing Rate     : 6.14e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 17.243014 TFLOP/s (over 55 steps)
+-----------------------------------------
+
+	FOM 5520484305.531999, AVG FOM 4629866333.040172, PEAK FOM 6200018089.281007
+STEP 55 ends. TIME = 1.911044295e-14 DT = 3.474625992e-16
+Evolve time = 115.8537503 s; This step = 1.153749775 s; Avg. per step = 2.106431823 s
+
+STEP 56 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.718074 s
+	Kernel Time (Avg)         : 0.717627 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 20.049084 TFLOP/s
+	Processing Rate     : 5.98e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 17.293122 TFLOP/s (over 56 steps)
+-----------------------------------------
+
+	FOM 5383315083.316818, AVG FOM 4643320775.009398, PEAK FOM 6200018089.281007
+STEP 56 ends. TIME = 1.945790555e-14 DT = 3.474625992e-16
+Evolve time = 117.0227617 s; This step = 1.169011408 s; Avg. per step = 2.089692173 s
+
+STEP 57 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.735895 s
+	Kernel Time (Avg)         : 0.735364 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 19.563556 TFLOP/s
+	Processing Rate     : 5.84e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 17.332954 TFLOP/s (over 57 steps)
+-----------------------------------------
+
+	FOM 5252947500.922866, AVG FOM 4654015980.727177, PEAK FOM 6200018089.281007
+STEP 57 ends. TIME = 1.980536815e-14 DT = 3.474625992e-16
+Evolve time = 118.2165298 s; This step = 1.193768126 s; Avg. per step = 2.073974207 s
+
+STEP 58 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.753534 s
+	Kernel Time (Avg)         : 0.753151 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 19.105603 TFLOP/s
+	Processing Rate     : 5.70e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 17.363517 TFLOP/s (over 58 steps)
+-----------------------------------------
+
+	FOM 5129984161.679962, AVG FOM 4662222328.674639, PEAK FOM 6200018089.281007
+STEP 58 ends. TIME = 2.015283075e-14 DT = 3.474625992e-16
+Evolve time = 119.4339254 s; This step = 1.217395548 s; Avg. per step = 2.05920561 s
+
+STEP 59 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.771821 s
+	Kernel Time (Avg)         : 0.771191 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 18.652951 TFLOP/s
+	Processing Rate     : 5.57e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 17.385372 TFLOP/s (over 59 steps)
+-----------------------------------------
+
+	FOM 5008443926.162763, AVG FOM 4668090491.343929, PEAK FOM 6200018089.281007
+STEP 59 ends. TIME = 2.050029335e-14 DT = 3.474625992e-16
+Evolve time = 120.6691486 s; This step = 1.235223234 s; Avg. per step = 2.045239807 s
+
+STEP 60 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.790106 s
+	Kernel Time (Avg)         : 0.789406 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 18.221262 TFLOP/s
+	Processing Rate     : 5.44e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 17.399304 TFLOP/s (over 60 steps)
+-----------------------------------------
+
+	FOM 4892532537.082143, AVG FOM 4671831192.106233, PEAK FOM 6200018089.281007
+--- INFO    : re-sorting particles
+STEP 60 ends. TIME = 2.084775595e-14 DT = 3.474625992e-16
+Evolve time = 122.1024831 s; This step = 1.433334502 s; Avg. per step = 2.035041385 s
+
+STEP 61 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.629207 s
+	Kernel Time (Avg)         : 0.628589 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 22.880740 TFLOP/s
+	Processing Rate     : 6.83e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 17.489163 TFLOP/s (over 61 steps)
+-----------------------------------------
+
+	FOM 6143633981.256647, AVG FOM 4695959106.682469, PEAK FOM 6200018089.281007
+STEP 61 ends. TIME = 2.119521855e-14 DT = 3.474625992e-16
+Evolve time = 123.1466322 s; This step = 1.04414907 s; Avg. per step = 2.018797248 s
+
+STEP 62 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.647395 s
+	Kernel Time (Avg)         : 0.646904 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 22.237926 TFLOP/s
+	Processing Rate     : 6.64e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 17.565756 TFLOP/s (over 62 steps)
+-----------------------------------------
+
+	FOM 5971034218.853372, AVG FOM 4716524834.298129, PEAK FOM 6200018089.281007
+STEP 62 ends. TIME = 2.154268115e-14 DT = 3.474625992e-16
+Evolve time = 124.2242776 s; This step = 1.077645411 s; Avg. per step = 2.00361738 s
+
+STEP 63 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.665548 s
+	Kernel Time (Avg)         : 0.664991 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 21.631398 TFLOP/s
+	Processing Rate     : 6.46e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 17.630290 TFLOP/s (over 63 steps)
+-----------------------------------------
+
+	FOM 5808177139.357040, AVG FOM 4733852648.664144, PEAK FOM 6200018089.281007
+STEP 63 ends. TIME = 2.189014375e-14 DT = 3.474625992e-16
+Evolve time = 125.3297271 s; This step = 1.105449528 s; Avg. per step = 1.989360748 s
+
+STEP 64 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.683408 s
+	Kernel Time (Avg)         : 0.682806 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 21.066090 TFLOP/s
+	Processing Rate     : 6.29e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 17.683975 TFLOP/s (over 64 steps)
+-----------------------------------------
+
+	FOM 5656388330.941962, AVG FOM 4748267268.699735, PEAK FOM 6200018089.281007
+STEP 64 ends. TIME = 2.223760635e-14 DT = 3.474625992e-16
+Evolve time = 126.4544127 s; This step = 1.124685598 s; Avg. per step = 1.975850198 s
+
+STEP 65 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.701135 s
+	Kernel Time (Avg)         : 0.700362 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 20.533472 TFLOP/s
+	Processing Rate     : 6.13e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 17.727813 TFLOP/s (over 65 steps)
+-----------------------------------------
+
+	FOM 5513376689.565433, AVG FOM 4760038182.866899, PEAK FOM 6200018089.281007
+STEP 65 ends. TIME = 2.258506895e-14 DT = 3.474625992e-16
+Evolve time = 127.6005643 s; This step = 1.146151582 s; Avg. per step = 1.963085604 s
+
+STEP 66 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.718640 s
+	Kernel Time (Avg)         : 0.718038 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 20.033313 TFLOP/s
+	Processing Rate     : 5.98e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 17.762745 TFLOP/s (over 66 steps)
+-----------------------------------------
+
+	FOM 5379080641.361009, AVG FOM 4769417614.056204, PEAK FOM 6200018089.281007
+STEP 66 ends. TIME = 2.293253154e-14 DT = 3.474625992e-16
+Evolve time = 128.7776522 s; This step = 1.177087904 s; Avg. per step = 1.951176548 s
+
+STEP 67 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.736163 s
+	Kernel Time (Avg)         : 0.735624 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 19.556432 TFLOP/s
+	Processing Rate     : 5.84e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 17.789516 TFLOP/s (over 67 steps)
+-----------------------------------------
+
+	FOM 5251034775.092501, AVG FOM 4776605929.892568, PEAK FOM 6200018089.281007
+STEP 67 ends. TIME = 2.327999414e-14 DT = 3.474625992e-16
+Evolve time = 129.9688839 s; This step = 1.191231715 s; Avg. per step = 1.939834088 s
+
+STEP 68 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.754236 s
+	Kernel Time (Avg)         : 0.753548 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 19.087834 TFLOP/s
+	Processing Rate     : 5.70e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 17.808609 TFLOP/s (over 68 steps)
+-----------------------------------------
+
+	FOM 5125213054.817903, AVG FOM 4781732505.259117, PEAK FOM 6200018089.281007
+STEP 68 ends. TIME = 2.362745674e-14 DT = 3.474625992e-16
+Evolve time = 131.1825943 s; This step = 1.213710382 s; Avg. per step = 1.929155798 s
+
+STEP 69 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.772266 s
+	Kernel Time (Avg)         : 0.771639 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 18.642184 TFLOP/s
+	Processing Rate     : 5.57e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 17.820690 TFLOP/s (over 69 steps)
+-----------------------------------------
+
+	FOM 5005552936.309390, AVG FOM 4784976279.622164, PEAK FOM 6200018089.281007
+STEP 69 ends. TIME = 2.397491934e-14 DT = 3.474625992e-16
+Evolve time = 132.420268 s; This step = 1.237673741 s; Avg. per step = 1.919134319 s
+
+STEP 70 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.790449 s
+	Kernel Time (Avg)         : 0.789712 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 18.213349 TFLOP/s
+	Processing Rate     : 5.44e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 17.826299 TFLOP/s (over 70 steps)
+-----------------------------------------
+
+	FOM 4890407822.657973, AVG FOM 4786482444.522676, PEAK FOM 6200018089.281007
+--- INFO    : re-sorting particles
+STEP 70 ends. TIME = 2.432238194e-14 DT = 3.474625992e-16
+Evolve time = 133.8546544 s; This step = 1.43438636 s; Avg. per step = 1.912209348 s
+
+STEP 71 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.629408 s
+	Kernel Time (Avg)         : 0.629003 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 22.873463 TFLOP/s
+	Processing Rate     : 6.83e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 17.897386 TFLOP/s (over 71 steps)
+-----------------------------------------
+
+	FOM 6141680233.406418, AVG FOM 4805569737.323855, PEAK FOM 6200018089.281007
+STEP 71 ends. TIME = 2.466984454e-14 DT = 3.474625992e-16
+Evolve time = 134.8980758 s; This step = 1.043421391 s; Avg. per step = 1.899972898 s
+
+STEP 72 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.647595 s
+	Kernel Time (Avg)         : 0.647270 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 22.231071 TFLOP/s
+	Processing Rate     : 6.64e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 17.957576 TFLOP/s (over 72 steps)
+-----------------------------------------
+
+	FOM 5969193427.754155, AVG FOM 4821731177.468720, PEAK FOM 6200018089.281007
+STEP 72 ends. TIME = 2.501730714e-14 DT = 3.474625992e-16
+Evolve time = 135.9697396 s; This step = 1.071663853 s; Avg. per step = 1.888468606 s
+
+STEP 73 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.665731 s
+	Kernel Time (Avg)         : 0.665288 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 21.625458 TFLOP/s
+	Processing Rate     : 6.46e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 18.007821 TFLOP/s (over 73 steps)
+-----------------------------------------
+
+	FOM 5806582263.123755, AVG FOM 4835222288.231118, PEAK FOM 6200018089.281007
+STEP 73 ends. TIME = 2.536476974e-14 DT = 3.474625992e-16
+Evolve time = 137.0673188 s; This step = 1.097579203 s; Avg. per step = 1.877634504 s
+
+STEP 74 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.683383 s
+	Kernel Time (Avg)         : 0.683165 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 21.066865 TFLOP/s
+	Processing Rate     : 6.29e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 18.049160 TFLOP/s (over 74 steps)
+-----------------------------------------
+
+	FOM 5656596357.888272, AVG FOM 4846321937.821079, PEAK FOM 6200018089.281007
+STEP 74 ends. TIME = 2.571223234e-14 DT = 3.474625992e-16
+Evolve time = 138.1909089 s; This step = 1.123590054 s; Avg. per step = 1.867444715 s
+
+STEP 75 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.701123 s
+	Kernel Time (Avg)         : 0.700711 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 20.533816 TFLOP/s
+	Processing Rate     : 6.13e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 18.082288 TFLOP/s (over 75 steps)
+-----------------------------------------
+
+	FOM 5513469150.211981, AVG FOM 4855217233.986292, PEAK FOM 6200018089.281007
+STEP 75 ends. TIME = 2.605969494e-14 DT = 3.474625992e-16
+Evolve time = 139.339714 s; This step = 1.148805085 s; Avg. per step = 1.857862853 s
+
+STEP 76 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.718747 s
+	Kernel Time (Avg)         : 0.718296 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 20.030323 TFLOP/s
+	Processing Rate     : 5.98e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 18.107920 TFLOP/s (over 76 steps)
+-----------------------------------------
+
+	FOM 5378277701.011136, AVG FOM 4862099608.552407, PEAK FOM 6200018089.281007
+STEP 76 ends. TIME = 2.640715754e-14 DT = 3.474625992e-16
+Evolve time = 140.5067282 s; This step = 1.167014264 s; Avg. per step = 1.84877274 s
+
+STEP 77 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.736371 s
+	Kernel Time (Avg)         : 0.735951 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 19.550926 TFLOP/s
+	Processing Rate     : 5.84e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 18.126661 TFLOP/s (over 77 steps)
+-----------------------------------------
+
+	FOM 5249556447.419989, AVG FOM 4867131515.550688, PEAK FOM 6200018089.281007
+STEP 77 ends. TIME = 2.675462014e-14 DT = 3.474625992e-16
+Evolve time = 141.7016624 s; This step = 1.194934212 s; Avg. per step = 1.84028133 s
+
+STEP 78 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.754173 s
+	Kernel Time (Avg)         : 0.753782 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 19.089426 TFLOP/s
+	Processing Rate     : 5.70e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 18.139004 TFLOP/s (over 78 steps)
+-----------------------------------------
+
+	FOM 5125640497.373495, AVG FOM 4870445733.266364, PEAK FOM 6200018089.281007
+STEP 78 ends. TIME = 2.710208273e-14 DT = 3.474625992e-16
+Evolve time = 142.9140081 s; This step = 1.212345641 s; Avg. per step = 1.832230873 s
+
+STEP 79 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.772084 s
+	Kernel Time (Avg)         : 0.771700 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 18.646578 TFLOP/s
+	Processing Rate     : 5.57e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 18.145429 TFLOP/s (over 79 steps)
+-----------------------------------------
+
+	FOM 5006732821.168888, AVG FOM 4872170886.277789, PEAK FOM 6200018089.281007
+STEP 79 ends. TIME = 2.744954533e-14 DT = 3.474625992e-16
+Evolve time = 144.1526716 s; This step = 1.238663526 s; Avg. per step = 1.824717362 s
+
+STEP 80 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.790335 s
+	Kernel Time (Avg)         : 0.789877 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 18.215996 TFLOP/s
+	Processing Rate     : 5.44e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 18.146311 TFLOP/s (over 80 steps)
+-----------------------------------------
+
+	FOM 4891118636.495632, AVG FOM 4872407733.155512, PEAK FOM 6200018089.281007
+--- INFO    : re-sorting particles
+STEP 80 ends. TIME = 2.779700793e-14 DT = 3.474625992e-16
+Evolve time = 145.5838875 s; This step = 1.431215917 s; Avg. per step = 1.819798594 s
+
+STEP 81 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.629931 s
+	Kernel Time (Avg)         : 0.629560 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 22.854447 TFLOP/s
+	Processing Rate     : 6.82e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 18.204436 TFLOP/s (over 81 steps)
+-----------------------------------------
+
+	FOM 6136574155.958375, AVG FOM 4888014726.029621, PEAK FOM 6200018089.281007
+STEP 81 ends. TIME = 2.814447053e-14 DT = 3.474625992e-16
+Evolve time = 146.6344215 s; This step = 1.050533987 s; Avg. per step = 1.8103015 s
+
+STEP 82 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.648049 s
+	Kernel Time (Avg)         : 0.647630 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 22.215503 TFLOP/s
+	Processing Rate     : 6.63e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 18.253352 TFLOP/s (over 82 steps)
+-----------------------------------------
+
+	FOM 5965013538.486608, AVG FOM 4901148857.888853, PEAK FOM 6200018089.281007
+STEP 82 ends. TIME = 2.849193313e-14 DT = 3.474625992e-16
+Evolve time = 147.7057788 s; This step = 1.071357259 s; Avg. per step = 1.801289985 s
+
+STEP 83 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.666067 s
+	Kernel Time (Avg)         : 0.665697 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 21.614523 TFLOP/s
+	Processing Rate     : 6.45e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 18.293848 TFLOP/s (over 83 steps)
+-----------------------------------------
+
+	FOM 5803646182.330610, AVG FOM 4912022319.629115, PEAK FOM 6200018089.281007
+STEP 83 ends. TIME = 2.883939573e-14 DT = 3.474625992e-16
+Evolve time = 148.8141908 s; This step = 1.108412033 s; Avg. per step = 1.792942058 s
+
+STEP 84 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.683664 s
+	Kernel Time (Avg)         : 0.683347 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 21.058198 TFLOP/s
+	Processing Rate     : 6.29e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 18.326757 TFLOP/s (over 84 steps)
+-----------------------------------------
+
+	FOM 5654269038.436037, AVG FOM 4920858590.091103, PEAK FOM 6200018089.281007
+STEP 84 ends. TIME = 2.918685833e-14 DT = 3.474625992e-16
+Evolve time = 149.9372455 s; This step = 1.123054659 s; Avg. per step = 1.784967208 s
+
+STEP 85 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.701485 s
+	Kernel Time (Avg)         : 0.701043 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 20.523213 TFLOP/s
+	Processing Rate     : 6.13e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 18.352597 TFLOP/s (over 85 steps)
+-----------------------------------------
+
+	FOM 5510622010.187342, AVG FOM 4927796983.268704, PEAK FOM 6200018089.281007
+STEP 85 ends. TIME = 2.953432093e-14 DT = 3.474625992e-16
+Evolve time = 151.0854911 s; This step = 1.148245632 s; Avg. per step = 1.777476366 s
+
+STEP 86 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.718881 s
+	Kernel Time (Avg)         : 0.718445 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 20.026593 TFLOP/s
+	Processing Rate     : 5.98e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 18.372062 TFLOP/s (over 86 steps)
+-----------------------------------------
+
+	FOM 5377276322.382106, AVG FOM 4933023487.211884, PEAK FOM 6200018089.281007
+STEP 86 ends. TIME = 2.988178353e-14 DT = 3.474625992e-16
+Evolve time = 152.2549427 s; This step = 1.169451568 s; Avg. per step = 1.77040631 s
+
+STEP 87 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.736559 s
+	Kernel Time (Avg)         : 0.736238 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 19.545928 TFLOP/s
+	Processing Rate     : 5.83e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 18.385555 TFLOP/s (over 87 steps)
+-----------------------------------------
+
+	FOM 5248214521.751517, AVG FOM 4936646372.666362, PEAK FOM 6200018089.281007
+STEP 87 ends. TIME = 3.022924613e-14 DT = 3.474625992e-16
+Evolve time = 153.4487144 s; This step = 1.193771749 s; Avg. per step = 1.763778327 s
+
+STEP 88 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.754342 s
+	Kernel Time (Avg)         : 0.753999 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 19.085156 TFLOP/s
+	Processing Rate     : 5.70e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 18.393505 TFLOP/s (over 88 steps)
+-----------------------------------------
+
+	FOM 5124493866.167732, AVG FOM 4938781003.274332, PEAK FOM 6200018089.281007
+STEP 88 ends. TIME = 3.057670873e-14 DT = 3.474625992e-16
+Evolve time = 154.6625742 s; This step = 1.213859791 s; Avg. per step = 1.757529252 s
+
+STEP 89 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.772326 s
+	Kernel Time (Avg)         : 0.771911 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 18.640747 TFLOP/s
+	Processing Rate     : 5.56e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 18.396283 TFLOP/s (over 89 steps)
+-----------------------------------------
+
+	FOM 5005167243.574743, AVG FOM 4939526916.086697, PEAK FOM 6200018089.281007
+STEP 89 ends. TIME = 3.092417133e-14 DT = 3.474625992e-16
+Evolve time = 155.9008677 s; This step = 1.238293543 s; Avg. per step = 1.751695143 s
+
+STEP 90 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.790385 s
+	Kernel Time (Avg)         : 0.790062 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 18.214828 TFLOP/s
+	Processing Rate     : 5.44e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 18.394267 TFLOP/s (over 90 steps)
+-----------------------------------------
+
+	FOM 4890804983.926332, AVG FOM 4938985561.284915, PEAK FOM 6200018089.281007
+--- INFO    : re-sorting particles
+STEP 90 ends. TIME = 3.127163392e-14 DT = 3.474625992e-16
+Evolve time = 157.3293658 s; This step = 1.428498056 s; Avg. per step = 1.748104064 s
+
+STEP 91 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.630579 s
+	Kernel Time (Avg)         : 0.629498 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 22.830959 TFLOP/s
+	Processing Rate     : 6.82e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 18.443022 TFLOP/s (over 91 steps)
+-----------------------------------------
+
+	FOM 6130267582.648097, AVG FOM 4952076572.508686, PEAK FOM 6200018089.281007
+STEP 91 ends. TIME = 3.161909652e-14 DT = 3.474625992e-16
+Evolve time = 158.3802027 s; This step = 1.050836904 s; Avg. per step = 1.740441788 s
+
+STEP 92 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.648246 s
+	Kernel Time (Avg)         : 0.647740 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 22.208747 TFLOP/s
+	Processing Rate     : 6.63e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 18.483954 TFLOP/s (over 92 steps)
+-----------------------------------------
+
+	FOM 5963199316.506346, AVG FOM 4963067037.117356, PEAK FOM 6200018089.281007
+STEP 92 ends. TIME = 3.196655912e-14 DT = 3.474625992e-16
+Evolve time = 159.457888 s; This step = 1.077685309 s; Avg. per step = 1.733237913 s
+
+STEP 93 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.665910 s
+	Kernel Time (Avg)         : 0.665643 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 21.619641 TFLOP/s
+	Processing Rate     : 6.45e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 18.517671 TFLOP/s (over 93 steps)
+-----------------------------------------
+
+	FOM 5805020377.354900, AVG FOM 4972120298.840341, PEAK FOM 6200018089.281007
+STEP 93 ends. TIME = 3.231402172e-14 DT = 3.474625992e-16
+Evolve time = 160.5622431 s; This step = 1.104355075 s; Avg. per step = 1.726475732 s
+
+STEP 94 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.683705 s
+	Kernel Time (Avg)         : 0.683281 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 21.056924 TFLOP/s
+	Processing Rate     : 6.29e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 18.544684 TFLOP/s (over 94 steps)
+-----------------------------------------
+
+	FOM 5653926997.921685, AVG FOM 4979373561.596525, PEAK FOM 6200018089.281007
+STEP 94 ends. TIME = 3.266148432e-14 DT = 3.474625992e-16
+Evolve time = 161.6953867 s; This step = 1.133143654 s; Avg. per step = 1.720163689 s
+
+STEP 95 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.701227 s
+	Kernel Time (Avg)         : 0.700899 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 20.530774 TFLOP/s
+	Processing Rate     : 6.13e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 18.565590 TFLOP/s (over 95 steps)
+-----------------------------------------
+
+	FOM 5512652217.801276, AVG FOM 4984987021.135523, PEAK FOM 6200018089.281007
+STEP 95 ends. TIME = 3.300894692e-14 DT = 3.474625992e-16
+Evolve time = 162.8441409 s; This step = 1.148754204 s; Avg. per step = 1.714148852 s
+
+STEP 96 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.718806 s
+	Kernel Time (Avg)         : 0.718467 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 20.028664 TFLOP/s
+	Processing Rate     : 5.98e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 18.580830 TFLOP/s (over 96 steps)
+-----------------------------------------
+
+	FOM 5377832276.092360, AVG FOM 4989079159.207990, PEAK FOM 6200018089.281007
+STEP 96 ends. TIME = 3.335640952e-14 DT = 3.474625992e-16
+Evolve time = 164.0181498 s; This step = 1.174008809 s; Avg. per step = 1.708522393 s
+
+STEP 97 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.736593 s
+	Kernel Time (Avg)         : 0.736095 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 19.545039 TFLOP/s
+	Processing Rate     : 5.83e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 18.590771 TFLOP/s (over 97 steps)
+-----------------------------------------
+
+	FOM 5247975570.973033, AVG FOM 4991748194.380825, PEAK FOM 6200018089.281007
+STEP 97 ends. TIME = 3.370387212e-14 DT = 3.474625992e-16
+Evolve time = 165.213079 s; This step = 1.194929233 s; Avg. per step = 1.703227618 s
+
+STEP 98 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.754253 s
+	Kernel Time (Avg)         : 0.753895 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 19.087409 TFLOP/s
+	Processing Rate     : 5.70e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 18.595839 TFLOP/s (over 98 steps)
+-----------------------------------------
+
+	FOM 5125098863.379537, AVG FOM 4993108915.493056, PEAK FOM 6200018089.281007
+STEP 98 ends. TIME = 3.405133472e-14 DT = 3.474625992e-16
+Evolve time = 166.430715 s; This step = 1.217635971 s; Avg. per step = 1.698272602 s
+
+STEP 99 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.772267 s
+	Kernel Time (Avg)         : 0.771886 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 18.642171 TFLOP/s
+	Processing Rate     : 5.56e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 18.596307 TFLOP/s (over 99 steps)
+-----------------------------------------
+
+	FOM 5005549423.262436, AVG FOM 4993234577.187696, PEAK FOM 6200018089.281007
+STEP 99 ends. TIME = 3.439879732e-14 DT = 3.474625992e-16
+Evolve time = 167.670512 s; This step = 1.239797012 s; Avg. per step = 1.693641535 s
+
+STEP 100 starts ...
+
+--- Performance Metrics (Current Step) ---
+	Kernel Time (Max)         : 0.790295 s
+	Kernel Time (Avg)         : 0.789937 s
+	Peak Performance     : 23.090731 TFLOP/s
+	Sustained Performance     : 18.216913 TFLOP/s
+	Processing Rate     : 5.44e+09 particles/s (total particles/total time)
+--- Overall Performance ---
+	Running Average Sustained : 18.592513 TFLOP/s (over 100 steps)
+-----------------------------------------
+
+	FOM 4891364728.919178, AVG FOM 4992215878.705011, PEAK FOM 6200018089.281007
+--- INFO    : re-sorting particles
+STEP 100 ends. TIME = 3.474625992e-14 DT = 3.474625992e-16
+Evolve time = 169.4807729 s; This step = 1.810260896 s; Avg. per step = 1.694807729 s
+
+
+**** WARNINGS ******************************************************************
+* GLOBAL warning list  after  [ THE END ]
+*
+* No recorded warnings.
+********************************************************************************
+
+Total Time                     : 171.5082826
+
+
+TinyProfiler total time across processes [min...avg...max]: 171.5 ... 171.5 ... 171.5
+
+----------------------------------------------------------------------------------------------------------
+Name                                                       NCalls  Excl. Min  Excl. Avg  Excl. Max   Max %
+----------------------------------------------------------------------------------------------------------
+WarpXParticleContainer::DepositCurrent::CurrentDeposition     400      121.4      121.5      121.7  70.98%
+PhysicalParticleContainer::Evolve::GatherAndPush              400      36.74      36.96      37.23  21.71%
+Redistribute_partition                                        102      2.504      2.809      3.377   1.97%
+FabArray::ParallelCopy_finish()                               300      1.158      1.426      1.704   0.99%
+ParticleCopyPlan::doHandShake                                 102     0.1771      1.241      1.657   0.97%
+FillBoundary_finish()                                        1206     0.6603      1.128      1.553   0.91%
+ParticleContainer::SortParticlesForDeposition()                10      1.419      1.487      1.533   0.89%
+FabArray::setVal()                                            621    0.02065     0.4216      1.147   0.67%
+PhysicalParticleContainer::AddPlasma()                          1      0.789     0.9147      1.132   0.66%
+FillBoundary_nowait()                                        1206     0.4094     0.8147      1.096   0.64%
+WarpX::OneStep_nosub()                                        100     0.2657     0.5046     0.8655   0.50%
+PhysicalParticleContainer::PushP()                              2     0.6464     0.6516     0.6572   0.38%
+FabArray::ParallelCopy_nowait()                               300     0.3924      0.466     0.5292   0.31%
+ParticleContainer::RedistributeGPU()                          102       0.14     0.1531      0.168   0.10%
+ParticleCopyPlan::build                                       102    0.01321    0.01373    0.01427   0.01%
+WarpX::Evolve()                                                 1  0.0001595   0.006037     0.0134   0.01%
+WarpX::Evolve::step                                           100   0.005207   0.006068   0.007871   0.00%
+ablastr::utils::communication::FillBoundary                  1206   0.005791   0.006302   0.006824   0.00%
+WarpX::SyncCurrent()                                          100   0.004801   0.005396   0.006042   0.00%
+PhysicalParticleContainer::Evolve()                           100    0.00371   0.004193    0.00475   0.00%
+FabArray<FAB>::SumBoundary_finish()                           300   0.003173   0.003615   0.004571   0.00%
+FabArray::FillBoundaryAndSync()                               600   0.003048   0.003517   0.004453   0.00%
+FabArray::FillBoundary()                                      606   0.003179   0.003653   0.004444   0.00%
+FabArray<FAB>::SumBoundary_nowait()                           300   0.003193    0.00354   0.003859   0.00%
+WarpX::InitData()                                               1  0.0003563   0.001051   0.003821   0.00%
+ablastr::utils::communication::SumBoundary                    300   0.001082   0.001528   0.002461   0.00%
+main()                                                          1   0.001143   0.001793   0.002455   0.00%
+FabArray<FAB>::SumBoundary()                                  300   0.002072   0.002266   0.002394   0.00%
+ParticleCopyPlan::buildMPIStart                               102   0.001918   0.002028   0.002181   0.00%
+PhysicalParticleContainer::AddParticles()                       2  5.429e-06  1.098e-05  1.295e-05   0.00%
+REG::WarpX::Evolve()                                            1  2.385e-06  2.839e-06  5.178e-06   0.00%
+Other                                                        5775     0.7758     0.9209      1.102   0.64%
+----------------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------------
+Name                                                       NCalls  Incl. Min  Incl. Avg  Incl. Max   Max %
+----------------------------------------------------------------------------------------------------------
+main()                                                          1      171.5      171.5      171.5 100.00%
+REG::WarpX::Evolve()                                            1      169.5      169.5      169.5  98.82%
+WarpX::Evolve()                                                 1      169.5      169.5      169.5  98.82%
+WarpX::Evolve::step                                           100      169.5      169.5      169.5  98.82%
+WarpX::OneStep_nosub()                                        100      161.4      161.4      161.5  94.14%
+PhysicalParticleContainer::Evolve()                           100      158.3      158.5      158.7  92.52%
+WarpXParticleContainer::DepositCurrent::CurrentDeposition     400      121.4      121.5      121.7  70.98%
+PhysicalParticleContainer::Evolve::GatherAndPush              400      36.74      36.96      37.23  21.71%
+ParticleContainer::RedistributeGPU()                          102      4.028      4.607      4.886   2.85%
+Redistribute_partition                                        102      2.504      2.809      3.377   1.97%
+WarpX::SyncCurrent()                                          100      1.741      2.015      2.265   1.32%
+ablastr::utils::communication::SumBoundary                    300      1.667      1.933      2.172   1.27%
+FabArray<FAB>::SumBoundary()                                  300      1.666      1.931       2.17   1.27%
+ablastr::utils::communication::FillBoundary                  1206      1.779      1.965      2.152   1.25%
+WarpX::InitData()                                               1      2.019       2.02      2.022   1.18%
+ParticleContainer::SortParticlesForDeposition()                10      1.802      1.874      1.923   1.12%
+FabArray<FAB>::SumBoundary_finish()                           300      1.162       1.43      1.707   1.00%
+FabArray::ParallelCopy_finish()                               300      1.158      1.426      1.704   0.99%
+FabArray::FillBoundary()                                      606      1.426      1.591      1.691   0.99%
+ParticleCopyPlan::build                                       102     0.1962       1.26      1.677   0.98%
+ParticleCopyPlan::buildMPIStart                               102     0.1791      1.243      1.659   0.97%
+ParticleCopyPlan::doHandShake                                 102     0.1771      1.241      1.657   0.97%
+FillBoundary_finish()                                        1206     0.6603      1.128      1.553   0.91%
+FabArray::setVal()                                            621    0.02065     0.4216      1.147   0.67%
+PhysicalParticleContainer::AddParticles()                       2      0.789     0.9147      1.132   0.66%
+PhysicalParticleContainer::AddPlasma()                          1      0.789     0.9147      1.132   0.66%
+FillBoundary_nowait()                                        1206     0.4135     0.8183        1.1   0.64%
+PhysicalParticleContainer::PushP()                              2     0.6464     0.6516     0.6572   0.38%
+FabArray<FAB>::SumBoundary_nowait()                           300     0.4224     0.4996     0.5629   0.33%
+FabArray::ParallelCopy_nowait()                               300     0.3935     0.4671     0.5302   0.31%
+FabArray::FillBoundaryAndSync()                               600     0.2887     0.3678     0.4553   0.27%
+Other                                                        5775      1.049      1.304      1.645   0.96%
+----------------------------------------------------------------------------------------------------------
+
+
+
+BEGIN REGION WarpX::Evolve()
+
+----------------------------------------------------------------------------------------------------------
+Name                                                       NCalls  Excl. Min  Excl. Avg  Excl. Max   Max %
+----------------------------------------------------------------------------------------------------------
+WarpXParticleContainer::DepositCurrent::CurrentDeposition     400      121.4      121.5      121.7  70.98%
+PhysicalParticleContainer::Evolve::GatherAndPush              400      36.74      36.96      37.23  21.71%
+Redistribute_partition                                        100      2.481      2.781      3.342   1.95%
+FabArray::ParallelCopy_finish()                               300      1.158      1.426      1.704   0.99%
+FillBoundary_finish()                                        1206     0.6603      1.128      1.553   0.91%
+ParticleContainer::SortParticlesForDeposition()                10      1.419      1.487      1.533   0.89%
+FillBoundary_nowait()                                        1206     0.4094     0.8147      1.096   0.64%
+ParticleCopyPlan::doHandShake                                 100   0.001299     0.5688     0.8824   0.51%
+WarpX::OneStep_nosub()                                        100     0.2657     0.5046     0.8655   0.50%
+PhysicalParticleContainer::PushP()                              2     0.6464     0.6516     0.6572   0.38%
+FabArray::ParallelCopy_nowait()                               300     0.3924      0.466     0.5292   0.31%
+ParticleContainer::RedistributeGPU()                          100     0.1398     0.1529     0.1677   0.10%
+ParticleCopyPlan::build                                       100    0.01308     0.0136    0.01413   0.01%
+WarpX::Evolve()                                                 1  0.0001595   0.006037     0.0134   0.01%
+WarpX::Evolve::step                                           100   0.005207   0.006068   0.007871   0.00%
+ablastr::utils::communication::FillBoundary                  1206   0.005791   0.006302   0.006824   0.00%
+WarpX::SyncCurrent()                                          100   0.004801   0.005396   0.006042   0.00%
+PhysicalParticleContainer::Evolve()                           100    0.00371   0.004193    0.00475   0.00%
+FabArray<FAB>::SumBoundary_finish()                           300   0.003173   0.003615   0.004571   0.00%
+FabArray::FillBoundaryAndSync()                               600   0.003048   0.003517   0.004453   0.00%
+FabArray::FillBoundary()                                      606   0.003179   0.003653   0.004444   0.00%
+FabArray<FAB>::SumBoundary_nowait()                           300   0.003193    0.00354   0.003859   0.00%
+ablastr::utils::communication::SumBoundary                    300   0.001082   0.001528   0.002461   0.00%
+FabArray<FAB>::SumBoundary()                                  300   0.002072   0.002266   0.002394   0.00%
+ParticleCopyPlan::buildMPIStart                               100     0.0019   0.002005   0.002138   0.00%
+REG::WarpX::Evolve()                                            1  2.385e-06  2.839e-06  5.178e-06   0.00%
+Other                                                        6351     0.7938     0.9389      1.121   0.65%
+----------------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------------
+Name                                                       NCalls  Incl. Min  Incl. Avg  Incl. Max   Max %
+----------------------------------------------------------------------------------------------------------
+REG::WarpX::Evolve()                                            1      169.5      169.5      169.5  98.82%
+WarpX::Evolve()                                                 1      169.5      169.5      169.5  98.82%
+WarpX::Evolve::step                                           100      169.5      169.5      169.5  98.82%
+WarpX::OneStep_nosub()                                        100      161.4      161.4      161.5  94.14%
+PhysicalParticleContainer::Evolve()                           100      158.3      158.5      158.7  92.52%
+WarpXParticleContainer::DepositCurrent::CurrentDeposition     400      121.4      121.5      121.7  70.98%
+PhysicalParticleContainer::Evolve::GatherAndPush              400      36.74      36.96      37.23  21.71%
+ParticleContainer::RedistributeGPU()                          100      3.806      3.906      4.046   2.36%
+Redistribute_partition                                        100      2.481      2.781      3.342   1.95%
+WarpX::SyncCurrent()                                          100      1.741      2.015      2.265   1.32%
+ablastr::utils::communication::SumBoundary                    300      1.667      1.933      2.172   1.27%
+FabArray<FAB>::SumBoundary()                                  300      1.666      1.931       2.17   1.27%
+ablastr::utils::communication::FillBoundary                  1206      1.779      1.965      2.152   1.25%
+ParticleContainer::SortParticlesForDeposition()                10      1.802      1.874      1.923   1.12%
+FabArray<FAB>::SumBoundary_finish()                           300      1.162       1.43      1.707   1.00%
+FabArray::ParallelCopy_finish()                               300      1.158      1.426      1.704   0.99%
+FabArray::FillBoundary()                                      606      1.426      1.591      1.691   0.99%
+FillBoundary_finish()                                        1206     0.6603      1.128      1.553   0.91%
+FillBoundary_nowait()                                        1206     0.4135     0.8183        1.1   0.64%
+ParticleCopyPlan::build                                       100    0.02023     0.5878     0.9014   0.53%
+ParticleCopyPlan::buildMPIStart                               100   0.003305     0.5708     0.8844   0.52%
+ParticleCopyPlan::doHandShake                                 100   0.001299     0.5688     0.8824   0.51%
+PhysicalParticleContainer::PushP()                              2     0.6464     0.6516     0.6572   0.38%
+FabArray<FAB>::SumBoundary_nowait()                           300     0.4224     0.4996     0.5629   0.33%
+FabArray::ParallelCopy_nowait()                               300     0.3935     0.4671     0.5302   0.31%
+FabArray::FillBoundaryAndSync()                               600     0.2887     0.3678     0.4553   0.27%
+Other                                                        6351      1.067       1.32      1.661   0.97%
+----------------------------------------------------------------------------------------------------------
+
+END REGION WarpX::Evolve()
+Unused ParmParse Variables:
+  [TOP]::chk.diag_type(nvals = 1)  :: [Full]
+  [TOP]::chk.intervals(nvals = 1)  :: [6]
+  [TOP]::diag1.diag_type(nvals = 1)  :: [Full]
+  [TOP]::diag1.electrons.variables(nvals = 7)  :: [x, y, z, ux, uy, uz, w]
+  [TOP]::diag1.fields_to_plot(nvals = 10)  :: [Bx, By, Bz, Ex, Ey, Ez, jx, jy, jz, rho]
+  [TOP]::diag1.intervals(nvals = 1)  :: [4]
+
+Device Memory Usage:
+--------------------------------------------------------------------------------------------------------------------------------------
+Name                                             Nalloc  Nfree  AvgMem min  AvgMem avg  AvgMem max  MaxMem min  MaxMem avg  MaxMem max
+--------------------------------------------------------------------------------------------------------------------------------------
+The_Arena::Initialize()                               8      8     154 MiB     155 MiB     155 MiB      59 GiB      59 GiB      59 GiB
+amrex::unpackRemotes                               3320   3320      11 GiB      18 GiB      25 GiB      27 GiB      30 GiB      33 GiB
+PhysicalParticleContainer::AddPlasma()              352    352    2997 MiB      10 GiB      14 GiB      32 GiB      32 GiB      32 GiB
+amrex::unpackBuffer                                  48     48       0   B     699 MiB    3502 MiB       0   B    6144 MiB      16 GiB
+ParticleContainer::SortParticlesForDeposition()     960    960    2133 MiB    3019 MiB    4113 MiB      11 GiB      13 GiB      14 GiB
+PermutationForDeposition()                         1280   1280    6676 KiB    6908 KiB    7075 KiB    1025 MiB    1025 MiB    1025 MiB
+Redistribute_partition                            28675  28675    1950 KiB    2587 KiB    3094 KiB     131 MiB     225 MiB     320 MiB
+WarpX::InitData()                                   312    312     109 MiB     109 MiB     109 MiB     109 MiB     109 MiB     109 MiB
+ResizeRandomSeed                                      8      8      40 MiB      40 MiB      40 MiB      40 MiB      40 MiB      40 MiB
+ParticleCopyPlan::build                            8069   8069    3228   B      69 KiB     166 KiB     549 KiB      16 MiB      32 MiB
+FabArray<FAB>::SumBoundary_nowait()                9600   9600     127 KiB     148 KiB     166 KiB      12 MiB      12 MiB      12 MiB
+WarpX::SyncCurrent()                               9600   9600    5520   B    6202   B    7018   B      12 MiB      12 MiB      12 MiB
+amrex::packBuffer                                   792    792      18 KiB      21 KiB      24 KiB    8752 KiB    8773 KiB    8809 KiB
+ParticleContainer::RedistributeGPU()                840    840    6035   B    7824   B    9681   B    5175 KiB    5190 KiB    5206 KiB
+WarpX::OneStep_nosub()                              800    800     311   B     322   B     331   B     216 KiB     216 KiB     216 KiB
+FillBoundary_finish()                              9648   9648      19   B      23   B      29   B      33 KiB      33 KiB      33 KiB
+FillBoundary_nowait()                             19296  19296      29   B     111   B     167   B      33 KiB      33 KiB      33 KiB
+FabArray::ParallelCopy_nowait()                    4800   4800      19   B      20   B      23   B      15 KiB      15 KiB      15 KiB
+FabArray::ParallelCopy_finish()                    2400   2400      18   B      20   B      23   B      15 KiB      15 KiB      15 KiB
+FabArray::setVal()                                  136    136    8270   B    8301   B    8319   B    8320   B    8320   B    8320   B
+DenseBins<T>::buildGPU                               96     96    1328   B    1330   B    1331   B    2112   B    2112   B    2112   B
+main()                                              224    224     847   B     847   B     847   B     848   B     848   B     848   B
+ParticleBufferMap::define                            48     48     537   B     538   B     539   B     544   B     544   B     544   B
+amrex::Copy()                                      4800   4800       5   B       5   B       6   B     512   B     512   B     512   B
+amrex::communicateParticlesStart                    816    816       0   B       0   B       0   B      64   B      64   B      64   B
+BilinearFilter::ComputeStencils()                    24     24      47   B      47   B      47   B      48   B      48   B      48   B
+--------------------------------------------------------------------------------------------------------------------------------------
+
+Managed Memory Usage:
+----------------------------------------------------------------------------------------------------------------------
+Name                             Nalloc  Nfree  AvgMem min  AvgMem avg  AvgMem max  MaxMem min  MaxMem avg  MaxMem max
+----------------------------------------------------------------------------------------------------------------------
+The_Managed_Arena::Initialize()       8      8      10   B     116   B     404   B    8192 KiB    8192 KiB    8192 KiB
+----------------------------------------------------------------------------------------------------------------------
+
+Pinned Memory Usage:
+---------------------------------------------------------------------------------------------------------------------------
+Name                                  Nalloc  Nfree  AvgMem min  AvgMem avg  AvgMem max  MaxMem min  MaxMem avg  MaxMem max
+---------------------------------------------------------------------------------------------------------------------------
+FabArray::ParallelCopy_nowait()         9600   9600     204 KiB     238 KiB     271 KiB      21 MiB      21 MiB      21 MiB
+ParticleContainer::RedistributeGPU()    1768   1768      19 KiB      22 KiB      25 KiB    8754 KiB    8775 KiB    8812 KiB
+The_Pinned_Arena::Initialize()             8      8     176   B     479   B     617   B    8192 KiB    8192 KiB    8192 KiB
+FillBoundary_nowait()                  38592  38592      36 KiB      38 KiB      41 KiB    5393 KiB    5393 KiB    5393 KiB
+amrex::communicateParticlesStart         792    792    7725   B    9367   B      10 KiB    5173 KiB    5188 KiB    5204 KiB
+FillBoundary_finish()                   9648   9648      19   B      24   B      29   B      33 KiB      33 KiB      33 KiB
+FabArray::ParallelCopy_finish()         2400   2400      18   B      20   B      23   B      15 KiB      15 KiB      15 KiB
+FabArray::setVal()                       136    136    8270   B    8301   B    8319   B    8320   B    8320   B    8320   B
+main()                                   392    392     607   B     607   B     607   B     608   B     608   B     608   B
+amrex::Copy()                           4800   4800       5   B       5   B       6   B     512   B     512   B     512   B
+ParticleCopyPlan::buildMPIStart          792    792       0   B       0   B       0   B     272   B     296   B     320   B
+ParticleCopyPlan::build                  816    816       0   B       0   B       1   B     144   B     144   B     144   B
+Redistribute_partition                  3232   3232       0   B       0   B       0   B      16   B      16   B      16   B
+WarpX::OneStep_nosub()                   800    800       0   B       0   B       0   B      16   B      16   B      16   B
+---------------------------------------------------------------------------------------------------------------------------
+
+Total GPU global memory (MB) spread across MPI: [81228 ... 81228]
+Free  GPU global memory (MB) spread across MPI: [19767 ... 19767]
+[The         Arena] space (MB) allocated spread across MPI: [60921 ... 60921]
+[The         Arena] space (MB) used      spread across MPI: [0 ... 0]
+[The Managed Arena] space (MB) allocated spread across MPI: [8 ... 8]
+[The Managed Arena] space (MB) used      spread across MPI: [0 ... 0]
+[The  Pinned Arena] space (MB) allocated spread across MPI: [40 ... 40]
+[The  Pinned Arena] space (MB) used      spread across MPI: [0 ... 0]
+AMReX (24.07) finalized
