@@ -472,40 +472,30 @@ MultiParticleContainer::Evolve (int lev,
         if (crho) { crho->setVal(0.0); }
     }
 
-    double local_time = 0.0;
-    long F = TotalNumberOfParticles();
-    printf("num particles: %ld\n",F);
-    // double F = 5526.0;
-    double start_time=0.0;
-    double end_time=0.0;
-    long total_particles=0;
-
     for (auto& pc : allcontainers) {
-        for(WarpXParIter pti(*pc,lev);pti.isValid();++pti)
-            {
-                const auto np=pti.numParticles();
-                total_particles+=np;
-            }
-        start_time=MPI_Wtime();
-
-        pc->Evolve(lev, Ex, Ey, Ez, Bx, By, Bz, jx, jy, jz, cjx, cjy, cjz,
+        local_time+=pc->Evolve_rebuild(lev, Ex, Ey, Ez, Bx, By, Bz, jx, jy, jz, cjx, cjy, cjz,
                    rho, crho, cEx, cEy, cEz, cBx, cBy, cBz, t, dt, a_dt_type, skip_deposition, push_type);
-        
-        end_time=MPI_Wtime();
-        local_time+=(end_time-start_time);
     }
+    
 
-    double local_flops=double(F)*total_particles;
-    double total_flops=0.0;
-    double max_time=0.0;
-    MPI_Reduce(&local_flops,&total_flops,1,MPI_DOUBLE,MPI_SUM,0,MPI_COMM_WORLD);
-    MPI_Reduce(&local_time,&max_time,1,MPI_DOUBLE,MPI_MAX,0,MPI_COMM_WORLD);
-    int rank;
-    MPI_Comm_rank(MPI_COMM_WORLD,&rank);
-    // double max_tflops=0.0;
-    if(rank==0)
-    {
- 
+    double local_flops = F_PARTICLE * local_total_particles + F_CELL * local_total_cells;
+    
+    double total_flops = 0.0;
+    long global_total_particles = 0;
+    double max_time = 0.0;     
+    double total_time = 0.0;   
+
+    MPI_Reduce(&local_flops, &total_flops, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
+    MPI_Reduce(&local_time, &total_time, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
+    MPI_Reduce(&local_time, &max_time, 1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD);
+    MPI_Reduce(&local_total_particles, &global_total_particles, 1, MPI_LONG, MPI_SUM, 0, MPI_COMM_WORLD);
+
+    int rank, rank_size;
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    MPI_Comm_size(MPI_COMM_WORLD, &rank_size);
+
+    
+    if (rank == 0) {
         static double total_ss_tflops_sum = 0.0;
         static int step_counter = 0;
 
@@ -533,7 +523,16 @@ MultiParticleContainer::Evolve (int lev,
         printf("--- Overall Performance ---\n");
         printf("\tRunning Average Sustained : %f TFLOP/s (over %d steps)\n", avg_ss_tflops, step_counter);
         printf("-----------------------------------------\n");
+
+        static double max_fom=0.0;
+        double fom=(0.1*local_total_cells+0.9*local_total_particles)/max_time;
+        max_fom=(max_fom>fom)?max_fom : fom;
+        static double total_fom_sum = 0.0;
+        total_fom_sum += fom;
+        double avg_fom=total_fom_sum/step_counter ;
+        printf("\n\tFOM %f, AVG FOM %f, PEAK FOM %f\n",fom,avg_fom,max_fom);
     }
+}
 
 }
 
