@@ -3002,9 +3002,9 @@ template <int depos_order>
     #endif
 
     #pragma omp unroll 
-    for (int iz = 0; iz < len.z; ++iz) {
-        for (int iy = 0; iy < len.y; ++iy) {       
-            for (int ix = 0; ix < len.x; ix++) {
+    for (int iz = 0; iz < len.z-2; ++iz) {
+        for (int iy = 0; iy < len.y-2; ++iy) {       
+            for (int ix = 0; ix < len.x-2; ix++) {
                 int old_bin=(ix) + (iy) * nnx + (iz) * nnxny;
                 int binlength = ptile.m_bin_lengths[old_bin];
                 int binoffset = ptile.m_bin_offsets[old_bin];
