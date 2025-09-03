@@ -1291,12 +1291,12 @@ struct ParticleTile
     std::vector<int> m_pid_to_index_map; // This is essentially the permutation array (perm), a compact index array for easy statistics and access.
 
     // --- OPM versions of sorting arrays ---
-    OPM_Inner_Vector_Int m_local_index_hbm;
-    OPM_Inner_Vector_Int m_pid_to_bin_map_hbm;
-    OPM_Inner_Vector_Int m_pid_to_index_map_hbm;
-    OPM_Inner_Vector_Int m_bin_offsets_hbm;
-    OPM_Inner_Vector_Int m_slot_offsets_hbm;
-    OPM_Inner_Vector_Int m_bin_lengths_hbm;
+    OPM_Inner_Vector_Int m_local_index_opm;
+    OPM_Inner_Vector_Int m_pid_to_bin_map_opm;
+    OPM_Inner_Vector_Int m_pid_to_index_map_opm;
+    OPM_Inner_Vector_Int m_bin_offsets_opm;
+    OPM_Inner_Vector_Int m_slot_offsets_opm;
+    OPM_Inner_Vector_Int m_bin_lengths_opm;
 
     // The following are deprecated as of 2025.07.21
     std::vector<int> m_bin_max_ip;         // Indicates the largest particle index (ip) in each bin, used to determine insertion position
@@ -1570,7 +1570,7 @@ struct ParticleTile
 
         m_capacity = static_cast<int>(std::ceil(static_cast<double>(np) * (1.0 + gap_ratio)) + 2*num_total_bins_grown);
 
-        m_local_index_hbm.assign(m_capacity, INVALID_PARTICLE_ID);
+        m_local_index_opm.assign(m_capacity, INVALID_PARTICLE_ID);
 
         m_bin_offsets.resize(num_total_bins_grown + 1);
         m_slot_offsets.resize(num_total_bins_grown + 1);
@@ -1578,12 +1578,12 @@ struct ParticleTile
         m_bin_lengths.resize(num_total_bins_grown);
 
         if (np > 0) {
-            m_pid_to_bin_map_hbm.resize(np);
+            m_pid_to_bin_map_opm.resize(np);
             m_pid_to_index_map.resize(np);
         } else {
-            m_pid_to_bin_map_hbm.clear();
+            m_pid_to_bin_map_opm.clear();
             m_pid_to_index_map.clear();
-            amrex::Abort("Error: NO particle at m_pid_to_bin_map_hbm in buildPMAForGrownTile");
+            amrex::Abort("Error: NO particle at m_pid_to_bin_map_opm in buildPMAForGrownTile");
         }
 
         int write_ptr = 0;
@@ -1621,13 +1621,13 @@ struct ParticleTile
                     } else {
                         std::copy(particle_ids_to_copy,
                               particle_ids_to_copy + particles_in_this_grown_bin,
-                              m_local_index_hbm.begin() + write_ptr);
+                              m_local_index_opm.begin() + write_ptr);
 
-                        if (!m_pid_to_bin_map_hbm.empty()) {
+                        if (!m_pid_to_bin_map_opm.empty()) {
                             for (int i = 0; i < particles_in_this_grown_bin; ++i) {
                                 int pid = particle_ids_to_copy[i];
-                                if (pid >= 0 && static_cast<size_t>(pid) < m_pid_to_bin_map_hbm.size()) {
-                                    m_pid_to_bin_map_hbm[pid] = current_grown_bin_idx;
+                                if (pid >= 0 && static_cast<size_t>(pid) < m_pid_to_bin_map_opm.size()) {
+                                    m_pid_to_bin_map_opm[pid] = current_grown_bin_idx;
                                     m_pid_to_index_map[pid] = write_ptr+i;
                                 }
                             }
@@ -1689,7 +1689,7 @@ struct ParticleTile
 
         m_capacity = static_cast<int>(std::ceil(static_cast<double>(np) * (1.0 + gap_ratio)) + 2*num_total_bins_grown);
 
-        m_local_index_hbm.assign(m_capacity, INVALID_PARTICLE_ID);
+        m_local_index_opm.assign(m_capacity, INVALID_PARTICLE_ID);
 
         m_bin_offsets.resize(num_total_bins_grown + 1);
         m_slot_offsets.resize(num_total_bins_grown + 1);
@@ -1697,12 +1697,12 @@ struct ParticleTile
         m_bin_lengths.resize(num_total_bins_grown);
 
         if (np > 0) {
-            m_pid_to_bin_map_hbm.resize(np);
+            m_pid_to_bin_map_opm.resize(np);
             m_pid_to_index_map.resize(np);
         } else {
-            m_pid_to_bin_map_hbm.clear();
+            m_pid_to_bin_map_opm.clear();
             m_pid_to_index_map.clear();
-            amrex::Abort("Error: NO particle at m_pid_to_bin_map_hbm in buildPMAForGrownTile");
+            amrex::Abort("Error: NO particle at m_pid_to_bin_map_opm in buildPMAForGrownTile");
         }
 
         int write_ptr = 0;
@@ -1745,13 +1745,13 @@ struct ParticleTile
                     }
                     std::copy(particle_ids_to_copy,
                           particle_ids_to_copy + particles_in_this_grown_bin,
-                          m_local_index_hbm.begin() + write_ptr);
+                          m_local_index_opm.begin() + write_ptr);
 
-                    if (!m_pid_to_bin_map_hbm.empty()) {
+                    if (!m_pid_to_bin_map_opm.empty()) {
                         for (int i = 0; i < particles_in_this_grown_bin; ++i) {
                             int pid = particle_ids_to_copy[i];
-                            if (pid >= 0 && static_cast<size_t>(pid) < m_pid_to_bin_map_hbm.size()) {
-                                m_pid_to_bin_map_hbm[pid] = current_grown_bin_idx;
+                            if (pid >= 0 && static_cast<size_t>(pid) < m_pid_to_bin_map_opm.size()) {
+                                m_pid_to_bin_map_opm[pid] = current_grown_bin_idx;
                                 m_pid_to_index_map[pid] = write_ptr+i;
                             }
                         }

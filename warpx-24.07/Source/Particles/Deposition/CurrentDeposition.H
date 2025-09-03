@@ -4029,14 +4029,14 @@ inline void increment_sort_particles_order3_OPM (
     OPM_Inner_Vector_Int& newbin, int numcell, amrex::Dim3 len
 )
 {
-    auto& local_index = ptile.m_local_index_hbm;
+    auto& local_index = ptile.m_local_index_opm;
     // Aligned with bin_offsets, length is ncell+1, [0] points to index 0.
     auto& slot_offsets = ptile.m_slot_offsets; 
     auto& bin_length = ptile.m_bin_lengths;
     
     auto& num_particles = ptile.m_num_particles;
     auto& bin_offsets = ptile.m_bin_offsets;
-    auto& pid_to_bin_map = ptile.m_pid_to_bin_map_hbm;
+    auto& pid_to_bin_map = ptile.m_pid_to_bin_map_opm;
     auto& pid_to_index_map = ptile.m_pid_to_index_map; 
     auto& was_rebuilt_this_step =  ptile.m_was_rebuilt_this_step;
     was_rebuilt_this_step = false ;
@@ -4059,7 +4059,7 @@ inline void increment_sort_particles_order3_OPM (
             int old_bin=pid_to_bin_map[ip];
             int idx=pid_to_index_map[ip]; 
             // Invalidate the particle's index, which will be compacted later.
-            ptile.m_local_index_hbm[idx] = INVALID_PARTICLE_ID;
+            ptile.m_local_index_opm[idx] = INVALID_PARTICLE_ID;
             // This is handled later in a batch operation.
             // bin_length[old_bin]--; 
             // This must be recorded to be included in the compaction step.
@@ -4158,7 +4158,7 @@ inline void increment_sort_particles_order3_OPM (
             }
             
             // 3. Compact the local_index to remove invalid entries.
-            sorted_index_pma_compact_hbm(bin_decrement_counts,
+            sorted_index_pma_compact_opm(bin_decrement_counts,
                 local_index,slot_offsets,bin_offsets,pid_to_index_map);
 
             // 4. Add newly created particles. They are appended to the pending moves list.
@@ -4259,7 +4259,7 @@ inline void increment_sort_particles_order3_OPM (
 
         // Stage 3.1: Recalculate m_bin_lengths from scratch.
         for(int ip=0;ip<np_to_deposit;ip++){
-            ptile.m_bin_lengths[ptile.m_pid_to_bin_map_hbm[ip]]++;
+            ptile.m_bin_lengths[ptile.m_pid_to_bin_map_opm[ip]]++;
         }   
         // Estimate the required capacity with a gap for future growth.
         ptile.m_capacity = static_cast<int>(
@@ -4308,16 +4308,16 @@ inline void increment_sort_particles_order3_OPM (
 
         // Stage 3.3: Update m_capacity and initialize m_local_index.
         ptile.m_capacity=ptile.m_bin_offsets[numcell];
-        ptile.m_local_index_hbm.clear();
-        ptile.m_local_index_hbm.assign(ptile.m_capacity, INVALID_PARTICLE_ID);
+        ptile.m_local_index_opm.clear();
+        ptile.m_local_index_opm.assign(ptile.m_capacity, INVALID_PARTICLE_ID);
         // Initialize with the starting position of each bin.
         std::vector<int> next_write_slot = ptile.m_bin_offsets; 
 
         // Stage 3.4: Populate m_local_index and m_pid_to_index_map with data.
         for(int ip=0;ip<np_to_deposit;ip++){
-            int bin_id =ptile.m_pid_to_bin_map_hbm[ip];
+            int bin_id =ptile.m_pid_to_bin_map_opm[ip];
             int insert_idx = next_write_slot[bin_id];
-            ptile.m_local_index_hbm[insert_idx] = ip;
+            ptile.m_local_index_opm[insert_idx] = ip;
             ptile.m_pid_to_index_map[ip]=insert_idx;
             next_write_slot[bin_id]++;
         }
@@ -4665,7 +4665,7 @@ void doDepositionShapeN_sve_rhocell_sme_order3 (const GetParticlePosition<PIdx>&
     const int numcell=ptile.m_num_bins;
     increment_sort_particles_order3_OPM(np_to_deposit,ptile,newbin,numcell,len);
 
-    auto& local_index = ptile.m_local_index_hbm;
+    auto& local_index = ptile.m_local_index_opm;
     auto& bin_offsets = ptile.m_bin_offsets;
     auto& bin_length = ptile.m_bin_lengths;
     int rhonx = lenx-3;
@@ -4888,7 +4888,7 @@ void doDepositionShapeN_sve_rhocell_order3_sort (const GetParticlePosition<PIdx>
 
     increment_sort_particles_order3_OPM(np_to_deposit,ptile,newbin,numcell,len);
 
-    auto& local_index = ptile.m_local_index_hbm;
+    auto& local_index = ptile.m_local_index_opm;
     auto& bin_offsets = ptile.m_bin_offsets;
     auto& bin_length = ptile.m_bin_lengths;
     int rhonx = len.x-3;
@@ -5223,7 +5223,7 @@ void doDepositionShapeN_org_sp_GPMA_order3(const GetParticlePosition<PIdx> &GetP
                                         amrex::Real q,
                                         WarpXParticleContainer::ParticleTileType &ptile, const amrex::Box &box,
                                         [[maybe_unused]] int n_rz_azimuthal_modes,
-                                        std::vector<uint64_t>& inner_timer
+                                        std::vector<uint64_t>& inner_timer, OPM_Inner_Vector_Int& newbin
                                     )
 {
     using namespace amrex::literals;
@@ -5275,7 +5275,7 @@ void doDepositionShapeN_org_sp_GPMA_order3(const GetParticlePosition<PIdx> &GetP
     std::vector<amrex::Real> sx_m(4 * np_to_deposit, 0);
     std::vector<amrex::Real> sy_m(4 * np_to_deposit, 0);
     std::vector<amrex::Real> sz_m(4 * np_to_deposit, 0);
-    alignas(64) std::vector<int> newbin(np_to_deposit,-1);
+    // alignas(64) std::vector<int> newbin(np_to_deposit,-1);
     long nnx = len.x;
     long nny = len.y;
     long nnxny = nnx*nny;
@@ -5388,7 +5388,7 @@ void doDepositionShapeN_org_sp_GPMA_order3(const GetParticlePosition<PIdx> &GetP
     svetime[0]=rdtscv();
     #endif
 
-    increment_sort_particles(np_to_deposit, ptile,newbin, numcell);
+    increment_sort_particles_order3_OPM(np_to_deposit,ptile,newbin,numcell,len);
 
     #ifdef BREAKDWON
     svetime[1]=rdtscv();
@@ -5409,9 +5409,9 @@ void doDepositionShapeN_org_sp_GPMA_order3(const GetParticlePosition<PIdx> &GetP
 
     // Loop over all bins in the tile
     #pragma omp unroll 
-    for (int iz = 0; iz < len.z; ++iz) {
-        for (int iy = 0; iy < len.y; ++iy) {
-            for (int ix = 0; ix < len.x; ix++) {
+    for (int iz = 0; iz < len.z-2; ++iz) {
+        for (int iy = 0; iy < len.y-2; ++iy) {
+            for (int ix = 0; ix < len.x-2; ix++) {
                 int old_bin = (ix) + (iy) * nnx + (iz) * nnxny;
                 int binlength = ptile.m_bin_lengths[old_bin];
                 int binoffset = ptile.m_bin_offsets[old_bin];
@@ -5425,7 +5425,7 @@ void doDepositionShapeN_org_sp_GPMA_order3(const GetParticlePosition<PIdx> &GetP
                 // --- Stage 1: Accumulate currents from all particles in the bin into the temp arrays ---
                 #pragma omp simd
                 for (int i = 0; i < binlength; i++) {
-                    int ip = ptile.m_local_index[binoffset + i];
+                    int ip = ptile.m_local_index_opm[binoffset + i];
                     // Loop over the 4x4x4 stencil for each particle
                     #pragma omp simd
                     for (int iz_s = 0; iz_s <= depos_order; iz_s++) {
