@@ -7,8 +7,6 @@ module load LSmpi25/
 module load LSmathlib25/
 module list
 
-sudo cpupower frequency-set -f  "xxx GHz"
-
 cd /path/to/your/working/directory
 echo "Running Debug Job !!!!!"
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/path/to/HPCtoolkit/ml/lib/sve
