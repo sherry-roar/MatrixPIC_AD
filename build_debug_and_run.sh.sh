@@ -2,10 +2,11 @@
 
 set -e
 module purge
-module use /path/to/HPCKit_root/25.3.30/modulefiles
-module load bisheng/compiler4.1.0/bishengmodule
-module load bisheng/hmpi2.4.3/hmpi
-module load bisheng/kml25.0.0/kml
+module use /path/to/HPCtoolkit/modulefiles
+module load LScompiler25/
+module load LSmpi25/
+module load LSmathlib25/
+module list
 
 cd /path/to/your/working/directory
 cd warpx-24.07/
@@ -41,23 +42,23 @@ cmake -S . -B $build_prefix \
         -DCMAKE_CXX_COMPILER=clang++  \
         -DDEBUG_LOG=ON -DBREAKDOWN=ON -DMEASURE_IPC=OFF -DENABLE_OPM=OFF -DENABLE_FLOPS=OFF \
         -DCMAKE_CXX_FLAGS="-mcpu=hip11 \
-                -march=armv8.6-a+sve+sve2+sme -rtlib=compiler-rt \
+                -rtlib=compiler-rt \
                 -I/path/to/memkind_root/include/ \
                 -msve-vector-bits=512 -O0 -g -w \
                 ${CXX_FLAGS_ADD} " \
         -DCMAKE_C_FLAGS="-mcpu=hip11 \
-                -march=armv8.6-a+sve+sve2+sme -rtlib=compiler-rt \
+                -rtlib=compiler-rt \
                 -I/path/to/memkind_root/include/ \
                 -msve-vector-bits=512 -O0 -g -w \
                 ${CXX_FLAGS_ADD} "  \
         -DCMAKE_EXE_LINKER_FLAGS=" -fuse-ld=lld ${LINKER_FLAGS_ADD} \
-                -Wl,-rpath,/path/to/HPCKit_root/25.3.30/compiler/bisheng/lib/aarch64-unknown-linux-gnu/ -lunwind \
+                -Wl,-rpath,/path/to/HPCtoolkit/compiler/lib/aarch64-unknown-linux-gnu/ -lunwind \
                 -L/path/to/memkind_root/lib/ -lmemkind \
-                -Wl,-Bdynamic -L/path/to/HPCKit_root/25.3.30/compiler/bisheng/lib -ljemalloc -lmathlib -lm \
-                -L/path/to/HPCKit_root/25.3.30/kml/bisheng-0126/lib/sve512/ -lkfft -lkfft_omp \
+                -Wl,-Bdynamic -L/path/to/HPCtoolkit/compiler/lib -ljemalloc -lmathlib -lm \
+                -L/path/to/HPCtoolkit/ml/lib/sve512/ -lkfft -lkfft_omp \
                 "      
     
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/path/to/HPCKit_root/25.3.30/kml/bisheng-0126/lib/sve
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/path/to/HPCtoolkit/ml/lib/sve
 export MEMKIND_HBW_NODES=$OPM_NODES
 
 cmake --build $build_prefix --target install -j16

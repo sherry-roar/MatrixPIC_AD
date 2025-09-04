@@ -1,17 +1,17 @@
 #!/bin/bash
 set -e
 module purge
-module use /path/to/HPCKit_root/25.3.30/modulefiles
-module load bisheng/compiler4.1.0/bishengmodule
-module load bisheng/hmpi2.4.3/hmpi
-module load bisheng/kml25.0.0/kml
+module use /path/to/HPCtoolkit/modulefiles
+module load LScompiler25/
+module load LSmpi25/
+module load LSmathlib25/
 module list
 
 sudo cpupower frequency-set -f  "xxx GHz"
 
 cd /path/to/your/working/directory
 echo "Running Debug Job !!!!!"
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/path/to/HPCKit_root/25.3.30/kml/bisheng-0126/lib/sve512/
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/path/to/HPCtoolkit/ml/lib/sve
 
 export OMP_NUM_THREADS=1
 export OMP_PROC_BIND=true
