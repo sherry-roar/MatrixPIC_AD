@@ -21,10 +21,10 @@ This project is intended to be built on an HPC cluster that uses the `module` sy
 The build scripts will automatically load the following environment modules. Please ensure they are available on your system.
 
 ```bash
-module use /path/to/HPCKit_root/25.3.30/modulefiles
-module load bisheng/compiler4.1.0/bishengmodule
-module load bisheng/hmpi2.4.3/hmpi
-module load bisheng/kml25.0.0/kml
+module use /path/to/HPCtoolkit/modulefiles
+module load LScompiler25/
+module load LSmpi25/
+module load LSmathlib25/
 ```
 
 ### 2\. External Libraries
